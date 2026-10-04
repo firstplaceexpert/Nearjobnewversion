@@ -73,59 +73,59 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
     <>
       {variant === "gopay-card" ? (
         /* Gojek-style Horizontal Floating Wallet Card */
-        <div className="bg-white rounded-3xl border border-gray-border/80 p-4 sm:p-5 shadow-xs flex items-center justify-between gap-4">
+        <div className="bg-white rounded-3xl border border-gray-border/80 p-3.5 sm:p-5 shadow-xs flex items-center justify-between gap-2.5 sm:gap-4">
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="flex items-center gap-3 text-left group"
+            className="flex items-center gap-2.5 sm:gap-3 text-left group min-w-0 flex-1 cursor-pointer"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#1867F8] text-white flex items-center justify-center shadow-xs">
-              <Wallet className="w-5 h-5" />
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#1867F8] to-[#23C8FE] text-white flex items-center justify-center shrink-0 shadow-xs">
+              <Wallet className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <span className="text-base sm:text-lg font-black text-dark group-hover:text-primary transition-colors block">
+            <div className="min-w-0">
+              <span className="text-sm sm:text-lg font-black text-dark group-hover:text-primary transition-colors block leading-tight truncate">
                 {isLoading ? "..." : `Rp ${balance.toLocaleString("id-ID")}`}
               </span>
-              <span className="text-[11px] font-bold text-slate-500">
+              <span className="text-[10px] sm:text-[11px] font-bold text-slate-500 block leading-tight truncate mt-0.5">
                 NearPay • Saldo Aman Escrow
               </span>
             </div>
           </button>
 
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-start gap-1 sm:gap-5 shrink-0">
             <button
               type="button"
               onClick={() => setIsOpen(true)}
-              className="flex flex-col items-center gap-1 group"
+              className="flex flex-col items-center gap-1 group w-11 sm:w-14 cursor-pointer shrink-0"
             >
-              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-colors shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-all shadow-xs group-hover:scale-105">
                 <ArrowUpRight className="w-4 h-4" />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-bold text-slate-700">
+              <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 whitespace-nowrap text-center block leading-tight">
                 Bayar
               </span>
             </button>
             <button
               type="button"
               onClick={() => setIsOpen(true)}
-              className="flex flex-col items-center gap-1 group"
+              className="flex flex-col items-center gap-1 group w-11 sm:w-14 cursor-pointer shrink-0"
             >
-              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-colors shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-all shadow-xs group-hover:scale-105">
                 <Plus className="w-4 h-4" />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-bold text-slate-700">
+              <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 whitespace-nowrap text-center block leading-tight">
                 Isi Saldo
               </span>
             </button>
             <button
               type="button"
               onClick={() => setIsOpen(true)}
-              className="flex flex-col items-center gap-1 group"
+              className="flex flex-col items-center gap-1 group w-11 sm:w-14 cursor-pointer shrink-0"
             >
-              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-colors shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-all shadow-xs group-hover:scale-105">
                 <ShieldCheck className="w-4 h-4" />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-bold text-slate-700">
+              <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 whitespace-nowrap text-center block leading-tight">
                 Jaminan
               </span>
             </button>

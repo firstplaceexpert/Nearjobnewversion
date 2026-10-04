@@ -79,7 +79,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
             onClick={() => setIsOpen(true)}
             className="flex items-center gap-3 text-left group"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-sky-500 text-white flex items-center justify-center shadow-xs">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#1867F8] text-white flex items-center justify-center shadow-xs">
               <Wallet className="w-5 h-5" />
             </div>
             <div>
@@ -98,7 +98,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
               onClick={() => setIsOpen(true)}
               className="flex flex-col items-center gap-1 group"
             >
-              <div className="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center group-hover:bg-sky-600 transition-colors shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-colors shadow-xs">
                 <ArrowUpRight className="w-4 h-4" />
               </div>
               <span className="text-[10px] sm:text-[11px] font-bold text-slate-700">
@@ -110,7 +110,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
               onClick={() => setIsOpen(true)}
               className="flex flex-col items-center gap-1 group"
             >
-              <div className="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center group-hover:bg-sky-600 transition-colors shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-colors shadow-xs">
                 <Plus className="w-4 h-4" />
               </div>
               <span className="text-[10px] sm:text-[11px] font-bold text-slate-700">
@@ -122,7 +122,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
               onClick={() => setIsOpen(true)}
               className="flex flex-col items-center gap-1 group"
             >
-              <div className="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center group-hover:bg-sky-600 transition-colors shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-colors shadow-xs">
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <span className="text-[10px] sm:text-[11px] font-bold text-slate-700">
@@ -196,7 +196,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
                   Rp {balance.toLocaleString("id-ID")}
                 </h2>
                 <div className="pt-2 flex items-center gap-1.5 text-[11px] text-white/90">
-                  <ShieldCheck className="w-3.5 h-3.5 text-accent" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#FEE49A]" />
                   <span>Garansi dana tersimpan aman hingga tugas tuntas</span>
                 </div>
               </div>

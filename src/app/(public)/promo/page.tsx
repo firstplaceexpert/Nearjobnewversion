@@ -62,7 +62,7 @@ export default function PromoPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       {/* Header */}
       <div className="border-b border-gray-border/60 pb-6">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 text-xs font-bold mb-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEE49A]/30 text-[#ad8318] border border-[#FEE49A] text-xs font-bold mb-2">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Promo & Penawaran Terbatas</span>
         </div>
@@ -82,7 +82,7 @@ export default function PromoPage() {
             key={promo.id}
             className={`p-5 rounded-2xl border transition-all ${
               promo.highlight
-                ? "bg-gradient-to-br from-blue-50/60 to-white border-primary/40 shadow-sm"
+                ? "bg-gradient-to-br from-[#1867F8]/10 via-[#23C8FE]/10 to-white border-primary/40 shadow-sm"
                 : "bg-white border-gray-border/80 hover:border-gray-border"
             }`}
           >

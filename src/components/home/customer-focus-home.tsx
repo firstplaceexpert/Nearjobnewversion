@@ -100,10 +100,9 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       code: "NearTugas",
       title: "Tugas Kuliah",
       ribbon: "Remote",
-      badgePrice: "Mulai 35rb",
       icon: GraduationCap,
-      bgClass: "bg-indigo-50 border-indigo-100 hover:border-indigo-300",
-      iconColor: "text-indigo-600",
+      bgClass: "bg-[#1867F8]/10 border-[#1867F8]/25 hover:border-[#1867F8]/60",
+      iconColor: "text-[#1867F8]",
     },
     {
       id: "rumah",
@@ -111,10 +110,9 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       code: "NearRumah",
       title: "Bantu Rumah",
       ribbon: "Lokasi",
-      badgePrice: "Mulai 35rb",
       icon: Home,
-      bgClass: "bg-emerald-50 border-emerald-100 hover:border-emerald-300",
-      iconColor: "text-emerald-600",
+      bgClass: "bg-[#23C8FE]/15 border-[#23C8FE]/30 hover:border-[#23C8FE]/60",
+      iconColor: "text-[#0aaedc]",
     },
     {
       id: "event",
@@ -122,10 +120,9 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       code: "NearEvent",
       title: "Jaga Stand",
       ribbon: "Shift",
-      badgePrice: "Mulai 30rb/j",
       icon: Store,
-      bgClass: "bg-amber-50 border-amber-100 hover:border-amber-300",
-      iconColor: "text-amber-600",
+      bgClass: "bg-[#FEE49A]/30 border-[#FEE49A] hover:border-[#e6c968]",
+      iconColor: "text-[#ad8318]",
     },
     {
       id: "titip",
@@ -133,10 +130,9 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       code: "NearTitip",
       title: "Titip Antre",
       ribbon: "Antre",
-      badgePrice: "Mulai 35rb",
       icon: Clock,
-      bgClass: "bg-sky-50 border-sky-100 hover:border-sky-300",
-      iconColor: "text-sky-600",
+      bgClass: "bg-[#FF9DE0]/20 border-[#FF9DE0]/40 hover:border-[#FF9DE0]/70",
+      iconColor: "text-[#c8469c]",
     },
   ];
 
@@ -153,7 +149,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Kunjungan kasih makan kucing, ganti air minum bersih & bersihkan pasir litterbox.",
       badge: "Rp 40.000 / visit",
       desc: "Kasih Makan & Pasir",
-      bgClass: "bg-amber-500/10 text-amber-600 border-amber-200",
+      bgClass: "bg-[#FEE49A]/30 text-[#ad8318] border-[#FEE49A]",
     },
     {
       id: "canva",
@@ -166,7 +162,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Bantu buat desain feed Instagram / banner promosi / poster menggunakan template Canva.",
       badge: "Rp 50.000 / tugas",
       desc: "Desain Feed & Poster",
-      bgClass: "bg-purple-500/10 text-purple-600 border-purple-200",
+      bgClass: "bg-[#FF9DE0]/25 text-[#c8469c] border-[#FF9DE0]/50",
     },
     {
       id: "clean",
@@ -181,7 +177,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Sapu, pel lantai, bersihkan kamar mandi & buang sampah kosan.",
       badge: "Rp 70.000 / 2 jam",
       desc: "Sapu, Pel & Kamar Mandi",
-      bgClass: "bg-teal-500/10 text-teal-600 border-teal-200",
+      bgClass: "bg-[#23C8FE]/15 text-[#0aaedc] border-[#23C8FE]/35",
     },
     {
       id: "masak",
@@ -194,7 +190,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Bantu potong sayur, bumbu & masak 2-3 lauk rumahan untuk anak kos / keluarga.",
       badge: "Rp 60.000 / sesi",
       desc: "Masak Rumahan 2-3 Menu",
-      bgClass: "bg-orange-500/10 text-orange-600 border-orange-200",
+      bgClass: "bg-[#F57373]/15 text-[#e35555] border-[#F57373]/30",
     },
   ];
 
@@ -336,14 +332,12 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
 
       {/* Banner Sukses Pemesanan Jika Ada */}
       {successTask && (
-        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-between gap-3 animate-in fade-in">
+        <div className="p-4 rounded-2xl bg-[#1867F8]/10 border border-[#1867F8]/20 flex items-center justify-between gap-3 animate-in fade-in">
           <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-[#1867F8] shrink-0" />
             <div>
-              <p className="text-xs font-black text-emerald-900">
-                Pesanan Berhasil Diposting!
-              </p>
-              <p className="text-[11px] text-emerald-700">
+              <p className="text-xs font-black text-dark">Pesanan Berhasil Diposting!</p>
+              <p className="text-[11px] text-[#1867F8]">
                 &ldquo;{successTask.title}&rdquo; aktif di radar pekerja.
               </p>
             </div>
@@ -374,8 +368,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                 <div
                   className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl border ${srv.bgClass} flex items-center justify-center relative transition-all duration-200 group-hover:scale-105 group-hover:shadow-md`}
                 >
-                  {/* Pita / Ribbon Kecil di Sudut Atas (Mirip Gojek 5rb/8rb) */}
-                  <span className="absolute -top-1.5 -left-1.5 bg-slate-900 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-xs">
+                  {/* Pita / Ribbon Kecil di Sudut Atas */}
+                  <span className="absolute -top-1.5 -left-1.5 bg-[#2F2B4F] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-xs">
                     {srv.ribbon}
                   </span>
 
@@ -392,18 +386,18 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
         </div>
       </div>
 
-      {/* 5. Banner Hijau Tipis Promo (Slim Strip Ala Gojek) */}
+      {/* 5. Banner Promo Harmonis Palet Resmi */}
       <Link
         href="/promo"
-        className="p-3 sm:p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-between gap-3 shadow-xs transition-all group"
+        className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#2F2B4F] to-[#1867F8] hover:opacity-95 text-white flex items-center justify-between gap-3 shadow-xs transition-all group"
       >
         <div className="flex items-center gap-2 text-xs font-bold truncate">
-          <Tag className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
+          <Tag className="w-3.5 h-3.5 text-[#23C8FE] shrink-0" />
           <span className="truncate">Mau tarif tugas & bantuan lebih hemat?</span>
         </div>
-        <span className="text-xs font-black bg-white/20 px-2.5 py-1 rounded-xl text-white shrink-0 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+        <span className="text-xs font-black bg-[#FEE49A] hover:bg-[#FEE49A]/90 text-[#2F2B4F] px-2.5 py-1 rounded-xl shrink-0 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform shadow-2xs">
           <span>Klaim Voucher</span>
-          <ChevronRight className="w-3 h-3" />
+          <ChevronRight className="w-3 h-3 text-[#2F2B4F]" />
         </span>
       </Link>
 
@@ -432,8 +426,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
               >
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-black text-emerald-700 uppercase">
+                    <span className="w-2 h-2 rounded-full bg-[#1867F8] animate-pulse" />
+                    <span className="text-[10px] font-black text-[#1867F8] uppercase">
                       Sedang Aktif
                     </span>
                   </div>
@@ -472,7 +466,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                     <h4 className="text-xs font-black text-dark truncate group-hover:text-primary transition-colors">
                       {preset.name}
                     </h4>
-                    <p className="text-[10px] text-emerald-700 font-extrabold truncate">
+                    <p className="text-[10px] text-[#1867F8] font-extrabold truncate">
                       {preset.badge}
                     </p>
                   </div>

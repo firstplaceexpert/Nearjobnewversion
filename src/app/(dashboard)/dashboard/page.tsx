@@ -272,7 +272,7 @@ export default function DashboardPage() {
 
                     {/* Badge Status Ringkas */}
                     {currentStage === 1 && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 text-primary text-[10px] font-black border border-primary/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#1867F8]/10 text-primary text-[10px] font-black border border-primary/20">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
                         <span>Mencari Mitra</span>
                       </span>
@@ -444,7 +444,7 @@ export default function DashboardPage() {
               // TAHAP 1: SEDANG MENCARI MITRA
               if (stage === 1) {
                 return (
-                  <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 space-y-3">
+                  <div className="p-4 rounded-2xl bg-[#1867F8]/5 border border-[#1867F8]/20 space-y-3">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shrink-0">
                         <Search className="w-4 h-4 animate-pulse" />
@@ -460,7 +460,7 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Pelamar Section jika ada */}
-                    <div className="pt-2 border-t border-blue-200/80">
+                    <div className="pt-2 border-t border-[#1867F8]/15">
                       <span className="text-[11px] font-extrabold text-slate-700 block mb-2">
                         Mitra yang Mengajukan Lamaran ({applicants.length}):
                       </span>
@@ -470,7 +470,7 @@ export default function DashboardPage() {
                           Memuat pelamar...
                         </p>
                       ) : applicants.length === 0 ? (
-                        <p className="text-xs text-slate-500 bg-white p-3 rounded-xl border border-blue-100">
+                        <p className="text-xs text-slate-500 bg-white p-3 rounded-xl border border-[#1867F8]/15">
                           Belum ada pelamar yang mengajukan. Mitra biasanya merespons
                           dalam 1-5 menit.
                         </p>
@@ -479,7 +479,7 @@ export default function DashboardPage() {
                           {applicants.map((app) => (
                             <div
                               key={app.id}
-                              className="p-3 bg-white rounded-xl border border-blue-200 flex items-center justify-between gap-3 shadow-2xs"
+                              className="p-3 bg-white rounded-xl border border-[#1867F8]/20 flex items-center justify-between gap-3 shadow-2xs"
                             >
                               <div className="min-w-0">
                                 <span className="font-extrabold text-xs text-dark block truncate">

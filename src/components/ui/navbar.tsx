@@ -61,10 +61,10 @@ export function Navbar() {
           {/* Quick Switch to Mode Mitra */}
           <Link
             href="/mitra"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-2xs hover:scale-102"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2F2B4F] hover:bg-[#3f3a69] text-white text-xs font-bold transition-all shadow-2xs hover:scale-102"
             title="Beralih ke Aplikasi Mitra Kerja"
           >
-            <Bike className="w-3.5 h-3.5 text-amber-400" />
+            <Bike className="w-3.5 h-3.5 text-[#FEE49A]" />
             <span>Mode Mitra</span>
           </Link>
 

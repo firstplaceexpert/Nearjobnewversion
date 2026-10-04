@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "NEAR JOB Customer",
+    "slug": "nearjob-customer",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#2F6BFF"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nearjob.customer"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#2F6BFF"
+      },
+      "package": "com.nearjob.customer"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

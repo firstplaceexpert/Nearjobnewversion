@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+build
+coverage
+prisma/migrations
+prisma/*.d.ts
+prisma/*.json
+.agents
+.claude
+.cursor
+.devin
+

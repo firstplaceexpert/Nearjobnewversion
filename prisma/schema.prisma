@@ -1,0 +1,126 @@
+// use prisma-8
+// This is your Prisma schema file (contract).
+// In Prisma 8, database connection is configured in prisma.config.ts
+// Learn more: https://pris.ly/d/prisma-schema
+
+// ─── Enums ──────────────────────────────────────────────────
+
+enum UserRole {
+  POSTER
+  WORKER
+}
+
+enum TaskStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum TransactionStatus {
+  PENDING
+  PAID
+}
+
+enum NotificationType {
+  NEW_APPLICATION
+  APPLICATION_ACCEPTED
+  APPLICATION_REJECTED
+  TASK_COMPLETED
+}
+
+// ─── Models ─────────────────────────────────────────────────
+
+/// User — Entitas utama untuk autentikasi & profil pengguna.
+model User {
+  id             String    @id @default(uuid())
+  name           String
+  email          String    @unique
+  hashedPassword String
+  role           UserRole
+  image          String?
+  createdAt      DateString @default(now())
+  updatedAt      DateString @default(now())
+
+  @@map("users")
+}
+
+/// Task — Pekerjaan atau tugas yang diposting oleh Poster.
+model Task {
+  id           String     @id @default(uuid())
+  title        String
+  description  String
+  category     String
+  location     String
+  latitude     Float?
+  longitude    Float?
+  budget       Int
+  scheduleDate String
+  scheduleTime String
+  status       TaskStatus @default(OPEN)
+  posterId     String
+  poster       User       @relation(fields: [posterId], references: [id], onDelete: Cascade)
+  createdAt    DateString @default(now())
+  updatedAt    DateString @default(now())
+
+  @@index([status])
+  @@index([category])
+  @@index([posterId])
+  @@map("tasks")
+}
+
+/// Application — Lamaran tugas dari Worker ke Task.
+model Application {
+  id        String            @id @default(uuid())
+  taskId    String
+  task      Task              @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  workerId  String
+  worker    User              @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  status    ApplicationStatus @default(PENDING)
+  appliedAt DateString        @default(now())
+
+  @@unique([taskId, workerId])
+  @@index([taskId])
+  @@index([workerId])
+  @@index([status])
+  @@map("applications")
+}
+
+/// Transaction — Pencatatan komisi & pembayaran tugas.
+model Transaction {
+  id               String            @id @default(uuid())
+  taskId           String
+  task             Task              @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  amount           Int
+  commissionRate   Float
+  commissionAmount Int
+  netAmount        Int
+  status           TransactionStatus @default(PENDING)
+  createdAt        DateString        @default(now())
+
+  @@index([taskId])
+  @@index([status])
+  @@map("transactions")
+}
+
+/// Notification — Notifikasi in-app untuk interaksi marketplace.
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      NotificationType
+  isRead    Boolean          @default(false)
+  createdAt DateString       @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+  @@map("notifications")
+}

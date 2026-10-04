@@ -1,0 +1,790 @@
+[
+  {
+    "id": "schema.public",
+    "label": "Create schema \"public\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres"
+    },
+    "precheck": [],
+    "execute": [
+      {
+        "description": "Create schema \"public\"",
+        "sql": "CREATE SCHEMA IF NOT EXISTS \"public\"",
+        "params": []
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "table.applications",
+    "label": "Create table \"applications\"",
+    "summary": "Creates table \"applications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "applications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"applications\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"applications\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"applications\"",
+        "sql": "CREATE TABLE \"public\".\"applications\" (\n  \"appliedAt\" date DEFAULT (now()) NOT NULL,\n  \"id\" text NOT NULL,\n  \"status\" text DEFAULT 'PENDING' NOT NULL,\n  \"taskId\" text NOT NULL,\n  \"workerId\" text NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"applications_status_check_904c6455\" CHECK (\"status\" IN ('PENDING', 'ACCEPTED', 'REJECTED'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"applications\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"applications\""]
+      }
+    ]
+  },
+  {
+    "id": "table.notifications",
+    "label": "Create table \"notifications\"",
+    "summary": "Creates table \"notifications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "notifications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"notifications\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"notifications\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"notifications\"",
+        "sql": "CREATE TABLE \"public\".\"notifications\" (\n  \"createdAt\" date DEFAULT (now()) NOT NULL,\n  \"id\" text NOT NULL,\n  \"isRead\" bool DEFAULT false NOT NULL,\n  \"message\" text NOT NULL,\n  \"title\" text NOT NULL,\n  \"type\" text NOT NULL,\n  \"userId\" text NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"notifications_type_check_0fa89ccc\" CHECK (\"type\" IN ('NEW_APPLICATION', 'APPLICATION_ACCEPTED', 'APPLICATION_REJECTED', 'TASK_COMPLETED'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"notifications\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"notifications\""]
+      }
+    ]
+  },
+  {
+    "id": "table.tasks",
+    "label": "Create table \"tasks\"",
+    "summary": "Creates table \"tasks\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "tasks"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"tasks\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"tasks\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"tasks\"",
+        "sql": "CREATE TABLE \"public\".\"tasks\" (\n  \"budget\" int4 NOT NULL,\n  \"category\" text NOT NULL,\n  \"createdAt\" date DEFAULT (now()) NOT NULL,\n  \"description\" text NOT NULL,\n  \"id\" text NOT NULL,\n  \"latitude\" float8,\n  \"location\" text NOT NULL,\n  \"longitude\" float8,\n  \"posterId\" text NOT NULL,\n  \"scheduleDate\" text NOT NULL,\n  \"scheduleTime\" text NOT NULL,\n  \"status\" text DEFAULT 'OPEN' NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" date DEFAULT (now()) NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"tasks_status_check_228d6925\" CHECK (\"status\" IN ('OPEN', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"tasks\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"tasks\""]
+      }
+    ]
+  },
+  {
+    "id": "table.transactions",
+    "label": "Create table \"transactions\"",
+    "summary": "Creates table \"transactions\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "transactions"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"transactions\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"transactions\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"transactions\"",
+        "sql": "CREATE TABLE \"public\".\"transactions\" (\n  \"amount\" int4 NOT NULL,\n  \"commissionAmount\" int4 NOT NULL,\n  \"commissionRate\" float8 NOT NULL,\n  \"createdAt\" date DEFAULT (now()) NOT NULL,\n  \"id\" text NOT NULL,\n  \"netAmount\" int4 NOT NULL,\n  \"status\" text DEFAULT 'PENDING' NOT NULL,\n  \"taskId\" text NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"transactions_status_check_50d0035a\" CHECK (\"status\" IN ('PENDING', 'PAID'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"transactions\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"transactions\""]
+      }
+    ]
+  },
+  {
+    "id": "table.users",
+    "label": "Create table \"users\"",
+    "summary": "Creates table \"users\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "users"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"users\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"users\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"users\"",
+        "sql": "CREATE TABLE \"public\".\"users\" (\n  \"createdAt\" date DEFAULT (now()) NOT NULL,\n  \"email\" text NOT NULL,\n  \"hashedPassword\" text NOT NULL,\n  \"id\" text NOT NULL,\n  \"image\" text,\n  \"name\" text NOT NULL,\n  \"role\" text NOT NULL,\n  \"updatedAt\" date DEFAULT (now()) NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"users_role_check_14f8053b\" CHECK (\"role\" IN ('POSTER', 'WORKER'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"users\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"users\""]
+      }
+    ]
+  },
+  {
+    "id": "unique.applications.applications_taskId_workerId_key",
+    "label": "Add unique constraint on \"applications\" (taskId, workerId)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "unique",
+        "name": "applications_taskId_workerId_key",
+        "table": "applications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"applications_taskId_workerId_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "applications_taskId_workerId_key",
+          "public",
+          "\"public\".\"applications\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"applications_taskId_workerId_key\"",
+        "sql": "ALTER TABLE \"public\".\"applications\" ADD CONSTRAINT \"applications_taskId_workerId_key\" UNIQUE (\"taskId\", \"workerId\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"applications_taskId_workerId_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "applications_taskId_workerId_key",
+          "public",
+          "\"public\".\"applications\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.users.users_email_key",
+    "label": "Add unique constraint on \"users\" (email)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "unique",
+        "name": "users_email_key",
+        "table": "users"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"users_email_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["users_email_key", "public", "\"public\".\"users\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"users_email_key\"",
+        "sql": "ALTER TABLE \"public\".\"users\" ADD CONSTRAINT \"users_email_key\" UNIQUE (\"email\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"users_email_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["users_email_key", "public", "\"public\".\"users\""]
+      }
+    ]
+  },
+  {
+    "id": "index.applications.applications_status_idx_e98638ab",
+    "label": "Create index \"applications_status_idx_e98638ab\" on \"applications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "applications_status_idx_e98638ab",
+        "table": "applications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"applications_status_idx_e98638ab\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"applications_status_idx_e98638ab\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"applications_status_idx_e98638ab\"",
+        "sql": "CREATE INDEX \"applications_status_idx_e98638ab\" ON \"public\".\"applications\" (\"status\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"applications_status_idx_e98638ab\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"applications_status_idx_e98638ab\""]
+      }
+    ]
+  },
+  {
+    "id": "index.applications.applications_taskId_idx_4965c936",
+    "label": "Create index \"applications_taskId_idx_4965c936\" on \"applications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "applications_taskId_idx_4965c936",
+        "table": "applications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"applications_taskId_idx_4965c936\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"applications_taskId_idx_4965c936\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"applications_taskId_idx_4965c936\"",
+        "sql": "CREATE INDEX \"applications_taskId_idx_4965c936\" ON \"public\".\"applications\" (\"taskId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"applications_taskId_idx_4965c936\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"applications_taskId_idx_4965c936\""]
+      }
+    ]
+  },
+  {
+    "id": "index.applications.applications_workerId_idx_0b8f3a7c",
+    "label": "Create index \"applications_workerId_idx_0b8f3a7c\" on \"applications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "applications_workerId_idx_0b8f3a7c",
+        "table": "applications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"applications_workerId_idx_0b8f3a7c\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"applications_workerId_idx_0b8f3a7c\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"applications_workerId_idx_0b8f3a7c\"",
+        "sql": "CREATE INDEX \"applications_workerId_idx_0b8f3a7c\" ON \"public\".\"applications\" (\"workerId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"applications_workerId_idx_0b8f3a7c\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"applications_workerId_idx_0b8f3a7c\""]
+      }
+    ]
+  },
+  {
+    "id": "index.notifications.notifications_isRead_idx_a2737ae3",
+    "label": "Create index \"notifications_isRead_idx_a2737ae3\" on \"notifications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "notifications_isRead_idx_a2737ae3",
+        "table": "notifications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"notifications_isRead_idx_a2737ae3\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"notifications_isRead_idx_a2737ae3\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"notifications_isRead_idx_a2737ae3\"",
+        "sql": "CREATE INDEX \"notifications_isRead_idx_a2737ae3\" ON \"public\".\"notifications\" (\"isRead\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"notifications_isRead_idx_a2737ae3\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"notifications_isRead_idx_a2737ae3\""]
+      }
+    ]
+  },
+  {
+    "id": "index.notifications.notifications_userId_idx_a489d58a",
+    "label": "Create index \"notifications_userId_idx_a489d58a\" on \"notifications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "notifications_userId_idx_a489d58a",
+        "table": "notifications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"notifications_userId_idx_a489d58a\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"notifications_userId_idx_a489d58a\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"notifications_userId_idx_a489d58a\"",
+        "sql": "CREATE INDEX \"notifications_userId_idx_a489d58a\" ON \"public\".\"notifications\" (\"userId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"notifications_userId_idx_a489d58a\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"notifications_userId_idx_a489d58a\""]
+      }
+    ]
+  },
+  {
+    "id": "index.tasks.tasks_category_idx_f2600f8e",
+    "label": "Create index \"tasks_category_idx_f2600f8e\" on \"tasks\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "tasks_category_idx_f2600f8e",
+        "table": "tasks"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"tasks_category_idx_f2600f8e\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"tasks_category_idx_f2600f8e\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"tasks_category_idx_f2600f8e\"",
+        "sql": "CREATE INDEX \"tasks_category_idx_f2600f8e\" ON \"public\".\"tasks\" (\"category\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"tasks_category_idx_f2600f8e\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"tasks_category_idx_f2600f8e\""]
+      }
+    ]
+  },
+  {
+    "id": "index.tasks.tasks_posterId_idx_981844b1",
+    "label": "Create index \"tasks_posterId_idx_981844b1\" on \"tasks\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "tasks_posterId_idx_981844b1",
+        "table": "tasks"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"tasks_posterId_idx_981844b1\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"tasks_posterId_idx_981844b1\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"tasks_posterId_idx_981844b1\"",
+        "sql": "CREATE INDEX \"tasks_posterId_idx_981844b1\" ON \"public\".\"tasks\" (\"posterId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"tasks_posterId_idx_981844b1\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"tasks_posterId_idx_981844b1\""]
+      }
+    ]
+  },
+  {
+    "id": "index.tasks.tasks_status_idx_e98638ab",
+    "label": "Create index \"tasks_status_idx_e98638ab\" on \"tasks\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "tasks_status_idx_e98638ab",
+        "table": "tasks"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"tasks_status_idx_e98638ab\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"tasks_status_idx_e98638ab\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"tasks_status_idx_e98638ab\"",
+        "sql": "CREATE INDEX \"tasks_status_idx_e98638ab\" ON \"public\".\"tasks\" (\"status\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"tasks_status_idx_e98638ab\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"tasks_status_idx_e98638ab\""]
+      }
+    ]
+  },
+  {
+    "id": "index.transactions.transactions_status_idx_e98638ab",
+    "label": "Create index \"transactions_status_idx_e98638ab\" on \"transactions\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "transactions_status_idx_e98638ab",
+        "table": "transactions"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"transactions_status_idx_e98638ab\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"transactions_status_idx_e98638ab\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"transactions_status_idx_e98638ab\"",
+        "sql": "CREATE INDEX \"transactions_status_idx_e98638ab\" ON \"public\".\"transactions\" (\"status\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"transactions_status_idx_e98638ab\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"transactions_status_idx_e98638ab\""]
+      }
+    ]
+  },
+  {
+    "id": "index.transactions.transactions_taskId_idx_4965c936",
+    "label": "Create index \"transactions_taskId_idx_4965c936\" on \"transactions\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "transactions_taskId_idx_4965c936",
+        "table": "transactions"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"transactions_taskId_idx_4965c936\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": ["\"public\".\"transactions_taskId_idx_4965c936\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"transactions_taskId_idx_4965c936\"",
+        "sql": "CREATE INDEX \"transactions_taskId_idx_4965c936\" ON \"public\".\"transactions\" (\"taskId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"transactions_taskId_idx_4965c936\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": ["\"public\".\"transactions_taskId_idx_4965c936\""]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.applications.applications_taskId_fkey",
+    "label": "Add foreign key \"applications_taskId_fkey\" on \"applications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "applications_taskId_fkey",
+        "table": "applications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"applications_taskId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["applications_taskId_fkey", "public", "\"public\".\"applications\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"applications_taskId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"applications\"\nADD CONSTRAINT \"applications_taskId_fkey\"\nFOREIGN KEY (\"taskId\")\nREFERENCES \"public\".\"tasks\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"applications_taskId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["applications_taskId_fkey", "public", "\"public\".\"applications\""]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.applications.applications_workerId_fkey",
+    "label": "Add foreign key \"applications_workerId_fkey\" on \"applications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "applications_workerId_fkey",
+        "table": "applications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"applications_workerId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["applications_workerId_fkey", "public", "\"public\".\"applications\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"applications_workerId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"applications\"\nADD CONSTRAINT \"applications_workerId_fkey\"\nFOREIGN KEY (\"workerId\")\nREFERENCES \"public\".\"users\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"applications_workerId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["applications_workerId_fkey", "public", "\"public\".\"applications\""]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.notifications.notifications_userId_fkey",
+    "label": "Add foreign key \"notifications_userId_fkey\" on \"notifications\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "notifications_userId_fkey",
+        "table": "notifications"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"notifications_userId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["notifications_userId_fkey", "public", "\"public\".\"notifications\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"notifications_userId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"notifications\"\nADD CONSTRAINT \"notifications_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"public\".\"users\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"notifications_userId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["notifications_userId_fkey", "public", "\"public\".\"notifications\""]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.tasks.tasks_posterId_fkey",
+    "label": "Add foreign key \"tasks_posterId_fkey\" on \"tasks\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "tasks_posterId_fkey",
+        "table": "tasks"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"tasks_posterId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["tasks_posterId_fkey", "public", "\"public\".\"tasks\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"tasks_posterId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"tasks\"\nADD CONSTRAINT \"tasks_posterId_fkey\"\nFOREIGN KEY (\"posterId\")\nREFERENCES \"public\".\"users\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"tasks_posterId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["tasks_posterId_fkey", "public", "\"public\".\"tasks\""]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.transactions.transactions_taskId_fkey",
+    "label": "Add foreign key \"transactions_taskId_fkey\" on \"transactions\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "transactions_taskId_fkey",
+        "table": "transactions"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"transactions_taskId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["transactions_taskId_fkey", "public", "\"public\".\"transactions\""]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"transactions_taskId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"transactions\"\nADD CONSTRAINT \"transactions_taskId_fkey\"\nFOREIGN KEY (\"taskId\")\nREFERENCES \"public\".\"tasks\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"transactions_taskId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": ["transactions_taskId_fkey", "public", "\"public\".\"transactions\""]
+      }
+    ]
+  }
+]

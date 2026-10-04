@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "NEAR JOB Mitra (GoPartner)",
+    "slug": "nearjob-driver",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#0F172A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nearjob.driver"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0F172A"
+      },
+      "package": "com.nearjob.driver"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

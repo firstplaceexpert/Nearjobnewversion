@@ -151,10 +151,10 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       "Kebutuhan tenaga jaga stand pameran, usher festival, penyebar leaflet, maupun pengganti kasir toko berbasis shift waktu fleksibel dan profesional.",
     dbCategory: "Jaga Booth",
     themeColor: {
-      badge: "bg-[#FEE49A]/30 text-[#ad8318] border-[#FEE49A]",
+      badge: "bg-[#FEE49A]/30 text-[#2F2B4F] border-[#FEE49A]",
       bgAccent: "bg-[#FEE49A]/10",
       border: "border-[#FEE49A]",
-      text: "text-[#ad8318]",
+      text: "text-[#2F2B4F]",
       gradient: "from-[#2F2B4F] via-[#F57373] to-[#FEE49A]",
     },
     isRemote: false,

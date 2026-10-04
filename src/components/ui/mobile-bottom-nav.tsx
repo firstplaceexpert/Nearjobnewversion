@@ -28,15 +28,11 @@ export function MobileBottomNav() {
             href={item.href}
             className={`flex flex-col items-center py-1 px-2.5 rounded-xl transition-all ${
               isActive ? "text-primary font-bold scale-105" : "text-gray hover:text-dark"
-            } ${item.label === "Mitra" ? "font-bold text-[#2F2B4F]" : ""}`}
+            }`}
           >
             <Icon
               className={`w-5 h-5 mb-0.5 ${
-                isActive
-                  ? "text-primary stroke-[2.5]"
-                  : item.label === "Mitra"
-                    ? "text-[#ad8318] stroke-[2.2]"
-                    : "stroke-[1.8]"
+                isActive ? "text-primary stroke-[2.5]" : "stroke-[1.8]"
               }`}
             />
             <span className="text-[10px] leading-tight">{item.label}</span>

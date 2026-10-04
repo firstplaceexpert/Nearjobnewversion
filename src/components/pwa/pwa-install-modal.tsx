@@ -396,7 +396,7 @@ export function PwaInstallModal() {
                   href="https://www.pwabuilder.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors"
+                  className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-xs transition-colors shadow-xs"
                 >
                   <span>Buka PWABuilder (Generator APK Gratis)</span>
                   <ExternalLink className="w-3.5 h-3.5" />

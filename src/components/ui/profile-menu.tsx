@@ -128,14 +128,14 @@ export function ProfileMenu() {
               <div
                 className={`w-12 h-12 rounded-2xl flex items-center justify-center text-white font-extrabold text-base shadow-sm ${
                   isMitraPath
-                    ? "bg-slate-900 ring-2 ring-amber-400"
+                    ? "bg-[#1867F8] ring-2 ring-[#23C8FE]/40"
                     : "bg-primary ring-2 ring-primary-light"
                 }`}
               >
                 {isMitraPath ? (
-                  <Bike className="w-6 h-6 text-amber-400" />
+                  <Bike className="w-6 h-6 text-white" />
                 ) : (
-                  <User className="w-6 h-6" />
+                  <User className="w-6 h-6 text-white" />
                 )}
               </div>
               <div className="min-w-0 flex-1">
@@ -146,7 +146,7 @@ export function ProfileMenu() {
                   <span
                     className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${
                       isMitraPath
-                        ? "bg-slate-900 text-amber-400"
+                        ? "bg-[#1867F8]/10 text-[#1867F8]"
                         : "bg-primary-light text-primary"
                     }`}
                   >
@@ -162,9 +162,9 @@ export function ProfileMenu() {
           </div>
 
           {/* THE 1-CLICK DUAL-MODE ROLE SWITCHER */}
-          <div className="p-4 bg-primary-light/20 border-b border-primary/20">
+          <div className="p-4 bg-[#1867F8]/5 border-b border-gray-border/60">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <span className="text-[11px] font-black text-dark uppercase tracking-wider flex items-center gap-1.5">
                 <ArrowLeftRight className="w-3.5 h-3.5 text-primary" />
                 <span>Ganti Peran Akun</span>
               </span>
@@ -177,22 +177,14 @@ export function ProfileMenu() {
               type="button"
               onClick={handleToggleMode}
               disabled={switchMutation.isPending}
-              className={`w-full p-3.5 rounded-2xl flex items-center justify-between gap-3 text-left transition-all shadow-xs cursor-pointer group ${
-                isMitraPath
-                  ? "bg-primary hover:bg-primary-hover text-white shadow-primary/20"
-                  : "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20"
-              }`}
+              className="w-full p-3.5 rounded-2xl flex items-center justify-between gap-3 text-left transition-all shadow-md cursor-pointer group bg-gradient-to-r from-[#1867F8] to-[#23C8FE] hover:opacity-95 text-white shadow-[#1867F8]/20"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${
-                    isMitraPath ? "bg-white/20 text-white" : "bg-white/10 text-amber-400"
-                  }`}
-                >
+                <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold text-sm shrink-0">
                   {isMitraPath ? (
                     <User className="w-5 h-5 text-white" />
                   ) : (
-                    <Bike className="w-5 h-5 text-amber-400" />
+                    <Bike className="w-5 h-5 text-white" />
                   )}
                 </div>
                 <div>
@@ -201,7 +193,7 @@ export function ProfileMenu() {
                       ? "Beralih ke Mode Konsumen"
                       : "Beralih ke Mode Mitra Kerja"}
                   </span>
-                  <span className="text-[11px] text-white/80 block leading-tight mt-0.5">
+                  <span className="text-[11px] text-white/90 block leading-tight mt-0.5">
                     {isMitraPath
                       ? "Pesan bantuan & kirim tugas"
                       : "Terima orderan & cari uang"}
@@ -268,7 +260,7 @@ export function ProfileMenu() {
 
           {/* Security Footer */}
           <div className="p-3 bg-light/60 border-t border-gray-border/60 flex items-center justify-between text-[11px] text-gray px-4">
-            <span className="flex items-center gap-1.5 text-emerald-700 font-semibold">
+            <span className="flex items-center gap-1.5 text-primary font-semibold">
               <ShieldCheck className="w-3.5 h-3.5" /> Akun Terverifikasi
             </span>
             <span className="font-mono text-[10px]">NearJob v1.0</span>

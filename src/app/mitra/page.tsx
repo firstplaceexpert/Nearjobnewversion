@@ -219,7 +219,7 @@ export default function MitraDashboardPage() {
               Rating Kepuasan
             </span>
             <div className="flex items-center gap-1.5">
-              <Star className="w-5 h-5 fill-[#FEE49A] text-[#ad8318]" />
+              <Star className="w-5 h-5 fill-[#FEE49A] text-amber-400" />
               <span className="text-xl sm:text-2xl font-black text-dark">
                 {profile?.rating || 4.98}
               </span>
@@ -236,7 +236,7 @@ export default function MitraDashboardPage() {
             <span className="text-[11px] font-bold text-gray uppercase tracking-wider block">
               Poin Mitra Harian
             </span>
-            <p className="text-xl sm:text-2xl font-black text-[#ad8318]">
+            <p className="text-xl sm:text-2xl font-black text-primary">
               {profile?.points || 80} Poin
             </p>
             <div className="flex items-center gap-1 text-[11px] text-primary font-semibold pt-1">

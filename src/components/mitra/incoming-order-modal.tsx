@@ -109,8 +109,8 @@ export function IncomingOrderModal({
                 <User className="w-3.5 h-3.5 text-primary" />
                 Pemesan: <strong className="text-dark">{order.customerName}</strong>
               </span>
-              <span className="font-semibold text-[#ad8318] flex items-center gap-1">
-                <Star className="w-3.5 h-3.5 fill-[#FEE49A] text-[#ad8318]" />
+              <span className="font-semibold text-amber-500 flex items-center gap-1">
+                <Star className="w-3.5 h-3.5 fill-[#FEE49A] text-amber-400" />
                 <span>{order.customerRating}</span>
               </span>
             </div>

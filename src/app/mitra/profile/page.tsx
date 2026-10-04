@@ -95,7 +95,7 @@ export default function MitraProfilePage() {
 
           <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center border-t sm:border-t-0 pt-3 sm:pt-0 border-light">
             <div className="flex items-center gap-1.5">
-              <Star className="w-5 h-5 fill-[#FEE49A] text-[#ad8318]" />
+              <Star className="w-5 h-5 fill-[#FEE49A] text-amber-400" />
               <span className="text-2xl font-black text-dark">{profile.rating}</span>
             </div>
             <span className="text-xs text-gray">{profile.totalTrips} Tugas Selesai</span>
@@ -133,9 +133,7 @@ export default function MitraProfilePage() {
           <span className="text-xs font-bold text-gray uppercase block">
             Poin Performa Harian
           </span>
-          <p className="text-2xl font-black text-[#ad8318] mt-1">
-            {profile.points} / 100
-          </p>
+          <p className="text-2xl font-black text-primary mt-1">{profile.points} / 100</p>
           <span className="text-[11px] text-primary block mt-1 font-medium">
             Prioritas Orderan
           </span>

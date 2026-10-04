@@ -66,7 +66,7 @@ export function RoleSwitcherBanner({
           <div
             className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${
               isMitra
-                ? "bg-[#FEE49A] text-[#2F2B4F] font-extrabold"
+                ? "bg-gradient-to-r from-[#1867F8] to-[#23C8FE] text-white font-extrabold"
                 : "bg-[#1867F8] text-white font-extrabold"
             }`}
           >
@@ -78,7 +78,7 @@ export function RoleSwitcherBanner({
               <span
                 className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${
                   isMitra
-                    ? "bg-[#FEE49A]/20 text-[#FEE49A] border border-[#FEE49A]/40"
+                    ? "bg-[#23C8FE]/20 text-[#23C8FE] border border-[#23C8FE]/40"
                     : "bg-[#1867F8]/10 text-[#1867F8] border border-[#1867F8]/20"
                 }`}
               >
@@ -119,11 +119,13 @@ export function RoleSwitcherBanner({
           disabled={switchMutation.isPending}
           className={`flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs transition-all shrink-0 cursor-pointer shadow-sm hover:scale-102 ${
             isMitra
-              ? "bg-white hover:bg-slate-100 text-[#2F2B4F]"
-              : "bg-[#2F2B4F] hover:bg-[#3f3a69] text-white"
+              ? "bg-white hover:bg-slate-100 text-[#1867F8] shadow-md shadow-black/10"
+              : "bg-gradient-to-r from-[#1867F8] to-[#23C8FE] hover:opacity-95 text-white shadow-md shadow-[#1867F8]/25"
           }`}
         >
-          <ArrowLeftRight className="w-4 h-4 text-[#FEE49A]" />
+          <ArrowLeftRight
+            className={`w-4 h-4 ${isMitra ? "text-[#1867F8]" : "text-white"}`}
+          />
           <span>
             {switchMutation.isPending
               ? "Mengalihkan..."

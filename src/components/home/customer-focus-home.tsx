@@ -122,7 +122,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       ribbon: "Shift",
       icon: Store,
       bgClass: "bg-[#FEE49A]/30 border-[#FEE49A] hover:border-[#e6c968]",
-      iconColor: "text-[#ad8318]",
+      iconColor: "text-[#2F2B4F]",
     },
     {
       id: "titip",
@@ -149,7 +149,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Kunjungan kasih makan kucing, ganti air minum bersih & bersihkan pasir litterbox.",
       badge: "Rp 40.000 / visit",
       desc: "Kasih Makan & Pasir",
-      bgClass: "bg-[#FEE49A]/30 text-[#ad8318] border-[#FEE49A]",
+      bgClass: "bg-[#FEE49A]/30 text-[#2F2B4F] border-[#FEE49A]",
     },
     {
       id: "canva",
@@ -298,7 +298,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
           href="/promo"
           className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#FEE49A] hover:bg-[#FEE49A]/90 text-[#2F2B4F] border border-[#FEE49A] text-xs font-black transition-all shrink-0 shadow-2xs"
         >
-          <Star className="w-3.5 h-3.5 fill-[#ad8318] text-[#ad8318]" />
+          <Star className="w-3.5 h-3.5 fill-[#2F2B4F] text-[#2F2B4F]" />
           <span>Voucher</span>
         </Link>
       </div>

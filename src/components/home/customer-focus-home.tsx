@@ -56,7 +56,7 @@ interface MainServiceItem {
   code: string;
   title: string;
   ribbon: string;
-  badgePrice: string;
+  badgePrice?: string;
   icon: typeof GraduationCap;
   bgClass: string;
   iconColor: string;
@@ -305,15 +305,6 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
           <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
           <span>Voucher</span>
         </Link>
-
-        {/* Profil Bulat Pengguna (Persis Posisi Avatar di Screenshot Gojek) */}
-        <Link
-          href="/dashboard"
-          className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center justify-center text-dark shrink-0 transition-all shadow-2xs"
-          title="Profil Saya"
-        >
-          <User className="w-4 h-4 text-slate-700" />
-        </Link>
       </div>
 
       {/* 2. Banner Promo Utama (Hero Visual Melengkung Ala Gojek) */}
@@ -394,9 +385,6 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                 {/* Judul Layanan di Bawah Ikon */}
                 <span className="text-xs font-extrabold text-dark mt-2 group-hover:text-primary transition-colors truncate w-full">
                   {srv.code}
-                </span>
-                <span className="text-[10px] text-slate-400 font-semibold truncate w-full">
-                  {srv.badgePrice}
                 </span>
               </Link>
             );

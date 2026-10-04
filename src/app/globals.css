@@ -9,9 +9,9 @@
 
 @theme inline {
   /* ── Brand Colors ────────────────────────────────────────── */
-  --color-primary: #2f6bff;
-  --color-primary-hover: #1a54e6;
-  --color-primary-light: #e0e7ff;
+  --color-primary: #1968f9;
+  --color-primary-hover: #0e52cf;
+  --color-primary-light: #e8f0fe;
 
   --color-dark: #0f172a;
   --color-dark-soft: #1e293b;

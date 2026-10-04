@@ -54,10 +54,10 @@ export default function DesignSystemPage() {
           description="Token warna brand yang didefinisikan di globals.css"
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-            <ColorSwatch name="Primary" value="#2F6BFF" className="bg-primary" />
+            <ColorSwatch name="Primary" value="#1968F9" className="bg-primary" />
             <ColorSwatch
               name="Primary Hover"
-              value="#1A54E6"
+              value="#0E52CF"
               className="bg-primary-hover"
             />
             <ColorSwatch

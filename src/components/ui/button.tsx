@@ -2,7 +2,7 @@
  * Button — Primary interactive element
  *
  * Follows NEAR JOB brand guidelines:
- * - Primary/solid: bright blue (#2F6BFF) with white text
+ * - Primary/solid: bright blue (#1968F9) with white text
  * - Outline: transparent with blue border
  * - Ghost: no border, subtle hover
  * - Danger: red for destructive actions

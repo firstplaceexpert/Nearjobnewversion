@@ -11,7 +11,7 @@ describe("PWA Configuration & Manifest", () => {
     expect(config.short_name).toBe("NearJob");
     expect(config.start_url).toBe("/");
     expect(config.display).toBe("standalone");
-    expect(config.theme_color).toBe("#2F6BFF");
+    expect(config.theme_color).toBe("#1968F9");
     expect(config.background_color).toBe("#ffffff");
 
     // Must have standard icons

@@ -142,8 +142,8 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
       className: "custom-user-marker",
       html: `
         <div class="relative flex items-center justify-center">
-          <div class="absolute w-12 h-12 rounded-full bg-emerald-500/20 animate-ping"></div>
-          <div class="w-10 h-10 rounded-full bg-emerald-600 border-3 border-white shadow-xl flex items-center justify-center text-white font-black text-xs">
+          <div class="absolute w-12 h-12 rounded-full bg-[#1867F8]/25 animate-ping"></div>
+          <div class="w-10 h-10 rounded-full bg-[#1867F8] border-3 border-white shadow-xl flex items-center justify-center text-white font-black text-xs">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
             </svg>
@@ -184,14 +184,14 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
       const isAngkut = task.category.includes("Angkut");
 
       const badgeColor = isPet
-        ? "bg-amber-500 text-white"
+        ? "bg-[#FEE49A] text-[#2F2B4F]"
         : isClean
-          ? "bg-teal-600 text-white"
+          ? "bg-[#23C8FE] text-white"
           : isBooth
-            ? "bg-purple-600 text-white"
+            ? "bg-[#F57373] text-white"
             : isAngkut
-              ? "bg-orange-600 text-white"
-              : "bg-blue-600 text-white";
+              ? "bg-[#FF9DE0] text-[#2F2B4F]"
+              : "bg-[#1867F8] text-white";
 
       const taskIcon = L.divIcon({
         className: "custom-task-marker",
@@ -201,7 +201,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
           }">
             <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-white text-dark shadow-xl border-2 ${
               isSelected
-                ? "border-primary ring-4 ring-primary/20 bg-slate-900 text-white"
+                ? "border-primary ring-4 ring-primary/20 bg-[#2F2B4F] text-white"
                 : "border-slate-300 hover:border-primary"
             }">
               <span class="text-[9px] font-black px-1.5 py-0.5 rounded-md uppercase ${badgeColor}">
@@ -213,14 +213,14 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                 }">
                   ${task.title}
                 </span>
-                <span class="text-[10px] font-extrabold text-emerald-600">
+                <span class="text-[10px] font-extrabold text-[#1867F8]">
                   Rp ${budgetInK}
                 </span>
               </div>
             </div>
             <div class="w-3 h-3 mx-auto rotate-45 -mt-1.5 shadow-md ${
               isSelected
-                ? "bg-slate-900 border-r-2 border-b-2 border-primary"
+                ? "bg-[#2F2B4F] border-r-2 border-b-2 border-primary"
                 : "bg-white border-r-2 border-b-2 border-slate-300"
             }"></div>
           </div>
@@ -392,14 +392,14 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
         <div className="flex flex-wrap sm:flex-row gap-2 justify-between items-start sm:items-center">
           {/* Posisi Mitra & Tombol GPS */}
           <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3 py-1.5 shadow-md border border-slate-200 pointer-events-auto flex items-center gap-2 max-w-fit">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+            <span className="w-2 h-2 rounded-full bg-[#23C8FE] animate-pulse shrink-0"></span>
             <span className="text-[11px] sm:text-xs font-black text-dark truncate max-w-[140px] sm:max-w-none">
               {userLocation.name}
             </span>
             <button
               onClick={handleGetCurrentLocation}
               disabled={isLocating}
-              className="px-2 py-0.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold transition-colors text-[10px] sm:text-[11px] flex items-center gap-1 shrink-0"
+              className="px-2 py-0.5 rounded-lg bg-[#23C8FE]/15 hover:bg-[#23C8FE]/25 text-[#0aaedc] font-bold transition-colors text-[10px] sm:text-[11px] flex items-center gap-1 shrink-0"
               title="Deteksi Lokasi GPS Asli"
             >
               <Navigation className={`w-3 h-3 ${isLocating ? "animate-spin" : ""}`} />
@@ -495,7 +495,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                 onClick={() => setSelectedRadius(item.val)}
                 className={`px-2 py-0.5 rounded-xl text-[10px] sm:text-[11px] font-bold transition-all shrink-0 ${
                   selectedRadius === item.val
-                    ? "bg-emerald-600 text-white shadow-xs"
+                    ? "bg-[#1867F8] text-white shadow-xs"
                     : "text-slate-600 hover:bg-slate-100"
                 }`}
               >
@@ -519,8 +519,8 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                   <Badge variant="primary" size="sm">
                     {activeTask.category}
                   </Badge>
-                  <span className="text-[11px] font-black text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                    <Navigation className="w-3 h-3 text-emerald-700" />
+                  <span className="text-[11px] font-black text-[#1867F8] bg-[#1867F8]/10 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    <Navigation className="w-3 h-3 text-[#1867F8]" />
                     <span>{activeTask.distance} km dari Anda</span>
                   </span>
                 </div>
@@ -553,7 +553,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                 <p className="text-[10px] text-slate-400 uppercase font-black">
                   Upah Bersih Mitra
                 </p>
-                <p className="text-lg font-black text-emerald-600">
+                <p className="text-lg font-black text-[#1867F8]">
                   Rp {Math.round(activeTask.budget * 0.9).toLocaleString("id-ID")}
                 </p>
               </div>
@@ -584,16 +584,16 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
       <div className="absolute bottom-4 left-4 z-[390] pointer-events-none">
         <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3.5 py-2 shadow-lg border border-slate-200 pointer-events-auto flex items-center gap-3 text-xs font-bold text-slate-700">
           <span className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-emerald-600 border border-white shadow-xs"></span>
+            <span className="w-3 h-3 rounded-full bg-[#1867F8] border border-white shadow-xs"></span>
             <span>Posisi Mitra</span>
           </span>
           <span className="text-slate-300">|</span>
           <span className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-blue-600 border border-white shadow-xs"></span>
+            <span className="w-3 h-3 rounded-full bg-[#23C8FE] border border-white shadow-xs"></span>
             <span>Titik Order ({mappedTasks.length})</span>
           </span>
           <span className="text-slate-300">|</span>
-          <span className="text-emerald-700 font-black">
+          <span className="text-[#1867F8] font-black">
             Radar Aktif {selectedRadius ? `${selectedRadius} km` : "Semua"}
           </span>
         </div>

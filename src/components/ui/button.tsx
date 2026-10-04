@@ -34,8 +34,9 @@ const variantStyles: Record<ButtonVariant, string> = {
   outline:
     "border-2 border-primary text-primary hover:bg-primary-light active:bg-primary-light",
   ghost: "text-gray hover:bg-light hover:text-dark active:bg-gray-border",
-  danger: "bg-error text-white hover:bg-red-600 active:bg-red-700",
-  success: "bg-success text-white hover:bg-green-600 active:bg-green-700 shadow-sm",
+  danger: "bg-error text-white hover:bg-error-hover active:bg-error-hover",
+  success:
+    "bg-secondary text-white hover:bg-secondary-hover active:bg-secondary-hover shadow-sm",
   secondary: "bg-light text-dark hover:bg-gray-border/50 active:bg-gray-border",
 };
 

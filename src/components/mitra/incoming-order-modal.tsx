@@ -42,7 +42,7 @@ export function IncomingOrderModal({
   const progressPercentage = (timeLeft / 20) * 100;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in overflow-y-auto">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-[#2F2B4F]/85 backdrop-blur-md animate-fade-in overflow-y-auto">
       <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border-2 border-primary overflow-hidden relative animate-scale-in my-auto max-h-[92vh] flex flex-col">
         {/* Countdown Progress Bar */}
         <div className="w-full bg-light h-2 shrink-0">
@@ -109,8 +109,8 @@ export function IncomingOrderModal({
                 <User className="w-3.5 h-3.5 text-primary" />
                 Pemesan: <strong className="text-dark">{order.customerName}</strong>
               </span>
-              <span className="font-semibold text-amber-500 flex items-center gap-1">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              <span className="font-semibold text-[#ad8318] flex items-center gap-1">
+                <Star className="w-3.5 h-3.5 fill-[#FEE49A] text-[#ad8318]" />
                 <span>{order.customerRating}</span>
               </span>
             </div>

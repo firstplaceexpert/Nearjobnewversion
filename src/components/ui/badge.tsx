@@ -17,9 +17,9 @@ interface BadgeProps {
 const variantStyles: Record<BadgeVariant, string> = {
   primary: "bg-primary-light text-primary",
   success: "bg-success-light text-success font-semibold",
-  warning: "bg-warning-light text-warning font-semibold",
+  warning: "bg-warning-light text-[#ad8318] font-semibold border border-warning/40",
   error: "bg-error-light text-error font-semibold",
-  accent: "bg-accent text-primary font-semibold",
+  accent: "bg-accent/25 text-[#2F2B4F] font-semibold border border-accent/40",
   neutral: "bg-light text-gray",
 };
 

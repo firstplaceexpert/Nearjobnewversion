@@ -98,7 +98,7 @@ export function PwaInstallModal() {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-base text-dark">Unduh & Pasang NearJob</h3>
-                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#1867F8]/10 text-[#1867F8]">
                   100% Gratis
                 </span>
               </div>
@@ -228,7 +228,7 @@ export function PwaInstallModal() {
                 {/* Android Guide */}
                 <div className="p-3.5 rounded-2xl bg-white border border-gray-border space-y-2">
                   <div className="flex items-center gap-2 font-bold text-xs text-dark">
-                    <span className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-[11px] font-black">
+                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center text-[11px] font-black">
                       🤖
                     </span>
                     <span>Untuk Android (Chrome)</span>
@@ -256,7 +256,7 @@ export function PwaInstallModal() {
                 {/* iPhone Guide */}
                 <div className="p-3.5 rounded-2xl bg-white border border-gray-border space-y-2">
                   <div className="flex items-center gap-2 font-bold text-xs text-dark">
-                    <span className="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-[11px] font-black">
+                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center text-[11px] font-black">
                       🍎
                     </span>
                     <span>Untuk iPhone (Safari)</span>

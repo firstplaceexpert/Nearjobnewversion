@@ -381,25 +381,25 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
 
   return (
     <div
-      className={`relative w-full rounded-3xl overflow-hidden border border-gray-border shadow-md bg-white transition-all ${
+      className={`relative w-full rounded-3xl overflow-hidden border border-gray-border shadow-md bg-white transition-all isolate ${
         isFullscreen
-          ? "fixed inset-0 z-50 rounded-none h-screen"
-          : "h-[650px] sm:h-[700px]"
+          ? "fixed inset-0 z-[100] rounded-none h-screen"
+          : "h-[520px] sm:h-[650px]"
       }`}
     >
       {/* Top Map Toolbar: Lokasi, Pilihan Area & Radius Radar */}
-      <div className="absolute top-4 left-4 right-4 z-[400] flex flex-col gap-2.5 pointer-events-none">
-        <div className="flex flex-col sm:flex-row gap-2.5 justify-between items-start sm:items-center">
+      <div className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-20 flex flex-col gap-2 pointer-events-none">
+        <div className="flex flex-wrap sm:flex-row gap-2 justify-between items-start sm:items-center">
           {/* Posisi Mitra & Tombol GPS */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3.5 py-2 shadow-lg border border-slate-200 pointer-events-auto flex items-center gap-2 max-w-fit">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-xs font-black text-dark truncate">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3 py-1.5 shadow-md border border-slate-200 pointer-events-auto flex items-center gap-2 max-w-fit">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+            <span className="text-[11px] sm:text-xs font-black text-dark truncate max-w-[140px] sm:max-w-none">
               {userLocation.name}
             </span>
             <button
               onClick={handleGetCurrentLocation}
               disabled={isLocating}
-              className="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold transition-colors text-[11px] flex items-center gap-1"
+              className="px-2 py-0.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold transition-colors text-[10px] sm:text-[11px] flex items-center gap-1 shrink-0"
               title="Deteksi Lokasi GPS Asli"
             >
               <Navigation className={`w-3 h-3 ${isLocating ? "animate-spin" : ""}`} />
@@ -408,10 +408,10 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
           </div>
 
           {/* Quick Controls: Layer Switcher & Fullscreen */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-1.5 shadow-lg border border-slate-200 pointer-events-auto flex items-center gap-1">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-1 shadow-md border border-slate-200 pointer-events-auto flex items-center gap-1">
             <button
               onClick={() => setMapStyle("standard")}
-              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-all ${
+              className={`px-2 py-0.5 rounded-xl text-[10px] sm:text-[11px] font-bold transition-all ${
                 mapStyle === "standard"
                   ? "bg-dark text-white shadow-xs"
                   : "text-slate-600 hover:bg-slate-100"
@@ -421,7 +421,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
             </button>
             <button
               onClick={() => setMapStyle("voyager")}
-              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-all ${
+              className={`px-2 py-0.5 rounded-xl text-[10px] sm:text-[11px] font-bold transition-all ${
                 mapStyle === "voyager"
                   ? "bg-dark text-white shadow-xs"
                   : "text-slate-600 hover:bg-slate-100"
@@ -431,7 +431,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
             </button>
             <button
               onClick={() => setMapStyle("satellite")}
-              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-all ${
+              className={`px-2 py-0.5 rounded-xl text-[10px] sm:text-[11px] font-bold transition-all ${
                 mapStyle === "satellite"
                   ? "bg-dark text-white shadow-xs"
                   : "text-slate-600 hover:bg-slate-100"
@@ -440,11 +440,11 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
               Satelit
             </button>
 
-            <span className="w-px h-4 bg-slate-200 mx-1"></span>
+            <span className="w-px h-3.5 bg-slate-200 mx-0.5"></span>
 
             <button
               onClick={() => setIsFullscreen(!isFullscreen)}
-              className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-700 transition-colors"
+              className="p-1 rounded-xl hover:bg-slate-100 text-slate-700 transition-colors"
               title={isFullscreen ? "Kecilkan Peta" : "Layar Penuh"}
             >
               {isFullscreen ? (
@@ -456,16 +456,18 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
           </div>
         </div>
 
-        {/* Pilihan Cepat Area & Radius Radar */}
-        <div className="flex flex-wrap items-center gap-2">
+        {/* Pilihan Cepat Area & Radius Radar (Horizontally scrollable on mobile) */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pointer-events-auto pb-1 max-w-full">
           {/* Preset Area Jakarta */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-1 shadow-md border border-slate-200 pointer-events-auto flex items-center gap-1">
-            <span className="text-[10px] font-extrabold text-slate-400 px-2">Area:</span>
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-1 shadow-md border border-slate-200 flex items-center gap-1 shrink-0">
+            <span className="text-[10px] font-extrabold text-slate-400 px-1.5">
+              Area:
+            </span>
             {AREA_PRESETS.map((p) => (
               <button
                 key={p.name}
                 onClick={() => handleSelectPreset(p)}
-                className={`px-2.5 py-0.5 rounded-xl text-[11px] font-bold transition-all ${
+                className={`px-2 py-0.5 rounded-xl text-[10px] sm:text-[11px] font-bold transition-all shrink-0 ${
                   userLocation.name.includes(p.name.split(" /")[0])
                     ? "bg-primary text-white shadow-xs"
                     : "text-slate-600 hover:bg-slate-100"
@@ -477,8 +479,8 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
           </div>
 
           {/* Filter Radius */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-1 shadow-md border border-slate-200 pointer-events-auto flex items-center gap-1">
-            <span className="text-[10px] font-extrabold text-slate-400 px-2">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-1 shadow-md border border-slate-200 flex items-center gap-1 shrink-0">
+            <span className="text-[10px] font-extrabold text-slate-400 px-1.5">
               Jangkauan:
             </span>
             {[
@@ -491,7 +493,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
               <button
                 key={item.label}
                 onClick={() => setSelectedRadius(item.val)}
-                className={`px-2.5 py-0.5 rounded-xl text-[11px] font-bold transition-all ${
+                className={`px-2 py-0.5 rounded-xl text-[10px] sm:text-[11px] font-bold transition-all shrink-0 ${
                   selectedRadius === item.val
                     ? "bg-emerald-600 text-white shadow-xs"
                     : "text-slate-600 hover:bg-slate-100"
@@ -509,7 +511,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
 
       {/* Floating Task Preview Card (Opens when a marker is clicked) */}
       {activeTask && (
-        <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:max-w-md z-[400] animate-slide-up pointer-events-auto">
+        <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:max-w-md z-30 animate-slide-up pointer-events-auto">
           <div className="bg-white rounded-3xl p-5 shadow-2xl border-2 border-primary/30 space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1">

@@ -82,7 +82,7 @@ export function ChatDrawer({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-end bg-dark/40 backdrop-blur-xs animate-fade-in">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-end bg-dark/50 backdrop-blur-xs animate-fade-in">
       <div className="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between border-l border-gray-border animate-slide-up sm:animate-fade-in">
         {/* Chat Header */}
         <div className="p-4 border-b border-gray-border flex items-center justify-between bg-light/60">

@@ -42,10 +42,10 @@ export function IncomingOrderModal({
   const progressPercentage = (timeLeft / 20) * 100;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-3 sm:p-4 bg-dark/70 backdrop-blur-xs animate-fade-in">
-      <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border-2 border-primary overflow-hidden relative animate-scale-in">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in overflow-y-auto">
+      <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border-2 border-primary overflow-hidden relative animate-scale-in my-auto max-h-[92vh] flex flex-col">
         {/* Countdown Progress Bar */}
-        <div className="w-full bg-light h-2">
+        <div className="w-full bg-light h-2 shrink-0">
           <div
             className="bg-primary h-full transition-all duration-1000 ease-linear"
             style={{ width: `${progressPercentage}%` }}
@@ -53,7 +53,7 @@ export function IncomingOrderModal({
         </div>
 
         {/* Radar Ring Header */}
-        <div className="p-5 pb-3 bg-gradient-to-b from-primary/10 to-transparent flex items-center justify-between">
+        <div className="p-4 sm:p-5 pb-3 bg-gradient-to-b from-primary/10 to-transparent flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center">
               <span className="absolute w-8 h-8 rounded-full bg-primary/20 animate-ping"></span>
@@ -73,21 +73,21 @@ export function IncomingOrderModal({
 
           <button
             onClick={onDismiss}
-            className="text-gray hover:text-dark p-1 rounded-full hover:bg-light"
+            className="text-gray hover:text-dark p-1.5 rounded-full hover:bg-light transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Body Details */}
-        <div className="p-5 pt-2 space-y-4">
+        {/* Body Details (Scrollable if height exceeds mobile viewport) */}
+        <div className="p-4 sm:p-5 pt-2 space-y-3.5 overflow-y-auto flex-1">
           {/* Earnings Highlight Box */}
-          <div className="p-4 rounded-2xl bg-primary-light/50 border border-primary/20 flex items-center justify-between">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-primary-light/50 border border-primary/20 flex items-center justify-between">
             <div>
               <span className="text-[11px] font-semibold text-gray block">
                 Penghasilan Bersih (Net)
               </span>
-              <p className="text-2xl font-extrabold text-primary">
+              <p className="text-xl sm:text-2xl font-extrabold text-primary">
                 Rp {order.netEarnings.toLocaleString("id-ID")}
               </p>
             </div>
@@ -103,7 +103,7 @@ export function IncomingOrderModal({
           </div>
 
           {/* Customer & Route Details */}
-          <div className="space-y-2.5 text-xs">
+          <div className="space-y-2 text-xs">
             <div className="flex items-center justify-between text-gray">
               <span className="flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-primary" />
@@ -115,7 +115,7 @@ export function IncomingOrderModal({
               </span>
             </div>
 
-            <div className="p-3 bg-light rounded-xl space-y-1.5 border border-gray-border/60">
+            <div className="p-3 bg-light rounded-xl space-y-1 border border-gray-border/60">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <div>
@@ -133,28 +133,28 @@ export function IncomingOrderModal({
               </p>
             )}
           </div>
+        </div>
 
-          {/* Action Buttons */}
-          <div className="pt-2 space-y-2">
-            <Button
-              variant="primary"
-              size="lg"
-              className="w-full justify-center font-extrabold text-sm py-3.5 shadow-lg shadow-primary/25 flex items-center gap-2"
-              onClick={() => onAccept(order.taskId)}
-              loading={isAccepting}
-              disabled={isAccepting}
-            >
-              <CheckCircle2 className="w-5 h-5" />
-              <span>TERIMA ORDER INI ({timeLeft}s)</span>
-            </Button>
-            <button
-              onClick={onDismiss}
-              disabled={isAccepting}
-              className="w-full text-center py-2 text-xs font-semibold text-gray hover:text-dark transition-colors"
-            >
-              Lewati Orderan Ini
-            </button>
-          </div>
+        {/* Action Buttons (Sticky at bottom of modal) */}
+        <div className="p-4 pt-2 bg-white border-t border-light/60 space-y-2 shrink-0">
+          <Button
+            variant="primary"
+            size="lg"
+            className="w-full justify-center font-extrabold text-sm py-3.5 shadow-lg shadow-primary/25 flex items-center gap-2"
+            onClick={() => onAccept(order.taskId)}
+            loading={isAccepting}
+            disabled={isAccepting}
+          >
+            <CheckCircle2 className="w-5 h-5" />
+            <span>TERIMA ORDER INI ({timeLeft}s)</span>
+          </Button>
+          <button
+            onClick={onDismiss}
+            disabled={isAccepting}
+            className="w-full text-center py-2 text-xs font-semibold text-gray hover:text-dark transition-colors"
+          >
+            Lewati Orderan Ini
+          </button>
         </div>
       </div>
     </div>

@@ -62,11 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="id" className={`${plusJakartaSans.variable} h-full`}>
       <body className="min-h-full flex flex-col font-sans antialiased">
         <QueryProvider>
-          <PwaProvider>
-            {children}
-            <PwaInstallBanner />
-            <PwaInstallModal />
-          </PwaProvider>
+          <PwaProvider>{children}</PwaProvider>
         </QueryProvider>
       </body>
     </html>

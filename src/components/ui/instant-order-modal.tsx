@@ -78,8 +78,8 @@ export function InstantOrderModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark/60 backdrop-blur-xs animate-fade-in">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-border overflow-hidden relative animate-scale-in">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in overflow-y-auto">
+      <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-border overflow-hidden relative animate-scale-in my-auto max-h-[92vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={handleReset}

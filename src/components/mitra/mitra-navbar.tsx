@@ -38,20 +38,21 @@ export function MitraNavbar({
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-border bg-white shadow-xs">
       {/* Top Banner: Dual Portal Switcher Indicator */}
-      <div className="bg-dark text-white px-4 py-1.5 text-xs flex items-center justify-between">
-        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-success animate-pulse"></span>
-            <span className="font-bold text-xs text-white tracking-wide">
-              NEAR MITRA • Mode Kerja (GoPartner Style)
+      <div className="bg-dark text-white px-3 sm:px-4 py-1.5 text-xs">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 truncate">
+            <span className="inline-block w-2 h-2 rounded-full bg-success animate-pulse shrink-0"></span>
+            <span className="font-bold text-[11px] sm:text-xs text-white tracking-wide truncate">
+              NEAR MITRA • Mode Kerja
             </span>
           </div>
           <Link
             href="/"
-            className="flex items-center gap-1.5 font-semibold text-primary-light hover:text-white transition-colors bg-white/10 hover:bg-white/20 px-2.5 py-0.5 rounded-full text-[11px]"
+            className="flex items-center gap-1 font-semibold text-primary-light hover:text-white transition-colors bg-white/10 hover:bg-white/20 px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] shrink-0"
           >
             <ArrowLeftRight className="w-3 h-3" />
-            <span>Kembali ke Aplikasi Pelanggan</span>
+            <span className="hidden sm:inline">Kembali ke Aplikasi Pelanggan</span>
+            <span className="sm:hidden">App Pelanggan</span>
           </Link>
         </div>
       </div>
@@ -126,14 +127,17 @@ export function MitraNavbar({
           <button
             onClick={onToggleOnline}
             disabled={isToggling}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl font-bold text-xs transition-all shadow-sm ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-2xl font-bold text-xs transition-all shadow-sm shrink-0 ${
               isOnline
                 ? "bg-success text-white hover:bg-success/90 shadow-success/20 ring-2 ring-success/30"
                 : "bg-gray-light/40 text-gray hover:bg-gray-light/60 hover:text-dark"
             }`}
           >
-            <Power className="w-4 h-4" />
-            <span>{isOnline ? "SIAP KERJA (ONLINE)" : "ISTIRAHAT (OFFLINE)"}</span>
+            <Power className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span className="hidden sm:inline">
+              {isOnline ? "SIAP KERJA (ONLINE)" : "ISTIRAHAT (OFFLINE)"}
+            </span>
+            <span className="sm:hidden">{isOnline ? "ONLINE" : "OFFLINE"}</span>
             <span
               className={`w-2 h-2 rounded-full ${
                 isOnline ? "bg-white animate-ping" : "bg-gray"

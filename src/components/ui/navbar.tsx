@@ -68,9 +68,6 @@ export function Navbar() {
             <span>Mode Mitra</span>
           </Link>
 
-          {/* Tombol Install App di Desktop / Browser */}
-          <PwaInstallButton />
-
           {/* Notifikasi */}
           <NotificationsPopover />
 

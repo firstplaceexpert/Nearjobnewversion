@@ -519,14 +519,11 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
         </span>
       </button>
 
-      {/* 8. Banner Unduh / Pasang Aplikasi (PWA Android, iOS & Desktop) */}
-      <PwaInstallCard />
-
       {/* Booking Modal untuk Pesanan Pintas / Kustom */}
 
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark/60 backdrop-blur-xs animate-fade-in">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-border overflow-hidden relative animate-scale-in max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in overflow-y-auto">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-border overflow-hidden relative animate-scale-in my-auto max-h-[92vh] overflow-y-auto">
             {/* Close Button */}
             <button
               type="button"

@@ -300,18 +300,18 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
 
         <Link
           href="/promo"
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-amber-100/80 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-black transition-all shrink-0 shadow-2xs"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#FEE49A] hover:bg-[#FEE49A]/90 text-[#2F2B4F] border border-[#FEE49A] text-xs font-black transition-all shrink-0 shadow-2xs"
         >
-          <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+          <Star className="w-3.5 h-3.5 fill-[#ad8318] text-[#ad8318]" />
           <span>Voucher</span>
         </Link>
       </div>
 
-      {/* 2. Banner Promo Utama (Hero Visual Melengkung Ala Gojek) */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 p-5 sm:p-6 text-white shadow-md">
+      {/* 2. Banner Promo Utama (Hero Visual Harmonis Warna Brand) */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#2F2B4F] via-[#1867F8] to-[#23C8FE] p-5 sm:p-6 text-white shadow-md">
         <div className="relative z-10 max-w-sm space-y-2">
           <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-black tracking-wider uppercase">
-            <Gift className="w-3 h-3 text-amber-200" />
+            <Gift className="w-3 h-3 text-[#FEE49A]" />
             <span>Promo Hemat NearJob</span>
           </div>
 
@@ -319,7 +319,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
             Menu Bantuan 20 Ribuan & Bebas Repot
           </h2>
 
-          <p className="text-xs text-rose-100 leading-relaxed">
+          <p className="text-xs text-blue-100 leading-relaxed">
             Pakai kupon{" "}
             <span className="font-mono font-bold bg-white/20 px-1.5 py-0.5 rounded text-white">
               NEARBARU

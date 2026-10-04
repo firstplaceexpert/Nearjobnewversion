@@ -53,26 +53,22 @@ export default function DesignSystemPage() {
           title="Color Palette"
           description="Token warna brand yang didefinisikan di globals.css"
         >
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
-            <ColorSwatch name="Primary" value="#1968F9" className="bg-primary" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <ColorSwatch name="Primary (Blue)" value="#1867F8" className="bg-primary" />
+            <ColorSwatch name="Dark (Midnight)" value="#2F2B4F" className="bg-dark" />
             <ColorSwatch
-              name="Primary Hover"
-              value="#0E52CF"
-              className="bg-primary-hover"
+              name="Secondary (Cyan)"
+              value="#23C8FE"
+              className="bg-secondary"
             />
+            <ColorSwatch name="Error (Coral)" value="#F57373" className="bg-error" />
+            <ColorSwatch name="Accent (Pink)" value="#FF9DE0" className="bg-accent" />
             <ColorSwatch
-              name="Primary Light"
-              value="#E0E7FF"
-              className="bg-primary-light"
+              name="Warning (Yellow)"
+              value="#FEE49A"
+              className="bg-warning"
               textDark
             />
-            <ColorSwatch name="Dark" value="#0F172A" className="bg-dark" />
-            <ColorSwatch name="Dark Soft" value="#1E293B" className="bg-dark-soft" />
-            <ColorSwatch name="Gray" value="#64748B" className="bg-gray" />
-            <ColorSwatch name="Light" value="#F1F5F9" className="bg-light" textDark />
-            <ColorSwatch name="Success" value="#22C55E" className="bg-success" />
-            <ColorSwatch name="Warning" value="#F59E0B" className="bg-warning" />
-            <ColorSwatch name="Error" value="#EF4444" className="bg-error" />
           </div>
         </Section>
 

@@ -8,31 +8,46 @@
    ============================================================ */
 
 @theme inline {
-  /* ── Brand Colors ────────────────────────────────────────── */
-  --color-primary: #1968f9;
+  /* ── NearJob Official Brand Palette ──────────────────────── */
+  /* Swatch 3: Brand Electric Blue (Matching Logo) */
+  --color-primary: #1867f8;
   --color-primary-hover: #0e52cf;
   --color-primary-light: #e8f0fe;
 
-  --color-dark: #0f172a;
-  --color-dark-soft: #1e293b;
+  /* Swatch 1: Deep Midnight Violet (Dark Base) */
+  --color-dark: #2f2b4f;
+  --color-dark-soft: #3f3a69;
 
-  --color-gray: #64748b;
-  --color-gray-light: #94a3b8;
-  --color-gray-border: #cbd5e1;
+  /* Swatch 4: Electric Sky Blue / Cyan */
+  --color-secondary: #23c8fe;
+  --color-secondary-hover: #0bb1e7;
+  --color-secondary-light: #e6f9ff;
 
-  --color-light: #f1f5f9;
+  /* Swatch 2: Warm Coral Red */
+  --color-error: #f57373;
+  --color-error-hover: #e35555;
+  --color-error-light: #fdeeee;
+
+  /* Swatch 5: Sweet Pastel Pink */
+  --color-accent: #ff9de0;
+  --color-accent-hover: #f382d0;
+  --color-accent-light: #fff0fa;
+
+  /* Swatch 6: Warm Buttercup Yellow */
+  --color-warning: #fee49a;
+  --color-warning-dark: #ad8318;
+  --color-warning-light: #fffbe9;
+
+  /* Neutrals */
+  --color-gray: #64607c;
+  --color-gray-light: #9894aa;
+  --color-gray-border: #dcd9e8;
+
+  --color-light: #f5f6fa;
   --color-white: #ffffff;
 
   --color-success: #22c55e;
   --color-success-light: #dcfce7;
-
-  --color-warning: #f59e0b;
-  --color-warning-light: #fef9c3;
-
-  --color-error: #ef4444;
-  --color-error-light: #fee2e2;
-
-  --color-accent: #e0e7ff;
 
   /* ── Typography ──────────────────────────────────────────── */
   --font-sans:

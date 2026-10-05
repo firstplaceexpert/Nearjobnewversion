@@ -307,7 +307,7 @@ export default function PostTaskPage() {
                 <Input
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Contoh: Mal Grand Indonesia Lt. 3, Jakarta Pusat atau Remote / Online"
+                  placeholder="Contoh: Malioboro Mall Lt. 2, Yogyakarta atau Remote / Online"
                   error={errors.location}
                 />
               </div>

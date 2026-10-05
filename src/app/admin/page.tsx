@@ -94,7 +94,7 @@ export default function AdminMerchantDashboard() {
       customer: "PT Mahakarya Digital",
       driver: "Rizky Pratama",
       service: "Jasa Kustom",
-      pickup: "Jakarta Convention Center",
+      pickup: "Jogja Expo Center (JEC)",
       destination: "Stand Booth A-12",
       budget: 1500000,
       commission: 135000,

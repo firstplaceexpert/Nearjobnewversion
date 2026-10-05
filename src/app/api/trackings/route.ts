@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const result = marketplaceStore.createInstantOrder(activeUser.id, {
       serviceName: body.serviceName || "NearExpress",
-      location: body.location || "Jakarta Selatan",
+      location: body.location || "Kota Yogyakarta",
       budget: Number(body.budget) || 50000,
       description: body.description || "Pesanan instan bantuan cepat di dekat lokasi.",
       latitude: body.latitude,

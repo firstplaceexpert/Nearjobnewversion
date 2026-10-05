@@ -188,12 +188,12 @@ export default function DesignSystemPage() {
                   <Badge variant="primary">Harian</Badge>
                 </div>
                 <CardTitle>Kurir Antar Dokumen</CardTitle>
-                <CardDescription>Jakarta Selatan · PT Cepat Sampai</CardDescription>
+                <CardDescription>Sleman, Yogyakarta · PT Cepat Sampai</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray">
-                  Dibutuhkan kurir berpengalaman untuk antar dokumen penting. Area Jakarta
-                  Selatan, motor sendiri.
+                  Dibutuhkan kurir berpengalaman untuk antar dokumen penting. Area Sleman
+                  & Kota Yogyakarta, motor sendiri.
                 </p>
               </CardContent>
               <CardFooter>

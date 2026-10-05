@@ -30,7 +30,7 @@ export function InstantOrderModal({
   const [step, setStep] = useState<"FORM" | "SEARCHING" | "ASSIGNED">("FORM");
   const [serviceName, setServiceName] = useState("NearExpress (Antar Kilat)");
   const [location, setLocation] = useState(
-    "Lobby Utama SCBD Lot 8, Senayan, Jakarta Selatan",
+    "Lobby Utama Plaza Ambarrukmo, Sleman, Yogyakarta",
   );
   const [budget, setBudget] = useState("50000");
   const [notes, setNotes] = useState(

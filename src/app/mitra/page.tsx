@@ -301,12 +301,14 @@ export default function MitraDashboardPage() {
                   </span>
                 </div>
 
-                <h5 className="font-bold text-sm text-dark line-clamp-1">{task.title}</h5>
+                <h5 className="font-bold text-sm text-dark leading-snug line-clamp-2 break-words">
+                  {task.title}
+                </h5>
 
-                <div className="text-xs text-gray space-y-1">
-                  <p className="flex items-center gap-1.5 truncate">
-                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
-                    <span>{task.location}</span>
+                <div className="text-xs text-gray space-y-1.5 pt-0.5">
+                  <p className="flex items-start gap-1.5 leading-snug">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                    <span className="break-words line-clamp-2">{task.location}</span>
                   </p>
                   <p className="flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-gray shrink-0" />

@@ -42,7 +42,7 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
   const [location, setLocation] = useState(
     config.isRemote
       ? "Online / Remote (Seluruh Indonesia)"
-      : "Jl. Sudirman, Jakarta Pusat",
+      : "Jl. Malioboro, Kota Yogyakarta",
   );
   const [scheduleDate, setScheduleDate] = useState(() => {
     const d = new Date();

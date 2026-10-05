@@ -113,14 +113,14 @@ export default function MitraOrdersPage() {
                       </span>
                     </div>
 
-                    <h3 className="font-extrabold text-base sm:text-lg text-dark">
+                    <h3 className="font-extrabold text-base sm:text-lg text-dark leading-snug break-words">
                       {app.task?.title}
                     </h3>
 
-                    <div className="text-xs text-gray space-y-1">
-                      <p className="flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
-                        <span>{app.task?.location}</span>
+                    <div className="text-xs text-gray space-y-1.5 pt-0.5">
+                      <p className="flex items-start gap-1.5 leading-snug">
+                        <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                        <span className="break-words">{app.task?.location}</span>
                       </p>
                       <p className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-gray shrink-0" />

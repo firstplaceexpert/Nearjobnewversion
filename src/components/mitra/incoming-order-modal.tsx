@@ -61,11 +61,11 @@ export function IncomingOrderModal({
                 <Navigation className="w-5 h-5 animate-pulse" />
               </div>
             </div>
-            <div>
+            <div className="min-w-0 pr-2">
               <span className="text-[11px] font-extrabold text-primary uppercase tracking-wider block">
                 Orderan Masuk ({timeLeft}s)
               </span>
-              <h3 className="text-base font-extrabold text-dark line-clamp-1">
+              <h3 className="text-sm sm:text-base font-extrabold text-dark leading-snug break-words line-clamp-2">
                 {order.title}
               </h3>
             </div>
@@ -73,7 +73,7 @@ export function IncomingOrderModal({
 
           <button
             onClick={onDismiss}
-            className="text-gray hover:text-dark p-1.5 rounded-full hover:bg-light transition-colors"
+            className="text-gray hover:text-dark p-1.5 rounded-full hover:bg-light transition-colors shrink-0"
           >
             <X className="w-4 h-4" />
           </button>
@@ -122,13 +122,15 @@ export function IncomingOrderModal({
                   <span className="text-[10px] text-gray uppercase font-bold block">
                     Lokasi Penjemputan / Kerja
                   </span>
-                  <p className="font-bold text-dark text-xs">{order.pickupLocation}</p>
+                  <p className="font-bold text-dark text-xs break-words leading-relaxed">
+                    {order.pickupLocation}
+                  </p>
                 </div>
               </div>
             </div>
 
             {order.notes && (
-              <p className="text-[11px] text-gray italic bg-light/50 p-2.5 rounded-lg border border-gray-border/40">
+              <p className="text-[11px] text-gray italic bg-light/50 p-2.5 rounded-lg border border-gray-border/40 break-words leading-relaxed">
                 &ldquo;{order.notes}&rdquo;
               </p>
             )}

@@ -72,20 +72,20 @@ export function ActiveJobTracker({
       {/* Header status */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-light">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-primary text-white flex items-center justify-center font-bold shadow-md shadow-primary/20">
+          <div className="w-10 h-10 rounded-2xl bg-primary text-white flex items-center justify-center font-bold shadow-md shadow-primary/20 shrink-0">
             <Navigation className="w-5 h-5 animate-pulse" />
           </div>
-          <div>
+          <div className="min-w-0 flex-1">
             <span className="text-[11px] font-extrabold text-primary uppercase tracking-wider block">
               Tugas Aktif Berjalan
             </span>
-            <h3 className="text-base sm:text-lg font-extrabold text-dark">
+            <h3 className="text-base sm:text-lg font-extrabold text-dark leading-snug break-words">
               {order.title}
             </h3>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
+        <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
           <span className="text-xs font-semibold text-gray">Upah Bersih:</span>
           <span className="text-lg font-black text-success">
             Rp {order.netEarnings.toLocaleString("id-ID")}
@@ -146,9 +146,9 @@ export function ActiveJobTracker({
             Pemesan Tugas
           </span>
           <p className="font-extrabold text-sm text-dark">{order.customerName}</p>
-          <div className="flex items-center gap-1.5 text-xs text-gray">
-            <MapPin className="w-3.5 h-3.5 text-primary" />
-            <span className="font-medium text-dark-soft truncate max-w-xs">
+          <div className="flex items-start gap-1.5 text-xs text-gray leading-snug">
+            <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+            <span className="font-medium text-dark-soft break-words">
               {order.location}
             </span>
           </div>

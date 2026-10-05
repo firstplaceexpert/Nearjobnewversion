@@ -57,7 +57,33 @@ const AREA_PRESETS = [
 ];
 
 /**
- * Menyediakan nama sub-menu layanan, kode brand, emoji ikon, dan warna tema
+ * Koleksi SVG Icon profesional untuk sub-menu peta (menggantikan emotikon)
+ */
+const SUBMENU_SVGS = {
+  // Paw Print untuk Rawat Hewan (NearPet)
+  paw: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg>`,
+  // Package / Box untuk Angkut Barang (NearAngkut)
+  package: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+  // Sparkles untuk Beres-Beres / Kebersihan (NearClean)
+  sparkles: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>`,
+  // Palette untuk Desain Grafis (NearDesign)
+  palette: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
+  // Coffee untuk Staf Kasir / Ritel (NearKasir)
+  coffee: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h12Z"/><path d="M6 2v2"/><path d="M17 11h1a3 3 0 0 1 0 6h-1"/></svg>`,
+  // Store untuk Jaga Booth / Bazaar (NearEvent)
+  store: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2"/><path d="M17 7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2"/><path d="M12 7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2"/><path d="M7 7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2"/></svg>`,
+  // Zap untuk Servis Listrik / Teknis (NearFix / NearExpress)
+  zap: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  // Camera untuk Fotografer & Event (NearFoto)
+  camera: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>`,
+  // Shopping Cart untuk Titip & Antre (NearHelper)
+  cart: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>`,
+  // Briefcase untuk Fallback Jasa Umum
+  briefcase: `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+};
+
+/**
+ * Menyediakan nama sub-menu layanan, kode brand, icon SVG, dan warna tema
  */
 function getSubMenuInfo(category: string, title: string) {
   const text = (category + " " + title).toLowerCase();
@@ -71,7 +97,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Rawat Hewan",
       brandCode: "NearPet",
-      icon: "🐱",
+      svgIcon: SUBMENU_SVGS.paw,
       bg: "bg-amber-100 text-amber-800",
     };
   }
@@ -84,7 +110,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Angkut Barang",
       brandCode: "NearAngkut",
-      icon: "📦",
+      svgIcon: SUBMENU_SVGS.package,
       bg: "bg-blue-100 text-blue-800",
     };
   }
@@ -98,7 +124,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Beres-Beres",
       brandCode: "NearClean",
-      icon: "🧹",
+      svgIcon: SUBMENU_SVGS.sparkles,
       bg: "bg-emerald-100 text-emerald-800",
     };
   }
@@ -113,7 +139,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Desain Grafis",
       brandCode: "NearDesign",
-      icon: "🎨",
+      svgIcon: SUBMENU_SVGS.palette,
       bg: "bg-purple-100 text-purple-800",
     };
   }
@@ -127,7 +153,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Staf Kasir",
       brandCode: "NearKasir",
-      icon: "☕",
+      svgIcon: SUBMENU_SVGS.coffee,
       bg: "bg-orange-100 text-orange-800",
     };
   }
@@ -142,7 +168,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Jaga Booth",
       brandCode: "NearEvent",
-      icon: "🎪",
+      svgIcon: SUBMENU_SVGS.store,
       bg: "bg-rose-100 text-rose-800",
     };
   }
@@ -157,7 +183,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Servis Listrik",
       brandCode: "NearFix",
-      icon: "⚡",
+      svgIcon: SUBMENU_SVGS.zap,
       bg: "bg-yellow-100 text-yellow-800",
     };
   }
@@ -170,7 +196,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Fotografer",
       brandCode: "NearFoto",
-      icon: "📸",
+      svgIcon: SUBMENU_SVGS.camera,
       bg: "bg-teal-100 text-teal-800",
     };
   }
@@ -183,7 +209,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Kurir Instan",
       brandCode: "NearExpress",
-      icon: "⚡",
+      svgIcon: SUBMENU_SVGS.zap,
       bg: "bg-amber-100 text-amber-800",
     };
   }
@@ -191,7 +217,7 @@ function getSubMenuInfo(category: string, title: string) {
     return {
       subMenu: "Titip & Antre",
       brandCode: "NearHelper",
-      icon: "🛒",
+      svgIcon: SUBMENU_SVGS.cart,
       bg: "bg-pink-100 text-pink-800",
     };
   }
@@ -201,7 +227,7 @@ function getSubMenuInfo(category: string, title: string) {
   return {
     subMenu: fallback || "Jasa Harian",
     brandCode: "NearJob",
-    icon: "💼",
+    svgIcon: SUBMENU_SVGS.briefcase,
     bg: "bg-slate-100 text-slate-800",
   };
 }
@@ -337,10 +363,10 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                 ? "bg-[#1867F8] text-white shadow-[0_10px_26px_rgba(24,103,248,0.48)] ring-4 ring-[#1867F8]/25 scale-110 -translate-y-1.5"
                 : "bg-white/95 text-[#2F2B4F] shadow-[0_4px_16px_rgba(0,0,0,0.18)] border border-slate-200/90 hover:border-[#1867F8] hover:shadow-[0_8px_24px_rgba(24,103,248,0.25)] hover:scale-105"
             }">
-              <div class="w-7 h-7 rounded-full flex items-center justify-center text-sm shrink-0 shadow-xs ${
+              <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0 shadow-xs ${
                 isSelected ? "bg-white/20 text-white" : info.bg
               }">
-                ${info.icon}
+                ${info.svgIcon}
               </div>
               <div class="flex flex-col text-left pr-1 leading-none">
                 <span class="text-[12px] font-black tracking-tight whitespace-nowrap mb-0.5 ${
@@ -643,8 +669,21 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <Badge variant="primary" size="sm">
-                    {getSubMenuInfo(activeTask.category, activeTask.title).subMenu}
+                  <Badge
+                    variant="primary"
+                    size="sm"
+                    className="flex items-center gap-1.5"
+                  >
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: getSubMenuInfo(activeTask.category, activeTask.title)
+                          .svgIcon,
+                      }}
+                      className="w-3.5 h-3.5 flex items-center justify-center shrink-0"
+                    />
+                    <span>
+                      {getSubMenuInfo(activeTask.category, activeTask.title).subMenu}
+                    </span>
                   </Badge>
                   <span className="text-[11px] font-black text-[#1867F8] bg-[#1867F8]/10 px-2.5 py-0.5 rounded-full flex items-center gap-1">
                     <Navigation className="w-3 h-3 text-[#1867F8]" />

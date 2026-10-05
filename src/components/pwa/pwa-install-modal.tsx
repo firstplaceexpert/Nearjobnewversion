@@ -13,6 +13,10 @@ import {
   Download,
   Sparkles,
   ExternalLink,
+  Share2,
+  Plus,
+  Info,
+  Apple,
 } from "lucide-react";
 import { usePwa } from "./pwa-provider";
 
@@ -228,8 +232,8 @@ export function PwaInstallModal() {
                 {/* Android Guide */}
                 <div className="p-3.5 rounded-2xl bg-white border border-gray-border space-y-2">
                   <div className="flex items-center gap-2 font-bold text-xs text-dark">
-                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center text-[11px] font-black">
-                      🤖
+                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center">
+                      <Smartphone className="w-3.5 h-3.5" />
                     </span>
                     <span>Untuk Android (Chrome)</span>
                   </div>
@@ -256,8 +260,8 @@ export function PwaInstallModal() {
                 {/* iPhone Guide */}
                 <div className="p-3.5 rounded-2xl bg-white border border-gray-border space-y-2">
                   <div className="flex items-center gap-2 font-bold text-xs text-dark">
-                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center text-[11px] font-black">
-                      🍎
+                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center">
+                      <Apple className="w-3.5 h-3.5" />
                     </span>
                     <span>Untuk iPhone (Safari)</span>
                   </div>
@@ -265,13 +269,16 @@ export function PwaInstallModal() {
                     <li>Buka alamat di atas di browser Safari iPhone.</li>
                     <li>
                       Ketuk tombol{" "}
-                      <strong className="text-dark">Bagikan (Share 📤)</strong> di bilah
-                      bawah.
+                      <strong className="text-dark inline-flex items-center gap-1">
+                        Bagikan (Share <Share2 className="w-3 h-3 inline text-primary" />)
+                      </strong>{" "}
+                      di bilah bawah.
                     </li>
                     <li>
                       Gulir lalu pilih{" "}
-                      <strong className="text-primary font-bold">
-                        &quot;Tambah ke Layar Utama (➕)&quot;
+                      <strong className="text-primary font-bold inline-flex items-center gap-1">
+                        &quot;Tambah ke Layar Utama&quot;{" "}
+                        <Plus className="w-3 h-3 inline" />
                       </strong>
                       .
                     </li>
@@ -359,7 +366,8 @@ export function PwaInstallModal() {
             <div className="space-y-4 animate-fade-in">
               <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2">
                 <div className="flex items-center gap-2 font-bold text-sm text-amber-900">
-                  <span>💡 Informasi Penting Tentang File APK</span>
+                  <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                  <span>Informasi Penting Tentang File APK</span>
                 </div>
                 <p className="leading-relaxed">
                   NearJob dibangun sebagai <strong>Progressive Web App (PWA)</strong>, di

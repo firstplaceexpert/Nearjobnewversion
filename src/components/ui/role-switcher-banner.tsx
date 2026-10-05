@@ -131,7 +131,7 @@ export function RoleSwitcherBanner({
               ? "Mengalihkan..."
               : isMitra
                 ? "Beralih ke Konsumen"
-                : "Beralih ke Mode Mitra 🛵"}
+                : "Beralih ke Mode Mitra"}
           </span>
         </button>
       </div>

@@ -994,17 +994,13 @@ export const marketplaceStore = {
       store.chats = new Map();
     }
     const user = store.users.get(senderId);
-    if (!user) throw new Error("Pengguna tidak ditemukan");
-
-    const task = store.tasks.get(taskId);
-    if (!task) throw new Error("Tugas tidak ditemukan");
 
     const newMessage: ChatMessage = {
       id: `msg-${Date.now()}`,
       taskId,
       senderId,
-      senderName: user.name,
-      senderRole: user.role,
+      senderName: user?.name || "Pengguna",
+      senderRole: user?.role || "WORKER",
       text: text.trim(),
       createdAt: new Date().toISOString(),
     };

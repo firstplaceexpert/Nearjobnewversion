@@ -32,7 +32,8 @@ export function ChatDrawer({
     queryFn: async () => {
       const res = await fetch(`/api/chat/${taskId}`);
       if (!res.ok) throw new Error("Gagal memuat pesan chat");
-      return res.json();
+      const json = await res.json();
+      return Array.isArray(json) ? json : [];
     },
     enabled: isOpen && !!taskId,
     refetchInterval: 3000, // Poll every 3 seconds for live chat feel

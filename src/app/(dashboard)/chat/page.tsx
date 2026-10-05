@@ -13,12 +13,17 @@ export default function ChatListPage() {
     undefined,
   );
 
-  const { data: tasks = [], isLoading } = useQuery<TaskItem[]>({
+  const {
+    data: tasks = [],
+    isLoading,
+    isError,
+  } = useQuery<TaskItem[]>({
     queryKey: ["tasks"],
     queryFn: async () => {
       const res = await fetch("/api/tasks");
       if (!res.ok) throw new Error("Gagal mengambil data tugas");
-      return res.json();
+      const json = await res.json();
+      return Array.isArray(json) ? json : json.data || [];
     },
   });
 
@@ -44,6 +49,16 @@ export default function ChatListPage() {
       {isLoading ? (
         <div className="p-12 text-center text-sm text-gray">
           Memuat daftar percakapan...
+        </div>
+      ) : isError ? (
+        <div className="bg-white rounded-3xl p-12 text-center border border-gray-border space-y-3">
+          <p className="text-sm font-semibold text-error">Gagal memuat percakapan</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-hover transition-colors"
+          >
+            Muat Ulang
+          </button>
         </div>
       ) : tasks.length === 0 ? (
         <div className="bg-white rounded-3xl p-12 text-center border border-gray-border space-y-3">

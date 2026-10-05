@@ -20,6 +20,7 @@ import {
   Home,
   Store,
   Check,
+  Coins,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ServiceCategoryConfig, ServiceVariant } from "@/lib/service-categories";
@@ -455,18 +456,80 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
             </div>
           </div>
 
-          {/* Total Tarif Layanan Bersih (Tanpa Bocoran Potongan / Upah Bersih) */}
+          {/* Penentuan Biaya / Upah Sesuai Keinginan Konsumen */}
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-primary-light/30 via-white to-light border-2 border-primary/30 space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div>
+                <label className="text-xs font-black text-dark flex items-center gap-1.5">
+                  <Coins className="w-4 h-4 text-primary" />
+                  <span>Tentukan Biaya / Upah Sesuai Keinginan Anda (Rp)</span>
+                  <span className="text-error">*</span>
+                </label>
+                <p className="text-[11px] text-gray mt-0.5">
+                  Bebas tentukan upah sesuai anggaran dan kesepakatan yang Anda inginkan
+                </p>
+              </div>
+              <span className="text-[11px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full w-fit">
+                Bebas Nego / Fleksibel
+              </span>
+            </div>
+
+            <div className="relative">
+              <span className="absolute left-4 top-3 font-black text-sm text-gray">
+                Rp
+              </span>
+              <input
+                type="number"
+                required
+                min="10000"
+                step="5000"
+                value={budgetNum || ""}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value, 10);
+                  setBudgetNum(isNaN(val) ? 0 : val);
+                }}
+                placeholder="Ketik nominal upah yang Anda inginkan..."
+                className="w-full pl-12 pr-4 py-3 bg-white rounded-xl text-base font-black text-dark border-2 border-gray-border focus:border-primary focus:outline-none transition-all shadow-xs"
+              />
+            </div>
+
+            {/* Quick Preset Buttons */}
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <span className="text-[10px] font-bold text-gray uppercase tracking-wider">
+                Preset Cepat:
+              </span>
+              <button
+                type="button"
+                onClick={() => setBudgetNum(selectedVariant.defaultBudget)}
+                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-primary-light/50 border border-gray-border text-dark transition-all"
+              >
+                Rekomendasi (Rp {selectedVariant.defaultBudget.toLocaleString("id-ID")})
+              </button>
+              {[10000, 25000, 50000].map((add) => (
+                <button
+                  key={add}
+                  type="button"
+                  onClick={() => setBudgetNum((prev) => prev + add)}
+                  className="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-primary-light/50 border border-gray-border text-primary transition-all"
+                >
+                  +{add / 1000}rb
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Total Tarif Layanan Bersih Sesuai Keinginan Konsumen */}
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <span className="text-xs text-slate-700 font-bold block">
-                Total Biaya Layanan:
+                Total Biaya Layanan yang Anda Tawarkan:
               </span>
               <span className="text-[11px] text-slate-400">
-                Tarif all-in resmi NearJob. Dana aman di rekening bersama sampai tugas
-                selesai.
+                Sesuai nominal yang Anda inginkan. Dana aman di rekening bersama sampai
+                tugas selesai.
               </span>
             </div>
-            <span className="font-black text-dark text-xl sm:text-2xl">
+            <span className="font-black text-primary text-xl sm:text-2xl">
               Rp {budgetNum.toLocaleString("id-ID")}
             </span>
           </div>

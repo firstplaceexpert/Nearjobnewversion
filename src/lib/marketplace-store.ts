@@ -853,7 +853,8 @@ export const marketplaceStore = {
     const store = initStore();
     // Get all accepted applications for this worker
     const workerApps = Array.from(store.applications.values()).filter(
-      (a) => a.workerId === workerId && a.status === "ACCEPTED",
+      (a) =>
+        a.workerId === workerId && (a.status === "ACCEPTED" || a.status === "COMPLETED"),
     );
 
     const taskIds = new Set(workerApps.map((a) => a.taskId));
@@ -1184,6 +1185,15 @@ export const marketplaceStore = {
     taskId: string,
   ): MitraActiveOrder {
     const store = initStore();
+
+    // Pastikan mitra hanya dapat mengambil 1 orderan aktif dalam satu waktu
+    const existingActive = store.mitraActiveOrders.get(workerId);
+    if (existingActive && existingActive.step !== "COMPLETED") {
+      throw new Error(
+        `Anda sedang menjalankan order "${existingActive.title}". Selesaikan order aktif ini terlebih dahulu sebelum mengambil order baru.`,
+      );
+    }
+
     const task = store.tasks.get(taskId);
     if (!task) throw new Error("Pesanan tidak ditemukan");
 
@@ -1275,6 +1285,14 @@ export const marketplaceStore = {
       if (task) {
         task.status = "COMPLETED";
         store.tasks.set(taskId, task);
+      }
+
+      // Complete application in store
+      for (const app of store.applications.values()) {
+        if (app.taskId === taskId && app.workerId === workerId) {
+          app.status = "COMPLETED";
+          store.applications.set(app.id, app);
+        }
       }
 
       // Complete transaction to PAID

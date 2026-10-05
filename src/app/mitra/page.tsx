@@ -49,18 +49,29 @@ export default function MitraDashboardPage() {
       : null;
   const nearbyTasks: TaskItem[] = data?.nearbyTasks || [];
 
+  const [acceptingTaskId, setAcceptingTaskId] = useState<string | null>(null);
+
   // Mutations
   const acceptOrderMutation = useMutation({
     mutationFn: async (taskId: string) => {
+      setAcceptingTaskId(taskId);
       const res = await fetch("/api/mitra/order/accept", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ taskId }),
       });
-      return res.json();
+      const json = await res.json();
+      if (!json.success) {
+        throw new Error(json.error || "Gagal mengambil orderan");
+      }
+      return json.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["mitraDashboard"] });
+      queryClient.invalidateQueries({ queryKey: ["workerDashboard"] });
+    },
+    onSettled: () => {
+      setAcceptingTaskId(null);
     },
   });
 
@@ -271,10 +282,33 @@ export default function MitraDashboardPage() {
         <div className="rounded-3xl overflow-hidden border border-gray-border shadow-sm">
           <TaskMap
             tasks={nearbyTasks}
-            onApplyClick={(task) => acceptOrderMutation.mutate(task.id)}
+            onApplyClick={(task) => {
+              if (activeOrder) {
+                alert(
+                  "Anda sedang memiliki tugas aktif yang berjalan. Selesaikan tugas tersebut terlebih dahulu sebelum mengambil tugas baru.",
+                );
+                return;
+              }
+              acceptOrderMutation.mutate(task.id);
+            }}
           />
         </div>
       </div>
+
+      {/* Error Banner jika gagal mengambil order */}
+      {acceptOrderMutation.isError && (
+        <div className="p-3.5 rounded-2xl bg-error-light text-error text-xs font-bold border border-error/20 flex items-center justify-between">
+          <span>
+            {(acceptOrderMutation.error as Error)?.message || "Gagal mengambil order"}
+          </span>
+          <button
+            onClick={() => acceptOrderMutation.reset()}
+            className="text-xs underline ml-2 hover:opacity-80"
+          >
+            Tutup
+          </button>
+        </div>
+      )}
 
       {/* SECTION 5: QUICK ORDER FEED (CARDS) */}
       <div className="space-y-3 pt-2">
@@ -282,7 +316,11 @@ export default function MitraDashboardPage() {
           <h4 className="text-sm font-bold text-dark">
             Lowongan Tugas Instan Tersedia ({nearbyTasks.length})
           </h4>
-          <span className="text-xs text-gray">Terupdate realtime</span>
+          <span className="text-xs text-gray">
+            {activeOrder
+              ? "Selesaikan tugas aktif Anda di atas untuk mengambil order baru"
+              : "Terupdate realtime"}
+          </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
@@ -324,16 +362,27 @@ export default function MitraDashboardPage() {
                   Pemesan: <strong className="text-dark">{task.poster.name}</strong>
                 </span>
 
-                <Button
-                  size="sm"
-                  variant="primary"
-                  className="text-xs font-bold"
-                  onClick={() => acceptOrderMutation.mutate(task.id)}
-                  loading={acceptOrderMutation.isPending}
-                  disabled={acceptOrderMutation.isPending}
-                >
-                  Ambil Orderan
-                </Button>
+                {activeOrder ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    disabled
+                    className="text-xs font-semibold text-gray bg-light border-dashed cursor-not-allowed opacity-75"
+                  >
+                    Ada Tugas Aktif
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    className="text-xs font-bold"
+                    onClick={() => acceptOrderMutation.mutate(task.id)}
+                    loading={acceptingTaskId === task.id}
+                    disabled={!!acceptingTaskId}
+                  >
+                    Ambil Orderan
+                  </Button>
+                )}
               </div>
             </div>
           ))}

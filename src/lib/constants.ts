@@ -64,6 +64,7 @@ export type TaskStatus = keyof typeof TASK_STATUS_CONFIG;
 export const APPLICATION_STATUS_CONFIG = {
   PENDING: { label: "Menunggu Kurasi", variant: "warning" as const },
   ACCEPTED: { label: "Diterima", variant: "success" as const },
+  COMPLETED: { label: "Selesai", variant: "neutral" as const },
   REJECTED: { label: "Ditolak", variant: "error" as const },
 } as const;
 

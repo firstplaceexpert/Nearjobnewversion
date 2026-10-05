@@ -27,7 +27,9 @@ export default function MitraOrdersPage() {
   const applications: ApplicationItem[] = data?.applications || [];
   const earnings = data?.earnings || { transactions: [] };
 
-  const activeApps = applications.filter((app) => app.status === "ACCEPTED");
+  const activeApps = applications.filter(
+    (app) => app.status === "ACCEPTED" && app.task?.status === "IN_PROGRESS",
+  );
   const historyTransactions: TransactionItem[] = earnings.transactions || [];
 
   return (

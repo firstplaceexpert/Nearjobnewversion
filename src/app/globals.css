@@ -158,3 +158,9 @@ html {
   background-color: var(--color-gray-border);
   border-radius: var(--radius-pill);
 }
+
+/* ── Leaflet Custom Marker Pin ────────────────────────────── */
+.custom-task-marker-pin {
+  background: transparent !important;
+  border: none !important;
+}

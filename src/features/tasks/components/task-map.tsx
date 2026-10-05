@@ -56,6 +56,156 @@ const AREA_PRESETS = [
   { name: "Kotagede / Bantul", lat: -7.8285, lng: 110.3995 },
 ];
 
+/**
+ * Menyediakan nama sub-menu layanan, kode brand, emoji ikon, dan warna tema
+ */
+function getSubMenuInfo(category: string, title: string) {
+  const text = (category + " " + title).toLowerCase();
+
+  if (
+    text.includes("kucing") ||
+    text.includes("hewan") ||
+    text.includes("pet") ||
+    text.includes("anjing")
+  ) {
+    return {
+      subMenu: "Rawat Hewan",
+      brandCode: "NearPet",
+      icon: "🐱",
+      bg: "bg-amber-100 text-amber-800",
+    };
+  }
+  if (
+    text.includes("angkut") ||
+    text.includes("pindahan") ||
+    text.includes("galon") ||
+    text.includes("kardus")
+  ) {
+    return {
+      subMenu: "Angkut Barang",
+      brandCode: "NearAngkut",
+      icon: "📦",
+      bg: "bg-blue-100 text-blue-800",
+    };
+  }
+  if (
+    text.includes("bersih") ||
+    text.includes("cuci") ||
+    text.includes("clean") ||
+    text.includes("kamar") ||
+    text.includes("pel")
+  ) {
+    return {
+      subMenu: "Beres-Beres",
+      brandCode: "NearClean",
+      icon: "🧹",
+      bg: "bg-emerald-100 text-emerald-800",
+    };
+  }
+  if (
+    text.includes("desain") ||
+    text.includes("banner") ||
+    text.includes("logo") ||
+    text.includes("grafis") ||
+    text.includes("canva") ||
+    text.includes("ppt")
+  ) {
+    return {
+      subMenu: "Desain Grafis",
+      brandCode: "NearDesign",
+      icon: "🎨",
+      bg: "bg-purple-100 text-purple-800",
+    };
+  }
+  if (
+    text.includes("kasir") ||
+    text.includes("ritel") ||
+    text.includes("toko") ||
+    text.includes("cafe") ||
+    text.includes("kopi")
+  ) {
+    return {
+      subMenu: "Staf Kasir",
+      brandCode: "NearKasir",
+      icon: "☕",
+      bg: "bg-orange-100 text-orange-800",
+    };
+  }
+  if (
+    text.includes("booth") ||
+    text.includes("pameran") ||
+    text.includes("event") ||
+    text.includes("expo") ||
+    text.includes("bazaar") ||
+    text.includes("usher")
+  ) {
+    return {
+      subMenu: "Jaga Booth",
+      brandCode: "NearEvent",
+      icon: "🎪",
+      bg: "bg-rose-100 text-rose-800",
+    };
+  }
+  if (
+    text.includes("listrik") ||
+    text.includes("pertukangan") ||
+    text.includes("servis") ||
+    text.includes("ac") ||
+    text.includes("saklar") ||
+    text.includes("teknisi")
+  ) {
+    return {
+      subMenu: "Servis Listrik",
+      brandCode: "NearFix",
+      icon: "⚡",
+      bg: "bg-yellow-100 text-yellow-800",
+    };
+  }
+  if (
+    text.includes("foto") ||
+    text.includes("kamera") ||
+    text.includes("video") ||
+    text.includes("wisuda")
+  ) {
+    return {
+      subMenu: "Fotografer",
+      brandCode: "NearFoto",
+      icon: "📸",
+      bg: "bg-teal-100 text-teal-800",
+    };
+  }
+  if (
+    text.includes("kurir") ||
+    text.includes("logistik") ||
+    text.includes("antar") ||
+    text.includes("kirim")
+  ) {
+    return {
+      subMenu: "Kurir Instan",
+      brandCode: "NearExpress",
+      icon: "⚡",
+      bg: "bg-amber-100 text-amber-800",
+    };
+  }
+  if (text.includes("antre") || text.includes("belanja") || text.includes("titip")) {
+    return {
+      subMenu: "Titip & Antre",
+      brandCode: "NearHelper",
+      icon: "🛒",
+      bg: "bg-pink-100 text-pink-800",
+    };
+  }
+
+  // Fallback nama sub menu
+  const fallback = category.split("&")[0].trim();
+  return {
+    subMenu: fallback || "Jasa Harian",
+    brandCode: "NearJob",
+    icon: "💼",
+    bg: "bg-slate-100 text-slate-800",
+  };
+}
+
 export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -168,7 +318,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
 
     markersRef.current.push(userMarker);
 
-    // 4. Render Task Markers yang Jelas & Informatif (Airbnb / Gojek Style Pin)
+    // 4. Render Task Markers (Hanya Nama Sub Menu & Harga, Rincian saat diklik)
     mappedTasks.forEach((task) => {
       const budgetInK =
         task.budget >= 1000000
@@ -176,58 +326,44 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
           : `${Math.round(task.budget / 1000)}rb`;
 
       const isSelected = activeTask?.id === task.id;
-
-      // Color coding per category
-      const isPet = task.category.includes("Harian") || task.title.includes("Kucing");
-      const isClean =
-        task.category.includes("Pertukangan") || task.title.includes("Bersih");
-      const isBooth = task.category.includes("Booth");
-      const isAngkut = task.category.includes("Angkut");
-
-      const badgeColor = isPet
-        ? "bg-[#FEE49A] text-[#2F2B4F]"
-        : isClean
-          ? "bg-[#23C8FE] text-white"
-          : isBooth
-            ? "bg-[#F57373] text-white"
-            : isAngkut
-              ? "bg-[#FF9DE0] text-[#2F2B4F]"
-              : "bg-[#1867F8] text-white";
+      const info = getSubMenuInfo(task.category, task.title);
 
       const taskIcon = L.divIcon({
-        className: "custom-task-marker",
+        className: "custom-task-marker-pin",
         html: `
-          <div class="cursor-pointer transition-all duration-200 transform ${
-            isSelected ? "scale-115 -translate-y-2 z-50" : "hover:scale-105"
-          }">
-            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-white text-dark shadow-xl border-2 ${
+          <div style="transform: translate(-50%, -100%); width: max-content;" class="group cursor-pointer select-none">
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-200 ${
               isSelected
-                ? "border-primary ring-4 ring-primary/20 bg-[#2F2B4F] text-white"
-                : "border-slate-300 hover:border-primary"
+                ? "bg-[#1867F8] text-white shadow-[0_10px_26px_rgba(24,103,248,0.48)] ring-4 ring-[#1867F8]/25 scale-110 -translate-y-1.5"
+                : "bg-white/95 text-[#2F2B4F] shadow-[0_4px_16px_rgba(0,0,0,0.18)] border border-slate-200/90 hover:border-[#1867F8] hover:shadow-[0_8px_24px_rgba(24,103,248,0.25)] hover:scale-105"
             }">
-              <span class="text-[9px] font-black px-1.5 py-0.5 rounded-md uppercase ${badgeColor}">
-                ${task.category.slice(0, 8)}
-              </span>
-              <div class="flex flex-col text-left leading-tight pr-0.5">
-                <span class="text-[11px] font-black truncate max-w-[130px] ${
-                  isSelected ? "text-white" : "text-dark"
+              <div class="w-7 h-7 rounded-full flex items-center justify-center text-sm shrink-0 shadow-xs ${
+                isSelected ? "bg-white/20 text-white" : info.bg
+              }">
+                ${info.icon}
+              </div>
+              <div class="flex flex-col text-left pr-1 leading-none">
+                <span class="text-[12px] font-black tracking-tight whitespace-nowrap mb-0.5 ${
+                  isSelected ? "text-white" : "text-[#2F2B4F]"
                 }">
-                  ${task.title}
+                  ${info.subMenu}
                 </span>
-                <span class="text-[10px] font-extrabold text-[#1867F8]">
+                <span class="text-[11px] font-black ${
+                  isSelected ? "text-[#FEE49A]" : "text-[#1867F8]"
+                }">
                   Rp ${budgetInK}
                 </span>
               </div>
             </div>
-            <div class="w-3 h-3 mx-auto rotate-45 -mt-1.5 shadow-md ${
+            <div class="w-2.5 h-2.5 mx-auto rotate-45 -mt-1 shadow-xs ${
               isSelected
-                ? "bg-[#2F2B4F] border-r-2 border-b-2 border-primary"
-                : "bg-white border-r-2 border-b-2 border-slate-300"
+                ? "bg-[#1867F8]"
+                : "bg-white/95 border-r border-b border-slate-200/90"
             }"></div>
           </div>
         `,
-        iconSize: [160, 48],
-        iconAnchor: [80, 48],
+        iconSize: [0, 0],
+        iconAnchor: [0, 0],
       });
 
       const marker = L.marker([task.latitude as number, task.longitude as number], {
@@ -508,14 +644,14 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <Badge variant="primary" size="sm">
-                    {activeTask.category}
+                    {getSubMenuInfo(activeTask.category, activeTask.title).subMenu}
                   </Badge>
                   <span className="text-[11px] font-black text-[#1867F8] bg-[#1867F8]/10 px-2.5 py-0.5 rounded-full flex items-center gap-1">
                     <Navigation className="w-3 h-3 text-[#1867F8]" />
                     <span>{activeTask.distance} km dari Anda</span>
                   </span>
                 </div>
-                <h4 className="text-sm sm:text-base font-black text-dark leading-snug break-words line-clamp-2">
+                <h4 className="text-sm sm:text-base font-black text-dark leading-snug break-words">
                   {activeTask.title}
                 </h4>
               </div>
@@ -527,6 +663,18 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                 <X className="w-4 h-4" />
               </button>
             </div>
+
+            {/* Rincian Deskripsi Tugas Lengkap */}
+            {activeTask.description && (
+              <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100 space-y-1">
+                <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                  Rincian Tugas
+                </p>
+                <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                  {activeTask.description}
+                </p>
+              </div>
+            )}
 
             <div className="flex items-center justify-between text-xs text-slate-500 border-y border-slate-100 py-2 gap-2">
               <span className="flex items-center gap-1 min-w-0 flex-1">
@@ -572,23 +720,25 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
       )}
 
       {/* Floating Bottom Legend & Status Counter */}
-      <div className="absolute bottom-4 left-4 z-[390] pointer-events-none">
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3.5 py-2 shadow-lg border border-slate-200 pointer-events-auto flex items-center gap-3 text-xs font-bold text-slate-700">
-          <span className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-[#1867F8] border border-white shadow-xs"></span>
-            <span>Posisi Mitra</span>
-          </span>
-          <span className="text-slate-300">|</span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-[#23C8FE] border border-white shadow-xs"></span>
-            <span>Titik Order ({mappedTasks.length})</span>
-          </span>
-          <span className="text-slate-300">|</span>
-          <span className="text-[#1867F8] font-black">
-            Radar Aktif {selectedRadius ? `${selectedRadius} km` : "Semua"}
-          </span>
+      {!activeTask && (
+        <div className="absolute bottom-4 left-4 z-[390] pointer-events-none">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3.5 py-2 shadow-lg border border-slate-200 pointer-events-auto flex items-center gap-3 text-xs font-bold text-slate-700">
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-[#1867F8] border border-white shadow-xs"></span>
+              <span>Posisi Mitra</span>
+            </span>
+            <span className="text-slate-300">|</span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-[#23C8FE] border border-white shadow-xs"></span>
+              <span>Titik Order ({mappedTasks.length})</span>
+            </span>
+            <span className="text-slate-300">|</span>
+            <span className="text-[#1867F8] font-black">
+              Radar Aktif {selectedRadius ? `${selectedRadius} km` : "Semua"}
+            </span>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

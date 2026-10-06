@@ -189,7 +189,7 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
             </span>
             <span className="flex items-center gap-1.5 bg-black/15 px-3 py-1 rounded-full">
               <Sparkles className="w-4 h-4 text-[#FEE49A]" />
-              <span>Estimasi Harga Standar Pasar</span>
+              <span>Upah Bebas Ditentukan Konsumen</span>
             </span>
           </div>
         </div>
@@ -278,9 +278,9 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
                 </div>
 
                 <div className="mt-4 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <span className="text-slate-400 font-medium">Estimasi Biaya</span>
-                  <span className="font-black text-dark">
-                    Rp {v.defaultBudget.toLocaleString("id-ID")}
+                  <span className="text-slate-500 font-medium">Penentuan Upah</span>
+                  <span className="font-extrabold text-primary">
+                    Sesuai Keinginan Anda
                   </span>
                 </div>
               </button>
@@ -496,25 +496,25 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
             {/* Quick Preset Buttons */}
             <div className="flex flex-wrap items-center gap-2 pt-1">
               <span className="text-[10px] font-bold text-gray uppercase tracking-wider">
-                Preset Cepat:
+                Tambah Cepat:
               </span>
-              <button
-                type="button"
-                onClick={() => setBudgetNum(selectedVariant.defaultBudget)}
-                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-primary-light/50 border border-gray-border text-dark transition-all"
-              >
-                Rekomendasi (Rp {selectedVariant.defaultBudget.toLocaleString("id-ID")})
-              </button>
-              {[10000, 25000, 50000].map((add) => (
+              {[10000, 25000, 50000, 100000].map((add) => (
                 <button
                   key={add}
                   type="button"
-                  onClick={() => setBudgetNum((prev) => prev + add)}
+                  onClick={() => setBudgetNum((prev) => (prev || 0) + add)}
                   className="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-primary-light/50 border border-gray-border text-primary transition-all"
                 >
                   +{add / 1000}rb
                 </button>
               ))}
+              <button
+                type="button"
+                onClick={() => setBudgetNum(0)}
+                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-rose-50 border border-gray-border text-slate-500 hover:text-rose-600 transition-all"
+              >
+                Reset
+              </button>
             </div>
           </div>
 

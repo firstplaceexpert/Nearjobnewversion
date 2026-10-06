@@ -147,7 +147,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       mode: "PER_TASK",
       budget: 40000,
       note: "Kunjungan kasih makan kucing, ganti air minum bersih & bersihkan pasir litterbox.",
-      badge: "Rp 40.000 / visit",
+      badge: "Perawatan Anabul",
       desc: "Kasih Makan & Pasir",
       bgClass: "bg-[#FEE49A]/30 text-[#2F2B4F] border-[#FEE49A]",
     },
@@ -160,7 +160,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       mode: "PER_TASK",
       budget: 50000,
       note: "Bantu buat desain feed Instagram / banner promosi / poster menggunakan template Canva.",
-      badge: "Rp 50.000 / tugas",
+      badge: "Desain Grafis",
       desc: "Desain Feed & Poster",
       bgClass: "bg-[#FF9DE0]/25 text-[#c8469c] border-[#FF9DE0]/50",
     },
@@ -175,7 +175,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       rate: 35000,
       budget: 70000,
       note: "Sapu, pel lantai, bersihkan kamar mandi & buang sampah kosan.",
-      badge: "Rp 70.000 / 2 jam",
+      badge: "Kebersihan Kosan",
       desc: "Sapu, Pel & Kamar Mandi",
       bgClass: "bg-[#23C8FE]/15 text-[#0aaedc] border-[#23C8FE]/35",
     },
@@ -188,7 +188,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       mode: "PER_TASK",
       budget: 60000,
       note: "Bantu potong sayur, bumbu & masak 2-3 lauk rumahan untuk anak kos / keluarga.",
-      badge: "Rp 60.000 / sesi",
+      badge: "Masak Rumahan",
       desc: "Masak Rumahan 2-3 Menu",
       bgClass: "bg-[#F57373]/15 text-[#e35555] border-[#F57373]/30",
     },
@@ -602,29 +602,81 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                 </div>
               </div>
 
-              {/* Dynamic Durasi jika Per Jam */}
+              {/* Penentuan Upah oleh Konsumen (Per Tugas) */}
+              {pricingMode === "PER_TASK" && (
+                <div>
+                  <label className="text-xs font-bold text-dark block mb-1">
+                    Nominal Upah yang Anda Tawarkan <span className="text-error">*</span>
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-black text-gray">
+                      Rp
+                    </span>
+                    <input
+                      type="number"
+                      required
+                      min="10000"
+                      step="5000"
+                      value={budgetStr}
+                      onChange={(e) => setBudgetStr(e.target.value)}
+                      placeholder="Ketik nominal upah yang Anda inginkan..."
+                      className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-gray-border text-xs font-bold text-dark focus:outline-none focus:border-primary"
+                    />
+                  </div>
+                  <p className="text-[10px] text-slate-500 mt-1">
+                    Harga bebas Anda tentukan sendiri sesuai keinginan.
+                  </p>
+                </div>
+              )}
+
+              {/* Dynamic Durasi & Tarif jika Per Jam */}
               {pricingMode === "HOURLY" && (
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-700">
-                    Durasi: <strong className="text-dark">{durationHours} Jam</strong> (@
-                    Rp {hourlyRate.toLocaleString("id-ID")}/jam)
-                  </span>
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      type="button"
-                      onClick={() => handleDurationChange(durationHours - 1)}
-                      className="w-7 h-7 rounded-lg bg-white border border-slate-300 font-bold text-sm text-dark hover:bg-slate-100 flex items-center justify-center"
-                    >
-                      -
-                    </button>
-                    <span className="w-6 text-center font-bold">{durationHours}</span>
-                    <button
-                      type="button"
-                      onClick={() => handleDurationChange(durationHours + 1)}
-                      className="w-7 h-7 rounded-lg bg-white border border-slate-300 font-bold text-sm text-dark hover:bg-slate-100 flex items-center justify-center"
-                    >
-                      +
-                    </button>
+                <div className="space-y-2.5">
+                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+                    <span className="font-semibold text-slate-700">
+                      Durasi Pekerjaan:{" "}
+                      <strong className="text-dark">{durationHours} Jam</strong>
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => handleDurationChange(durationHours - 1)}
+                        className="w-7 h-7 rounded-lg bg-white border border-slate-300 font-bold text-sm text-dark hover:bg-slate-100 flex items-center justify-center"
+                      >
+                        -
+                      </button>
+                      <span className="w-6 text-center font-bold">{durationHours}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleDurationChange(durationHours + 1)}
+                        className="w-7 h-7 rounded-lg bg-white border border-slate-300 font-bold text-sm text-dark hover:bg-slate-100 flex items-center justify-center"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold text-dark block mb-1">
+                      Tarif per Jam yang Anda Tawarkan
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-black text-gray">
+                        Rp
+                      </span>
+                      <input
+                        type="number"
+                        min="10000"
+                        step="5000"
+                        value={hourlyRate}
+                        onChange={(e) => {
+                          const r = parseInt(e.target.value, 10) || 0;
+                          setHourlyRate(r);
+                          setBudgetStr((durationHours * r).toString());
+                        }}
+                        className="w-full pl-10 pr-3.5 py-2 rounded-xl border border-gray-border text-xs font-bold text-dark focus:outline-none focus:border-primary"
+                      />
+                    </div>
                   </div>
                 </div>
               )}

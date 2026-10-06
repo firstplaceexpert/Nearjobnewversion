@@ -49,7 +49,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "canva",
         name: "Desain Feed Canva & Banner",
-        badge: "Rp 50.000 / tugas",
+        badge: "Desain Grafis",
         defaultBudget: 50000,
         description:
           "Bantu buat desain konten Instagram, banner promosi, atau poster acara menggunakan template Canva.",
@@ -58,7 +58,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "ppt",
         name: "Rapikan Format PPT & Slide Kuliah",
-        badge: "Rp 45.000 / tugas",
+        badge: "Format Slide",
         defaultBudget: 45000,
         description:
           "Tata letak visual slide presentasi, perbaiki tipografi, dan masukkan materi agar siap dipresentasikan.",
@@ -67,7 +67,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "ketik",
         name: "Ketik Ulang Naskah & Transkrip",
-        badge: "Rp 35.000 / tugas",
+        badge: "Pengetikan & Naskah",
         defaultBudget: 35000,
         description:
           "Bantu ketik naskah tulisan tangan / PDF ke Word, transkrip rekaman suara, atau rapikan daftar pustaka.",
@@ -76,7 +76,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "excel",
         name: "Olah Data Excel & Statistik Dasar",
-        badge: "Rp 60.000 / tugas",
+        badge: "Olah Data",
         defaultBudget: 60000,
         description:
           "Input tabulasi data kuesioner, rumus formula Excel dasar, dan pembuatan grafik visualisasi.",
@@ -105,7 +105,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "kucing",
         name: "Kasih Makan & Bersih Pasir Kucing",
-        badge: "Rp 40.000 / visit",
+        badge: "Perawatan Kucing",
         defaultBudget: 40000,
         description:
           "Kunjungan kasih makan anabul, ganti air minum bersih, buang kotoran pasir litterbox, dan update foto.",
@@ -114,7 +114,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "clean",
         name: "Beres-Beres Kosan & Kamar Mandi",
-        badge: "Rp 70.000 / 2 jam",
+        badge: "Beres-Beres Kosan",
         defaultBudget: 70000,
         suggestedDuration: 2,
         description:
@@ -124,7 +124,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "masak",
         name: "Bantu Masak Harian & Meal Prep",
-        badge: "Rp 60.000 / sesi",
+        badge: "Dapur & Memasak",
         defaultBudget: 60000,
         description:
           "Bantu potong bahan, racik bumbu, dan masak 2-3 menu lauk rumahan sehat untuk anak kos / keluarga.",
@@ -133,7 +133,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "laundry",
         name: "Bantu Cuci Piring & Setrika Pakaian",
-        badge: "Rp 70.000 / 2 jam",
+        badge: "Cuci & Setrika",
         defaultBudget: 70000,
         suggestedDuration: 2,
         description:
@@ -163,7 +163,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "booth",
         name: "Jaga Stand Booth Bazaar Mall",
-        badge: "Rp 180.000 / shift (6 Jam)",
+        badge: "Jaga Stand Booth",
         defaultBudget: 180000,
         suggestedDuration: 6,
         description:
@@ -173,7 +173,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "crew",
         name: "Crew Bantuan Event & Pameran",
-        badge: "Rp 210.000 / shift (6 Jam)",
+        badge: "Crew Bantuan Acara",
         defaultBudget: 210000,
         suggestedDuration: 6,
         description:
@@ -183,7 +183,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "flyer",
         name: "Penyebar Brosur & Flyer Promosi",
-        badge: "Rp 120.000 / shift (4 Jam)",
+        badge: "Penyebar Brosur",
         defaultBudget: 120000,
         suggestedDuration: 4,
         description:
@@ -193,7 +193,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "toko",
         name: "Titip Jaga Toko / Kasir Pengganti",
-        badge: "Rp 180.000 / shift (6 Jam)",
+        badge: "Titip Jaga Toko",
         defaultBudget: 180000,
         suggestedDuration: 6,
         description:
@@ -223,7 +223,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "antre",
         name: "Titip Antre Tiket & Nomor Faskes",
-        badge: "Rp 70.000 / 2 jam",
+        badge: "Jasa Titip Antre",
         defaultBudget: 70000,
         suggestedDuration: 2,
         description:
@@ -233,7 +233,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "pasar",
         name: "Titip Belanja Sayur & Pasar Tradisional",
-        badge: "Rp 40.000 / tugas",
+        badge: "Belanja Pasar",
         defaultBudget: 40000,
         description:
           "Bantu belanja daftar bumbu dan sayuran segar langsung ke pasar tradisional terdekat.",
@@ -242,7 +242,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "pindahan",
         name: "Tenaga Angkut Pindahan Kosan",
-        badge: "Rp 100.000 / tugas",
+        badge: "Angkut Pindahan",
         defaultBudget: 100000,
         description:
           "Tenaga fisik membantu angkat kardus perabotan, kasur, lemari lipat, dan naik turun tangga kosan.",
@@ -251,7 +251,7 @@ export const SERVICE_CATEGORIES: Record<string, ServiceCategoryConfig> = {
       {
         id: "galon",
         name: "Angkat Galon, Tabung Gas & Barang Berat",
-        badge: "Rp 35.000 / tugas",
+        badge: "Angkat Barang Berat",
         defaultBudget: 35000,
         description:
           "Bantu angkat galon air, tabung gas elpiji, atau paket berat sampai ke lantai atas.",

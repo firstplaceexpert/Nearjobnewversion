@@ -121,22 +121,22 @@ export function InstantOrderModal({
                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-border bg-white text-xs font-semibold focus:outline-none focus:border-primary"
               >
                 <option value="NearPet (Rawat & Kasih Makan Kucing)">
-                  NearPet (Rawat & Kasih Makan Kucing) - Rp 40.000
+                  NearPet (Rawat & Kasih Makan Kucing)
                 </option>
                 <option value="NearCanva (Tugas Desain Canva / Feed IG)">
-                  NearCanva (Tugas Desain Canva / Feed IG) - Rp 50.000
+                  NearCanva (Tugas Desain Canva / Feed IG)
                 </option>
                 <option value="NearBooth (Jaga Stand Booth Bazaar 6 Jam)">
-                  NearBooth (Jaga Stand Booth Bazaar 6 Jam) - Rp 180.000
+                  NearBooth (Jaga Stand Booth Bazaar 6 Jam)
                 </option>
                 <option value="NearExpress (Antar Dokumen / Barang Kilat)">
-                  NearExpress (Antar Dokumen / Barang Kilat) - Rp 25.000
+                  NearExpress (Antar Dokumen / Barang Kilat)
                 </option>
                 <option value="NearClean (Beres Bersih Kosan / Rumah 2 Jam)">
-                  NearClean (Beres Bersih Kosan / Rumah 2 Jam) - Rp 70.000
+                  NearClean (Beres Bersih Kosan / Rumah 2 Jam)
                 </option>
                 <option value="NearHelper (Bantuan Umum / Antre / Angkat)">
-                  NearHelper (Bantuan Umum / Antre / Angkat) - Rp 50.000
+                  NearHelper (Bantuan Umum / Antre / Angkat)
                 </option>
               </select>
             </div>

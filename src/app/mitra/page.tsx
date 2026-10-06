@@ -4,7 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Compass, TrendingUp, Award, MapPin, Clock, Power, Star } from "lucide-react";
+import {
+  Compass,
+  TrendingUp,
+  Award,
+  MapPin,
+  Clock,
+  Power,
+  Star,
+  AlertCircle,
+  Eye,
+  CheckCircle2,
+  Lock,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -50,6 +62,7 @@ export default function MitraDashboardPage() {
   const nearbyTasks: TaskItem[] = data?.nearbyTasks || [];
 
   const [acceptingTaskId, setAcceptingTaskId] = useState<string | null>(null);
+  const [orderSuccessMessage, setOrderSuccessMessage] = useState<string | null>(null);
 
   // Mutations
   const acceptOrderMutation = useMutation({
@@ -66,7 +79,11 @@ export default function MitraDashboardPage() {
       }
       return json.data;
     },
-    onSuccess: () => {
+    onSuccess: (respData) => {
+      const orderTitle = respData?.activeOrder?.title || "Tugas";
+      setOrderSuccessMessage(
+        `Pesanan "${orderTitle}" berhasil Anda ambil! Sistem memprioritaskan tugas ini dan mengunci orderan lain agar Anda dapat fokus menyelesaikan pesanan.`,
+      );
       queryClient.invalidateQueries({ queryKey: ["mitraDashboard"] });
       queryClient.invalidateQueries({ queryKey: ["workerDashboard"] });
     },
@@ -115,6 +132,22 @@ export default function MitraDashboardPage() {
 
   return (
     <div className="space-y-6">
+      {/* BANNER NOTIFIKASI SUKSES MENGAMBIL ORDERAN */}
+      {orderSuccessMessage && (
+        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center justify-between gap-3 shadow-xs animate-slide-up">
+          <div className="flex items-center gap-2.5">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <span>{orderSuccessMessage}</span>
+          </div>
+          <button
+            onClick={() => setOrderSuccessMessage(null)}
+            className="text-xs font-bold text-emerald-700 underline shrink-0 hover:text-emerald-900"
+          >
+            Tutup
+          </button>
+        </div>
+      )}
+
       {/* SECTION 1: ACTIVE ORDER TRACKER (IF CURRENTLY ON A JOB) */}
       {activeOrder && (
         <div className="animate-slide-up">
@@ -285,7 +318,7 @@ export default function MitraDashboardPage() {
             onApplyClick={(task) => {
               if (activeOrder) {
                 alert(
-                  "Anda sedang memiliki tugas aktif yang berjalan. Selesaikan tugas tersebut terlebih dahulu sebelum mengambil tugas baru.",
+                  `Anda sedang memiliki tugas aktif yang berjalan ("${activeOrder.title}"). Selesaikan tugas tersebut terlebih dahulu sebelum mengambil tugas baru.`,
                 );
                 return;
               }
@@ -314,14 +347,30 @@ export default function MitraDashboardPage() {
       <div className="space-y-3 pt-2">
         <div className="flex items-center justify-between">
           <h4 className="text-sm font-bold text-dark">
-            Lowongan Tugas Instan Tersedia ({nearbyTasks.length})
+            {activeOrder
+              ? `Lowongan Lain di Sekitar (${nearbyTasks.length})`
+              : `Lowongan Tugas Instan Tersedia (${nearbyTasks.length})`}
           </h4>
           <span className="text-xs text-gray">
             {activeOrder
-              ? "Selesaikan tugas aktif Anda di atas untuk mengambil order baru"
+              ? "Tersedia untuk dilihat atau diambil setelah tugas aktif selesai"
               : "Terupdate realtime"}
           </span>
         </div>
+
+        {/* Banner Penjelasan jika sedang ada tugas aktif yang berjalan */}
+        {activeOrder && (
+          <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs flex items-center justify-between gap-3 shadow-xs">
+            <div className="flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>
+                Anda sedang menjalankan 1 tugas aktif:{" "}
+                <strong>{activeOrder.title}</strong>. Lowongan lain di bawah tetap
+                berstatus terbuka di radar dan tidak ikut terambil.
+              </span>
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {nearbyTasks.slice(0, 4).map((task) => (
@@ -363,14 +412,21 @@ export default function MitraDashboardPage() {
                 </span>
 
                 {activeOrder ? (
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    disabled
-                    className="text-xs font-semibold text-gray bg-light border-dashed cursor-not-allowed opacity-75"
-                  >
-                    Ada Tugas Aktif
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md">
+                      Tersedia di Radar
+                    </span>
+                    <Link href={`/tasks/${task.id}`}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-xs font-semibold text-dark hover:bg-light"
+                      >
+                        <Eye className="w-3 h-3 mr-1 text-gray" />
+                        Rincian
+                      </Button>
+                    </Link>
+                  </div>
                 ) : (
                   <Button
                     size="sm"

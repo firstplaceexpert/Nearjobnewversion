@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Send, X, ShieldCheck, CheckCheck, MessageSquare } from "lucide-react";
 import type { ChatMessage } from "@/features/tasks/types";
@@ -26,18 +26,41 @@ export function ChatDrawer({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
 
+  // Polling active user info
+  const { data: activeUserData } = useQuery({
+    queryKey: ["activeUser"],
+    queryFn: async () => {
+      const res = await fetch("/api/auth/active-user");
+      if (!res.ok) return null;
+      const json = await res.json();
+      return json.currentUser;
+    },
+  });
+
   // Polling chat messages
-  const { data: messages = [], isLoading } = useQuery<ChatMessage[]>({
+  const { data: chatData, isLoading } = useQuery<{
+    messages: (ChatMessage & { isMe?: boolean })[];
+    currentUserId?: string;
+  }>({
     queryKey: ["chat", taskId],
     queryFn: async () => {
       const res = await fetch(`/api/chat/${taskId}`);
       if (!res.ok) throw new Error("Gagal memuat pesan chat");
       const json = await res.json();
-      return Array.isArray(json) ? json : [];
+      if (Array.isArray(json)) {
+        return { messages: json, currentUserId: undefined };
+      }
+      return {
+        messages: (json.messages || []) as (ChatMessage & { isMe?: boolean })[],
+        currentUserId: json.currentUser?.id,
+      };
     },
     enabled: isOpen && !!taskId,
     refetchInterval: 3000, // Poll every 3 seconds for live chat feel
   });
+
+  const messages = useMemo(() => chatData?.messages || [], [chatData?.messages]);
+  const currentUserId = chatData?.currentUserId || activeUserData?.id;
 
   const sendMutation = useMutation({
     mutationFn: async (text: string) => {
@@ -53,10 +76,18 @@ export function ChatDrawer({
       return res.json();
     },
     onSuccess: (data) => {
-      queryClient.setQueryData<ChatMessage[]>(["chat", taskId], (old = []) => [
-        ...old,
-        data.message,
-      ]);
+      queryClient.setQueryData<
+        | { messages: (ChatMessage & { isMe?: boolean })[]; currentUserId?: string }
+        | (ChatMessage & { isMe?: boolean })[]
+      >(["chat", taskId], (old) => {
+        const newMsg = data.message ? { ...data.message, isMe: true } : data;
+        if (!old) return { messages: [newMsg], currentUserId };
+        if (Array.isArray(old)) return [...old, newMsg];
+        return {
+          ...old,
+          messages: [...(old.messages || []), newMsg],
+        };
+      });
       setInputText("");
     },
   });
@@ -140,29 +171,43 @@ export function ChatDrawer({
             </div>
           ) : (
             messages.map((msg) => {
-              const isPosterSender = msg.senderRole === "POSTER";
+              const isMe =
+                msg.isMe ??
+                (currentUserId
+                  ? msg.senderId === currentUserId
+                  : activeUserData?.role
+                    ? msg.senderRole === activeUserData.role
+                    : false);
 
               return (
                 <div
                   key={msg.id}
-                  className={`flex flex-col ${
-                    isPosterSender ? "items-end" : "items-start"
-                  }`}
+                  className={`flex flex-col ${isMe ? "items-end" : "items-start"}`}
                 >
-                  <span className="text-[10px] text-gray mb-1 px-1">
-                    {msg.senderName}
-                  </span>
+                  <div
+                    className={`flex items-center gap-1.5 mb-1 px-1 text-[10px] ${
+                      isMe ? "flex-row-reverse text-right" : "flex-row text-left"
+                    }`}
+                  >
+                    <span className="font-bold text-dark">
+                      {isMe ? "Anda" : msg.senderName}
+                    </span>
+                    <span className="text-gray text-[9px]">
+                      ({msg.senderRole === "POSTER" ? "Pemberi Tugas" : "Mitra Kerja"})
+                    </span>
+                  </div>
+
                   <div
                     className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-xs shadow-xs leading-relaxed ${
-                      isPosterSender
+                      isMe
                         ? "bg-primary text-white rounded-tr-xs"
                         : "bg-white text-dark border border-gray-border/80 rounded-tl-xs"
                     }`}
                   >
-                    {msg.text}
+                    <p className="whitespace-pre-wrap break-words">{msg.text}</p>
                     <div
-                      className={`text-[9px] mt-1 flex items-center justify-end gap-1 ${
-                        isPosterSender ? "text-white/80" : "text-gray"
+                      className={`text-[9px] mt-1.5 flex items-center gap-1 ${
+                        isMe ? "justify-end text-white/80" : "justify-start text-gray"
                       }`}
                     >
                       <span>
@@ -171,7 +216,7 @@ export function ChatDrawer({
                           minute: "2-digit",
                         })}
                       </span>
-                      {isPosterSender && <CheckCheck className="w-3 h-3" />}
+                      {isMe && <CheckCheck className="w-3 h-3 text-white/90" />}
                     </div>
                   </div>
                 </div>
@@ -205,7 +250,11 @@ export function ChatDrawer({
         >
           <input
             type="text"
-            placeholder="Tulis pesan ke mitra..."
+            placeholder={
+              activeUserData?.role === "WORKER"
+                ? "Tulis pesan ke pemesan tugas..."
+                : "Tulis pesan ke mitra kerja..."
+            }
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             className="flex-1 px-4 py-2.5 text-xs rounded-full border border-gray-border focus:outline-none focus:border-primary"

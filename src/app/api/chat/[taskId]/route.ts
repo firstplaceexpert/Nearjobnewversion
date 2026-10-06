@@ -12,8 +12,21 @@ export async function GET(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const messages = marketplaceStore.getChatMessages(taskId);
-  return NextResponse.json(messages);
+  const rawMessages = marketplaceStore.getChatMessages(taskId);
+  const messages = rawMessages.map((m) => ({
+    ...m,
+    isMe: m.senderId === activeUser.id,
+  }));
+
+  return NextResponse.json({
+    success: true,
+    messages,
+    currentUser: {
+      id: activeUser.id,
+      name: activeUser.name,
+      role: activeUser.role,
+    },
+  });
 }
 
 export async function POST(
@@ -34,7 +47,13 @@ export async function POST(
     }
 
     const message = marketplaceStore.sendChatMessage(taskId, activeUser.id, text);
-    return NextResponse.json({ success: true, message });
+    return NextResponse.json({
+      success: true,
+      message: {
+        ...message,
+        isMe: true,
+      },
+    });
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Gagal mengirim pesan";
     return NextResponse.json({ error: msg }, { status: 400 });

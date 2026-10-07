@@ -2,15 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Power,
-  ArrowLeftRight,
-  Wallet,
-  Compass,
-  Package,
-  User,
-  Star,
-} from "lucide-react";
+import { Power, Wallet, Compass, Package, User, Star } from "lucide-react";
 import type { MitraProfile } from "@/features/tasks/types";
 import { ProfileMenu } from "@/components/ui/profile-menu";
 
@@ -38,7 +30,7 @@ export function MitraNavbar({
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-border bg-white shadow-xs">
-      {/* Top Banner: Dual Portal Switcher Indicator */}
+      {/* Top Banner: Mitra Mode Indicator */}
       <div className="bg-dark text-white px-3 sm:px-4 py-1.5 text-xs">
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 sm:gap-2 truncate">
@@ -47,14 +39,6 @@ export function MitraNavbar({
               NEAR MITRA • Mode Kerja
             </span>
           </div>
-          <Link
-            href="/"
-            className="flex items-center gap-1 font-semibold text-primary-light hover:text-white transition-colors bg-white/10 hover:bg-white/20 px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] shrink-0"
-          >
-            <ArrowLeftRight className="w-3 h-3" />
-            <span className="hidden sm:inline">Kembali ke Aplikasi Pelanggan</span>
-            <span className="sm:hidden">App Pelanggan</span>
-          </Link>
         </div>
       </div>
 

@@ -20,7 +20,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
-import { RoleSwitcherBanner } from "@/components/ui/role-switcher-banner";
 import { formatRupiah } from "@/lib/utils";
 
 import { ChatDrawer } from "@/features/chat/components/chat-drawer";
@@ -158,9 +157,6 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 animate-fade-in">
-      {/* 0. Banner Profil & Mode Switcher (Konsumen <-> Mitra) */}
-      <RoleSwitcherBanner currentRole="POSTER" />
-
       {/* 1. Header Aktivitas */}
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-border/60 pb-5">

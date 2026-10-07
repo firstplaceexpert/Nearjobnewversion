@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Tag, LayoutDashboard, MessageSquare, ArrowLeftRight } from "lucide-react";
+import { Home, Tag, LayoutDashboard, MessageSquare } from "lucide-react";
 
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -12,7 +12,6 @@ export function MobileBottomNav() {
     { label: "Promo", href: "/promo", icon: Tag },
     { label: "Aktivitas", href: "/dashboard", icon: LayoutDashboard },
     { label: "Chat", href: "/chat", icon: MessageSquare },
-    { label: "Mitra", href: "/mitra", icon: ArrowLeftRight },
   ];
 
   return (

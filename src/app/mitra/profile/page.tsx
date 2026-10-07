@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { RoleSwitcherBanner } from "@/components/ui/role-switcher-banner";
 import type { MitraProfile } from "@/features/tasks/types";
 
 export default function MitraProfilePage() {
@@ -48,9 +47,6 @@ export default function MitraProfilePage() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      {/* 0. Role Switcher: Mitra <-> Konsumen */}
-      <RoleSwitcherBanner currentRole="WORKER" />
-
       {/* Header */}
       <div>
         <h1 className="text-2xl font-extrabold text-dark tracking-tight">

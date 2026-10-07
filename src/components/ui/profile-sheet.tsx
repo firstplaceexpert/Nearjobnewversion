@@ -457,14 +457,13 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             >
               <div className="flex items-center gap-3">
                 <ArrowLeftRight className="w-5 h-5 text-primary" />
-                <div>
-                  <span className="text-xs font-bold text-dark block">
-                    {isMitraPath ? "Beralih ke Mode Konsumen" : "Beralih ke Mode Mitra"}
-                  </span>
-                  <span className="text-[10px] text-primary font-semibold">
-                    {switchMutation.isPending ? "Beralih..." : "1-Klik Beralih Portal"}
-                  </span>
-                </div>
+                <span className="text-xs font-bold text-dark">
+                  {switchMutation.isPending
+                    ? "Beralih..."
+                    : isMitraPath
+                      ? "Beralih ke Mode Konsumen"
+                      : "Beralih ke Mode Mitra"}
+                </span>
               </div>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>

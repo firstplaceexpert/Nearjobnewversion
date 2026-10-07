@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ui/logo";
 import { NotificationsPopover } from "@/components/ui/notifications-popover";
 import { ProfileMenu } from "@/components/ui/profile-menu";
-import { PwaInstallButton } from "@/components/pwa";
-import { Bike } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -56,18 +54,8 @@ export function Navbar() {
           </nav>
         </div>
 
-        {/* Right Actions: Mode Switcher, PWA Install, Notifikasi & Profil Dropdown */}
+        {/* Right Actions: Notifikasi & Profil */}
         <div className="flex items-center gap-2 sm:gap-2.5">
-          {/* Quick Switch to Mode Mitra */}
-          <Link
-            href="/mitra"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-primary to-secondary hover:opacity-95 text-white text-xs font-bold transition-all shadow-xs hover:scale-102"
-            title="Beralih ke Aplikasi Mitra Kerja"
-          >
-            <Bike className="w-3.5 h-3.5 text-white" />
-            <span>Mode Mitra</span>
-          </Link>
-
           {/* Notifikasi */}
           <NotificationsPopover />
 

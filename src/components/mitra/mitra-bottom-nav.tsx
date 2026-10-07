@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, Package, Wallet, User, ArrowLeftRight } from "lucide-react";
+import { Compass, Package, Wallet, User } from "lucide-react";
 
 export function MitraBottomNav() {
   const pathname = usePathname();
@@ -12,12 +12,11 @@ export function MitraBottomNav() {
     { label: "Orderan", href: "/mitra/orders", icon: Package },
     { label: "Dompet", href: "/mitra/wallet", icon: Wallet },
     { label: "Profil", href: "/mitra/profile", icon: User },
-    { label: "Pelanggan", href: "/", icon: ArrowLeftRight },
   ];
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-border/80 shadow-lg pb-safe">
-      <div className="grid grid-cols-5 h-15">
+      <div className="grid grid-cols-4 h-15">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;

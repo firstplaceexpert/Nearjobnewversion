@@ -20,6 +20,14 @@ import type {
 } from "@/features/tasks/types";
 import type { JobType, TaskStatus } from "@/lib/constants";
 
+export interface OtpRecord {
+  phone: string;
+  code: string;
+  name: string;
+  role: "POSTER" | "WORKER";
+  expiresAt: number;
+}
+
 // Global in-memory state singleton for persistence across dev reloads
 declare global {
   var __NEARJOB_DATA__:
@@ -34,6 +42,7 @@ declare global {
         trackings: Map<string, LiveOrderTracking>;
         mitraProfiles: Map<string, MitraProfile>;
         mitraActiveOrders: Map<string, MitraActiveOrder>;
+        otps: Map<string, OtpRecord>;
       }
     | undefined;
 }
@@ -61,6 +70,9 @@ function initStore() {
     if (!globalThis.__NEARJOB_DATA__.mitraActiveOrders) {
       globalThis.__NEARJOB_DATA__.mitraActiveOrders = new Map();
     }
+    if (!globalThis.__NEARJOB_DATA__.otps) {
+      globalThis.__NEARJOB_DATA__.otps = new Map();
+    }
     return globalThis.__NEARJOB_DATA__;
   }
 
@@ -74,6 +86,7 @@ function initStore() {
   const trackings = new Map<string, LiveOrderTracking>();
   const mitraProfiles = new Map<string, MitraProfile>();
   const mitraActiveOrders = new Map<string, MitraActiveOrder>();
+  const otps = new Map<string, OtpRecord>();
 
   // ── Seed Users ───────────────────────────────────────────────
   const poster1: UserSummary = {
@@ -456,6 +469,7 @@ function initStore() {
     trackings,
     mitraProfiles,
     mitraActiveOrders,
+    otps,
   };
   globalThis.__NEARJOB_DATA__ = store;
   return store;
@@ -471,6 +485,93 @@ export const marketplaceStore = {
   getAllUsers(): UserSummary[] {
     const store = initStore();
     return Array.from(store.users.values());
+  },
+
+  findUserByPhone(phone: string): UserSummary | undefined {
+    const store = initStore();
+    const cleanPhone = phone.replace(/\D/g, "");
+    return Array.from(store.users.values()).find(
+      (u) => u.phone && u.phone.replace(/\D/g, "") === cleanPhone,
+    );
+  },
+
+  registerUserWithPhone(input: {
+    name: string;
+    phone: string;
+    role: "POSTER" | "WORKER";
+  }): UserSummary {
+    const store = initStore();
+    const cleanPhone = input.phone.replace(/\D/g, "");
+
+    // Check if user with phone already exists
+    const existingUser = Array.from(store.users.values()).find(
+      (u) => u.phone && u.phone.replace(/\D/g, "") === cleanPhone,
+    );
+
+    if (existingUser) {
+      existingUser.name = input.name;
+      existingUser.role = input.role;
+      store.users.set(existingUser.id, existingUser);
+      return existingUser;
+    }
+
+    const userId = generateId("usr");
+    const newUser: UserSummary = {
+      id: userId,
+      name: input.name,
+      phone: input.phone,
+      email: `${cleanPhone}@nearjob.id`,
+      role: input.role,
+    };
+
+    store.users.set(userId, newUser);
+
+    // If worker, also ensure mitra profile exists
+    if (input.role === "WORKER" && !store.mitraProfiles.has(userId)) {
+      store.mitraProfiles.set(userId, {
+        id: userId,
+        name: input.name,
+        email: `${cleanPhone}@nearjob.id`,
+        phone: input.phone,
+        avatar:
+          "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80",
+        vehicle: "Honda Vario 160cc",
+        plateNumber: "AB 4812 XX",
+        rating: 5.0,
+        totalTrips: 0,
+        acceptanceRate: 100,
+        completionRate: 100,
+        isOnline: true,
+        todayEarnings: 0,
+        todayTrips: 0,
+        dailyGoalTrips: 5,
+        points: 50,
+      });
+    }
+
+    return newUser;
+  },
+
+  // ── OTP Management ──────────────────────────────────────────
+  saveOtp(record: OtpRecord) {
+    const store = initStore();
+    if (!store.otps) store.otps = new Map();
+    const cleanPhone = record.phone.replace(/\D/g, "");
+    store.otps.set(cleanPhone, record);
+  },
+
+  getOtp(phone: string): OtpRecord | undefined {
+    const store = initStore();
+    if (!store.otps) store.otps = new Map();
+    const cleanPhone = phone.replace(/\D/g, "");
+    return store.otps.get(cleanPhone);
+  },
+
+  deleteOtp(phone: string) {
+    const store = initStore();
+    if (!store.otps) store.otps = new Map();
+    const cleanPhone = phone.replace(/\D/g, "");
+    store.otps.delete(cleanPhone);
   },
 
   // ── Tasks ───────────────────────────────────────────────────

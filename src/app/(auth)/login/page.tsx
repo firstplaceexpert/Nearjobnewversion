@@ -141,6 +141,23 @@ export default function LoginPage() {
             </Button>
           </form>
 
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200"></div>
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-white px-2 text-slate-400">atau</span>
+            </div>
+          </div>
+
+          <Link
+            href="/register"
+            className="w-full py-2.5 px-4 rounded-xl border border-[#25D366]/40 hover:bg-[#25D366]/5 text-slate-800 text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+          >
+            <span className="text-base">💬</span>
+            <span>Daftar / Masuk Cepat via OTP WhatsApp</span>
+          </Link>
+
           <p className="text-center text-xs text-gray pt-2">
             Belum punya akun?{" "}
             <Link href="/register" className="font-semibold text-primary hover:underline">

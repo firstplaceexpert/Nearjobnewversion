@@ -91,8 +91,9 @@ function initStore() {
   };
   const worker1: UserSummary = {
     id: "usr-worker-siti",
-    name: "Siti Rahma",
-    email: "siti@nearjob.id",
+    name: "Rois hadi",
+    email: "roishp01@gmail.com",
+    phone: "+6281327446342",
     role: "WORKER",
   };
   const worker2: UserSummary = {

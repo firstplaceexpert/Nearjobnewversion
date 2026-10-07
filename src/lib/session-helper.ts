@@ -38,7 +38,7 @@ export async function getCurrentUser(): Promise<UserSummary | null> {
     // cookies() unavailable in non-request context
   }
 
-  // Default fallback to first worker for smooth exploration if no session
-  const defaultUser = marketplaceStore.getUser("usr-worker-siti");
+  // Default fallback to primary user (Rois hadi) for smooth exploration if no session
+  const defaultUser = marketplaceStore.getUser("usr-poster-budi");
   return defaultUser || null;
 }

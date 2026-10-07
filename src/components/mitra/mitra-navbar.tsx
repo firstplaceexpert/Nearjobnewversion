@@ -12,6 +12,7 @@ import {
   Star,
 } from "lucide-react";
 import type { MitraProfile } from "@/features/tasks/types";
+import { ProfileMenu } from "@/components/ui/profile-menu";
 
 interface MitraNavbarProps {
   profile: MitraProfile;
@@ -77,7 +78,7 @@ export function MitraNavbar({
               <div className="flex items-center gap-1 text-[11px] text-gray">
                 <Star className="w-3 h-3 fill-[#FEE49A] text-amber-400" />
                 <span className="font-bold text-dark">{profile.rating}</span>
-                <span>• {profile.name}</span>
+                <span>• Terverifikasi</span>
               </div>
             </div>
           </Link>
@@ -144,6 +145,9 @@ export function MitraNavbar({
               }`}
             ></span>
           </button>
+
+          {/* Profile Menu (Avatar Only) */}
+          <ProfileMenu />
         </div>
       </div>
     </header>

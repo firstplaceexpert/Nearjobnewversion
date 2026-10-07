@@ -14,6 +14,7 @@ export interface UserSummary {
   email: string;
   role: "POSTER" | "WORKER";
   image?: string | null;
+  phone?: string;
 }
 
 export interface TaskItem {

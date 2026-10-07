@@ -78,8 +78,9 @@ function initStore() {
   // ── Seed Users ───────────────────────────────────────────────
   const poster1: UserSummary = {
     id: "usr-poster-budi",
-    name: "Budi Santoso",
-    email: "budi@nearjob.id",
+    name: "Rois hadi",
+    email: "roishp01@gmail.com",
+    phone: "+6281327446342",
     role: "POSTER",
   };
   const poster2: UserSummary = {

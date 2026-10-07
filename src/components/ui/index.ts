@@ -28,3 +28,4 @@ export { InstantOrderModal } from "./instant-order-modal";
 export { ProfileMenu } from "./profile-menu";
 export { RoleSwitcherBanner } from "./role-switcher-banner";
 export { VoucherSelector } from "./voucher-selector";
+export { ProfileSheet } from "./profile-sheet";

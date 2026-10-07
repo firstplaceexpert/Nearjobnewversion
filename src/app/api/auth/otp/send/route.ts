@@ -37,6 +37,18 @@ export async function POST(req: Request) {
     }
 
     const normalizedPhone = normalizeIndonesianPhone(rawPhone);
+    const ktpImage = body.ktpImage ? String(body.ktpImage).trim() : null;
+
+    if (role === "WORKER" && !ktpImage) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Sebagai Mitra Kerja, Anda wajib mengunggah foto diri bersama KTP untuk verifikasi akun resmi.",
+        },
+        { status: 400 },
+      );
+    }
 
     // Generate random 4-digit numeric OTP code
     const code = Math.floor(1000 + Math.random() * 9000).toString();
@@ -47,6 +59,7 @@ export async function POST(req: Request) {
       code,
       name,
       role,
+      ktpImage,
       expiresAt,
     });
 

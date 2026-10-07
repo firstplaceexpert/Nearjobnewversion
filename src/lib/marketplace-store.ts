@@ -25,6 +25,7 @@ export interface OtpRecord {
   code: string;
   name: string;
   role: "POSTER" | "WORKER";
+  ktpImage?: string | null;
   expiresAt: number;
 }
 
@@ -499,6 +500,7 @@ export const marketplaceStore = {
     name: string;
     phone: string;
     role: "POSTER" | "WORKER";
+    ktpImage?: string | null;
   }): UserSummary {
     const store = initStore();
     const cleanPhone = input.phone.replace(/\D/g, "");
@@ -511,6 +513,10 @@ export const marketplaceStore = {
     if (existingUser) {
       existingUser.name = input.name;
       existingUser.role = input.role;
+      if (input.ktpImage) {
+        existingUser.ktpImage = input.ktpImage;
+        existingUser.isKtpVerified = true;
+      }
       store.users.set(existingUser.id, existingUser);
       return existingUser;
     }
@@ -522,6 +528,8 @@ export const marketplaceStore = {
       phone: input.phone,
       email: `${cleanPhone}@nearjob.id`,
       role: input.role,
+      ktpImage: input.ktpImage || null,
+      isKtpVerified: input.role === "WORKER" ? !!input.ktpImage : false,
     };
 
     store.users.set(userId, newUser);
@@ -534,6 +542,7 @@ export const marketplaceStore = {
         email: `${cleanPhone}@nearjob.id`,
         phone: input.phone,
         avatar:
+          input.ktpImage ||
           "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80",
         vehicle: "Honda Vario 160cc",
         plateNumber: "AB 4812 XX",
@@ -546,6 +555,8 @@ export const marketplaceStore = {
         todayTrips: 0,
         dailyGoalTrips: 5,
         points: 50,
+        ktpImage: input.ktpImage || null,
+        isKtpVerified: !!input.ktpImage,
       });
     }
 

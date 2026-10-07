@@ -52,15 +52,17 @@ export async function POST(req: Request) {
       );
     }
 
-    // Determine final name and role
+    // Determine final name, role, and KTP selfie image
     const finalName = nameParam || otpRecord?.name || "Pengguna NearJob";
     const finalRole = (otpRecord?.role || roleParam) as "POSTER" | "WORKER";
+    const ktpImage = otpRecord?.ktpImage || body.ktpImage || null;
 
     // Register or retrieve user in marketplace store
     const user = marketplaceStore.registerUserWithPhone({
       name: finalName,
       phone: normalizedPhone,
       role: finalRole,
+      ktpImage,
     });
 
     // Clean up OTP record

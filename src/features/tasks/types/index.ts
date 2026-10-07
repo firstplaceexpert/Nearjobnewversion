@@ -15,6 +15,8 @@ export interface UserSummary {
   role: "POSTER" | "WORKER";
   image?: string | null;
   phone?: string;
+  ktpImage?: string | null;
+  isKtpVerified?: boolean;
 }
 
 export interface TaskItem {
@@ -139,6 +141,8 @@ export interface MitraProfile {
   todayTrips: number;
   dailyGoalTrips: number;
   points: number;
+  ktpImage?: string | null;
+  isKtpVerified?: boolean;
 }
 
 export interface MitraIncomingOrder {

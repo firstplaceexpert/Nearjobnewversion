@@ -51,15 +51,15 @@ describe("Critical Marketplace Flow — End-to-End Business Logic", () => {
       ).toThrow("Hanya akun Pemberi Tugas (Poster) yang dapat memposting pekerjaan");
     });
 
-    it("menolak posting tugas jika budget di bawah batas minimal Rp10.000", () => {
+    it("menolak posting tugas jika budget di bawah batas minimal Rp2.000", () => {
       const invalidInput = {
         title: "Tugas Terlalu Murah",
         category: "Jasa Harian",
         type: "DAILY" as const,
         description:
-          "Deskripsi tugas dengan budget tidak manusiawi di bawah sepuluh ribu.",
+          "Deskripsi tugas dengan budget tidak manusiawi di bawah dua ribu rupiah.",
         location: "Jakarta",
-        budget: 5_000,
+        budget: 1_000,
         scheduleDate: "2026-10-10",
         scheduleTime: "10:00",
       };
@@ -68,7 +68,7 @@ describe("Critical Marketplace Flow — End-to-End Business Logic", () => {
       expect(parsed.success).toBe(false);
       if (!parsed.success) {
         expect(parsed.error.flatten().fieldErrors.budget?.[0]).toContain(
-          "minimal Rp10.000",
+          "minimal Rp2.000",
         );
       }
     });
@@ -161,13 +161,13 @@ describe("Critical Marketplace Flow — End-to-End Business Logic", () => {
       const task = marketplaceStore.getTaskById(createdTaskId);
       expect(task?.status).toBe("IN_PROGRESS");
 
-      // Periksa kalkulasi komisi dinamis pada transaksi
-      // Budget: Rp120.000 (>= Rp50.000 → komisi 9%)
+      // Periksa kalkulasi komisi platform pada transaksi
+      // Budget: Rp120.000 (Komisi flat 10%)
       expect(result.transaction).toBeDefined();
       expect(result.transaction?.amount).toBe(120_000);
-      expect(result.transaction?.commissionRate).toBe(0.09);
-      expect(result.transaction?.commissionAmount).toBe(10_800); // 120.000 * 0.09
-      expect(result.transaction?.netAmount).toBe(109_200); // 120.000 - 10.800
+      expect(result.transaction?.commissionRate).toBe(0.1);
+      expect(result.transaction?.commissionAmount).toBe(12_000); // 120.000 * 0.10
+      expect(result.transaction?.netAmount).toBe(108_000); // 120.000 - 12.000
       expect(result.transaction?.status).toBe("PENDING");
     });
 
@@ -204,7 +204,7 @@ describe("Critical Marketplace Flow — End-to-End Business Logic", () => {
 
       // Periksa ringkasan penghasilan worker1
       const earnings = marketplaceStore.getWorkerEarningsSummary(worker1Id);
-      expect(earnings.totalEarned).toBeGreaterThanOrEqual(109_200);
+      expect(earnings.totalEarned).toBeGreaterThanOrEqual(108_000);
       expect(earnings.totalCompletedTasks).toBeGreaterThanOrEqual(1);
     });
   });

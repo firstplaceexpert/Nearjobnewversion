@@ -56,7 +56,7 @@ export const postTaskSchema = z.object({
       error: "Budget harus berupa angka",
     })
     .int("Budget harus berupa bilangan bulat")
-    .min(10000, "Budget minimal Rp10.000")
+    .min(2000, "Budget minimal Rp2.000")
     .max(100000000, "Budget maksimal Rp100.000.000"),
   scheduleDate: z.string().min(1, "Tanggal pelaksanaan wajib diisi"),
   scheduleTime: z.string().min(1, "Jam pelaksanaan wajib diisi"),

@@ -2,7 +2,7 @@
  * Zod Validation Schemas — Unit Tests
  */
 import { describe, it, expect } from "vitest";
-import { loginSchema, registerSchema } from "@/lib/validations";
+import { loginSchema, registerSchema, postTaskSchema } from "@/lib/validations";
 
 describe("loginSchema", () => {
   it("accepts valid input", () => {
@@ -75,5 +75,43 @@ describe("registerSchema", () => {
       role: "ADMIN",
     });
     expect(result.success).toBe(false);
+  });
+});
+
+describe("postTaskSchema — Biaya Minimum Rp2.000 & Bebas Kelipatan", () => {
+  const validTask = {
+    title: "Bantu Kasih Makan Kucing",
+    category: "Jasa Harian",
+    type: "DAILY" as const,
+    description:
+      "Kunjungan memberi makan kucing dan membersihkan litter box dengan teliti.",
+    location: "Sleman, Yogyakarta",
+    budget: 2000,
+    scheduleDate: "2026-10-10",
+    scheduleTime: "08:00",
+  };
+
+  it("menerima biaya minimum tepat Rp2.000", () => {
+    const result = postTaskSchema.safeParse(validTask);
+    expect(result.success).toBe(true);
+  });
+
+  it("menerima nominal bebas yang bukan kelipatan bulat (Rp2.500, Rp7.350, Rp12.345)", () => {
+    expect(postTaskSchema.safeParse({ ...validTask, budget: 2500 }).success).toBe(true);
+    expect(postTaskSchema.safeParse({ ...validTask, budget: 7350 }).success).toBe(true);
+    expect(postTaskSchema.safeParse({ ...validTask, budget: 12345 }).success).toBe(true);
+  });
+
+  it("menolak biaya di bawah minimum Rp2.000 (contoh Rp1.999)", () => {
+    const result = postTaskSchema.safeParse({ ...validTask, budget: 1999 });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues[0].message).toContain("minimal Rp2.000");
+    }
+  });
+
+  it("menolak biaya bernilai 0 atau negatif", () => {
+    expect(postTaskSchema.safeParse({ ...validTask, budget: 0 }).success).toBe(false);
+    expect(postTaskSchema.safeParse({ ...validTask, budget: -5000 }).success).toBe(false);
   });
 });

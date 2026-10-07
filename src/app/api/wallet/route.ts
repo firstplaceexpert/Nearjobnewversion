@@ -21,9 +21,9 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const amount = Number(body.amount);
-    if (!amount || amount < 10000) {
+    if (!amount || amount < 2000) {
       return NextResponse.json(
-        { error: "Nominal top up minimal Rp 10.000" },
+        { error: "Nominal top up minimal Rp 2.000" },
         { status: 400 },
       );
     }

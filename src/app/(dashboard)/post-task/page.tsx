@@ -358,29 +358,29 @@ export default function PostTaskPage() {
                   </span>
                   <input
                     type="number"
-                    step="5000"
-                    min="10000"
+                    step="1"
+                    min="2000"
+                    placeholder="Contoh: 15000, 25500, dll."
                     value={budgetStr}
                     onChange={(e) => setBudgetStr(e.target.value)}
                     className="w-full pl-10 pr-3.5 py-2.5 bg-light rounded-xl text-xs sm:text-sm font-bold text-dark border border-gray-border focus:border-primary focus:bg-white focus:outline-none transition-all"
                   />
                 </div>
+                <p className="text-[11px] text-gray mt-1">
+                  Biaya minimum Rp 2.000. Bebas nominal (tidak harus kelipatan).
+                </p>
                 {errors.budget && (
                   <p className="text-[11px] text-error mt-1">{errors.budget}</p>
                 )}
               </div>
 
-              {/* Real-time Dynamic Commission Box */}
+              {/* Real-time Commission Box */}
               {commissionData && (
                 <div className="p-4 rounded-xl bg-primary-light/20 border border-primary-light space-y-2 text-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-gray">Tarif Komisi Platform:</span>
                     <Badge variant="primary" size="sm">
-                      {Math.round(commissionData.commissionRate * 100)}% (
-                      {budgetNum >= 50000
-                        ? "Tarif Hemat >= Rp50rb"
-                        : "Tarif Standar < Rp50rb"}
-                      )
+                      10% (Flat)
                     </Badge>
                   </div>
 

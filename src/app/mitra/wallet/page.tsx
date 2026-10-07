@@ -158,13 +158,16 @@ export default function MitraWalletPage() {
               </label>
               <input
                 type="number"
-                min="10000"
-                step="5000"
+                min="2000"
+                step="1"
                 max={wallet.balance}
                 value={withdrawAmount}
                 onChange={(e) => setWithdrawAmount(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-border text-sm font-bold text-dark focus:outline-none focus:border-primary"
               />
+              <p className="text-[10px] text-slate-500 mt-1">
+                Minimal penarikan Rp 2.000. Bebas nominal (tidak harus kelipatan).
+              </p>
             </div>
 
             <div>
@@ -203,7 +206,7 @@ export default function MitraWalletPage() {
               size="md"
               className="w-full justify-center font-bold text-xs shadow-md shadow-primary/20"
               loading={withdrawMutation.isPending}
-              disabled={withdrawMutation.isPending || wallet.balance < 10000}
+              disabled={withdrawMutation.isPending || wallet.balance < 2000}
             >
               Kirim ke Rekening &rarr;
             </Button>

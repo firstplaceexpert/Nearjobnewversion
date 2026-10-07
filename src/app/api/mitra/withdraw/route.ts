@@ -10,11 +10,11 @@ export async function POST(req: Request) {
     const workerId = user?.role === "WORKER" ? user.id : "usr-worker-siti";
 
     const { amount, bank, accountNumber } = await req.json();
-    if (!amount || amount < 10000 || !bank || !accountNumber) {
+    if (!amount || amount < 2000 || !bank || !accountNumber) {
       return NextResponse.json(
         {
           success: false,
-          error: "Nominal penarikan minimal Rp 10.000 dan data bank lengkap",
+          error: "Nominal penarikan minimal Rp 2.000 dan data bank lengkap",
         },
         { status: 400 },
       );

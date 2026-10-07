@@ -122,7 +122,7 @@ export function ApplyModal({ task, isOpen, onClose, onSuccess }: ApplyModalProps
               <span className="text-gray flex items-center gap-1">
                 Komisi Platform ({Math.round(commission.commissionRate * 100)}%):
                 <Badge variant="primary" size="sm">
-                  {commission.budget >= 50000 ? "Tarif Hemat 9%" : "Tarif Standar 10%"}
+                  Tarif Flat 10%
                 </Badge>
               </span>
               <span className="font-medium text-error">

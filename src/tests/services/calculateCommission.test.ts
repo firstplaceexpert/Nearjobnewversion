@@ -1,37 +1,63 @@
 import { describe, it, expect } from "vitest";
 import {
   calculateCommission,
+  MIN_BUDGET,
+  COMMISSION_RATE,
   COMMISSION_THRESHOLD,
   LOW_BUDGET_RATE,
   HIGH_BUDGET_RATE,
 } from "@/features/payments/services/calculateCommission";
 
-describe("calculateCommission — Dynamic Commission Service", () => {
-  it("mengekspor konstanta ambang batas Rp50.000 dengan benar", () => {
-    expect(COMMISSION_THRESHOLD).toBe(50_000);
+describe("calculateCommission — Platform Commission Service (Flat 10%, Min Rp 2.000)", () => {
+  it("mengekspor konstanta komisi 10% dan batas minimum Rp 2.000", () => {
+    expect(MIN_BUDGET).toBe(2_000);
+    expect(COMMISSION_RATE).toBe(0.1);
+    expect(LOW_BUDGET_RATE).toBe(0.1);
+    expect(HIGH_BUDGET_RATE).toBe(0.1);
   });
 
-  describe("Tepat di batas ambang Rp50.000", () => {
-    it("menerapkan komisi 9% untuk budget tepat Rp50.000", () => {
-      const result = calculateCommission(50_000);
+  describe("Biaya Minimum Rp 2.000", () => {
+    it("menerapkan komisi 10% untuk biaya minimum tepat Rp 2.000", () => {
+      const result = calculateCommission(2_000);
 
-      expect(result.commissionRate).toBe(HIGH_BUDGET_RATE);
-      expect(result.commissionAmount).toBe(4_500); // 50.000 * 0.09
-      expect(result.netAmount).toBe(45_500); // 50.000 - 4.500
-      expect(result.budget).toBe(50_000);
-    });
-
-    it("menerapkan komisi 10% untuk budget tepat di bawah Rp50.000 (Rp49.999)", () => {
-      const result = calculateCommission(49_999);
-
-      expect(result.commissionRate).toBe(LOW_BUDGET_RATE);
-      expect(result.commissionAmount).toBe(Math.round(49_999 * 0.1)); // 5.000
-      expect(result.netAmount).toBe(49_999 - result.commissionAmount);
+      expect(result.budget).toBe(2_000);
+      expect(result.commissionRate).toBe(0.1);
+      expect(result.commissionAmount).toBe(200); // 2.000 * 0.10
+      expect(result.netAmount).toBe(1_800); // 2.000 - 200
     });
   });
 
-  describe("Nilai kecil (< Rp50.000)", () => {
-    it("menerapkan komisi 10% untuk budget Rp20.000", () => {
+  describe("Penentuan harga bebas (bukan kelipatan bulat)", () => {
+    it("menghitung komisi 10% dengan tepat untuk nominal ganjil Rp 2.500", () => {
+      const result = calculateCommission(2_500);
+
+      expect(result.budget).toBe(2_500);
+      expect(result.commissionRate).toBe(0.1);
+      expect(result.commissionAmount).toBe(250);
+      expect(result.netAmount).toBe(2_250);
+    });
+
+    it("menghitung komisi 10% dengan pembulatan rupiah untuk nominal acak Rp 7.350", () => {
+      const result = calculateCommission(7_350);
+
+      expect(result.budget).toBe(7_350);
+      expect(result.commissionRate).toBe(0.1);
+      expect(result.commissionAmount).toBe(735);
+      expect(result.netAmount).toBe(6_615);
+    });
+
+    it("menghitung komisi 10% untuk nominal acak Rp 12.345", () => {
+      const result = calculateCommission(12_345);
+
+      expect(result.budget).toBe(12_345);
+      expect(result.commissionRate).toBe(0.1);
+      expect(result.commissionAmount).toBe(Math.round(12_345 * 0.1)); // 1.235
+      expect(result.netAmount).toBe(12_345 - result.commissionAmount);
+    });
+  });
+
+  describe("Penerapan komisi flat 10% di berbagai nominal", () => {
+    it("menerapkan komisi 10% untuk budget Rp 20.000", () => {
       const result = calculateCommission(20_000);
 
       expect(result.commissionRate).toBe(0.1);
@@ -39,54 +65,28 @@ describe("calculateCommission — Dynamic Commission Service", () => {
       expect(result.netAmount).toBe(18_000);
     });
 
-    it("menerapkan komisi 10% untuk budget Rp35.000", () => {
-      const result = calculateCommission(35_000);
+    it("menerapkan komisi 10% untuk budget Rp 50.000", () => {
+      const result = calculateCommission(50_000);
 
       expect(result.commissionRate).toBe(0.1);
-      expect(result.commissionAmount).toBe(3_500);
-      expect(result.netAmount).toBe(31_500);
+      expect(result.commissionAmount).toBe(5_000);
+      expect(result.netAmount).toBe(45_000);
     });
 
-    it("menerapkan komisi 10% untuk budget minimal Rp10.000", () => {
-      const result = calculateCommission(10_000);
-
-      expect(result.commissionRate).toBe(0.1);
-      expect(result.commissionAmount).toBe(1_000);
-      expect(result.netAmount).toBe(9_000);
-    });
-  });
-
-  describe("Nilai besar (>= Rp50.000)", () => {
-    it("menerapkan komisi 9% untuk budget Rp100.000", () => {
+    it("menerapkan komisi 10% untuk budget Rp 100.000", () => {
       const result = calculateCommission(100_000);
 
-      expect(result.commissionRate).toBe(0.09);
-      expect(result.commissionAmount).toBe(9_000);
-      expect(result.netAmount).toBe(91_000);
+      expect(result.commissionRate).toBe(0.1);
+      expect(result.commissionAmount).toBe(10_000);
+      expect(result.netAmount).toBe(90_000);
     });
 
-    it("menerapkan komisi 9% untuk budget Rp500.000", () => {
-      const result = calculateCommission(500_000);
-
-      expect(result.commissionRate).toBe(0.09);
-      expect(result.commissionAmount).toBe(45_000);
-      expect(result.netAmount).toBe(455_000);
-    });
-
-    it("menerapkan komisi 9% untuk budget Rp1.000.000", () => {
+    it("menerapkan komisi 10% untuk budget Rp 1.000.000", () => {
       const result = calculateCommission(1_000_000);
 
-      expect(result.commissionRate).toBe(0.09);
-      expect(result.commissionAmount).toBe(90_000);
-      expect(result.netAmount).toBe(910_000);
-    });
-
-    it("menerapkan komisi 9% untuk budget profesional Rp5.000.000", () => {
-      const result = calculateCommission(5_000_000);
-
-      expect(result.commissionRate).toBe(0.09);
-      expect(result.commissionAmount).toBe(450_000);
-      expect(result.netAmount).toBe(4_550_000);
+      expect(result.commissionRate).toBe(0.1);
+      expect(result.commissionAmount).toBe(100_000);
+      expect(result.netAmount).toBe(900_000);
     });
   });
 

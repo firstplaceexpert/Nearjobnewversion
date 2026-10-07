@@ -165,12 +165,16 @@ export function InstantOrderModal({
               <input
                 type="number"
                 required
-                min="10000"
-                step="5000"
+                min="2000"
+                step="1"
+                placeholder="Contoh: 15000, 25500, dll."
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-border text-xs font-bold text-primary focus:outline-none focus:border-primary"
               />
+              <p className="text-[10px] text-slate-500">
+                Biaya minimum Rp 2.000. Bebas nominal (tidak harus kelipatan).
+              </p>
 
               {/* Total Tarif Layanan */}
               {Number(budget) > 0 && (

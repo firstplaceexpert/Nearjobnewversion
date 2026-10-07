@@ -167,8 +167,7 @@ export function TaskDetailClient({ task, currentUser }: TaskDetailClientProps) {
                 <div className="flex items-center justify-between">
                   <span className="text-gray">Tarif Komisi Platform:</span>
                   <Badge variant="primary" size="sm">
-                    {Math.round(commission.commissionRate * 100)}% (
-                    {commission.budget >= 50000 ? "Hemat" : "Standar"})
+                    {Math.round(commission.commissionRate * 100)}% (Flat)
                   </Badge>
                 </div>
 

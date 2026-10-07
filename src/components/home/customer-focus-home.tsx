@@ -615,16 +615,16 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                     <input
                       type="number"
                       required
-                      min="10000"
-                      step="5000"
+                      min="2000"
+                      step="1"
                       value={budgetStr}
                       onChange={(e) => setBudgetStr(e.target.value)}
-                      placeholder="Ketik nominal upah yang Anda inginkan..."
+                      placeholder="Ketik nominal upah (min. Rp 2.000)..."
                       className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-gray-border text-xs font-bold text-dark focus:outline-none focus:border-primary"
                     />
                   </div>
                   <p className="text-[10px] text-slate-500 mt-1">
-                    Harga bebas Anda tentukan sendiri sesuai keinginan.
+                    Biaya minimum Rp 2.000. Bebas nominal (tidak harus kelipatan).
                   </p>
                 </div>
               )}
@@ -666,8 +666,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                       </span>
                       <input
                         type="number"
-                        min="10000"
-                        step="5000"
+                        min="2000"
+                        step="1"
                         value={hourlyRate}
                         onChange={(e) => {
                           const r = parseInt(e.target.value, 10) || 0;

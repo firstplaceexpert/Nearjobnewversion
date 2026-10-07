@@ -62,7 +62,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
   const handleCustomTopUp = (e: React.FormEvent) => {
     e.preventDefault();
     const val = Number(customAmount.replace(/\D/g, ""));
-    if (val >= 10000) {
+    if (val >= 2000) {
       topUpMutation.mutate(val);
     }
   };
@@ -223,7 +223,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
               <form onSubmit={handleCustomTopUp} className="flex gap-2 pt-1">
                 <input
                   type="text"
-                  placeholder="Nominal lain (min. 10.000)"
+                  placeholder="Nominal lain (min. 2.000)"
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}
                   className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-gray-border focus:outline-none focus:border-primary"

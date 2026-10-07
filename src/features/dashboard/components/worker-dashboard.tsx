@@ -71,7 +71,7 @@ export function WorkerDashboard() {
               {formatRupiah(earnings.totalEarned)}
             </p>
             <span className="text-[11px] text-gray mt-1 block">
-              Setelah potongan komisi dinamis 9% - 10%
+              Setelah potongan komisi platform 10%
             </span>
           </CardContent>
         </Card>

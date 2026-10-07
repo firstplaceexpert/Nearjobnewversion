@@ -481,17 +481,20 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
               <input
                 type="number"
                 required
-                min="10000"
-                step="5000"
+                min="2000"
+                step="1"
                 value={budgetNum || ""}
                 onChange={(e) => {
                   const val = parseInt(e.target.value, 10);
                   setBudgetNum(isNaN(val) ? 0 : val);
                 }}
-                placeholder="Ketik nominal upah yang Anda inginkan..."
+                placeholder="Ketik nominal upah (min. Rp 2.000)..."
                 className="w-full pl-12 pr-4 py-3 bg-white rounded-xl text-base font-black text-dark border-2 border-gray-border focus:border-primary focus:outline-none transition-all shadow-xs"
               />
             </div>
+            <p className="text-[11px] text-gray pt-1">
+              Biaya minimum Rp 2.000. Bebas nominal (tidak harus kelipatan).
+            </p>
 
             {/* Quick Preset Buttons */}
             <div className="flex flex-wrap items-center gap-2 pt-1">

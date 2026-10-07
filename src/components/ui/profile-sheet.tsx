@@ -77,20 +77,20 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
   });
 
   const currentUser = data?.currentUser;
-  const userName = currentUser?.name || "Rois hadi";
-  const userEmail = currentUser?.email || "roishp01@gmail.com";
-  const userPhone = currentUser?.phone || "+6281327446342";
+  const userName = currentUser?.name || "Dimas Pratama";
+  const userEmail = currentUser?.email || "dimas@nearjob.id";
+  const userPhone = currentUser?.phone || "+6281298765432";
 
   const [editName, setEditName] = useState(userName);
   const [editPhone, setEditPhone] = useState(userPhone);
 
-  // Get Initials (e.g. Rois Hadi -> RH)
+  // Get Initials (e.g. Dimas Pratama -> DP)
   const getInitials = (nameStr: string) => {
     const parts = nameStr.trim().split(" ");
     if (parts.length >= 2) {
       return (parts[0][0] + parts[1][0]).toUpperCase();
     }
-    return nameStr.slice(0, 2).toUpperCase() || "RH";
+    return nameStr.slice(0, 2).toUpperCase() || "DP";
   };
 
   // Switch role mutation
@@ -226,11 +226,11 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
           </div>
         </div>
 
-        {/* Floating Profile Card: RH, Rois hadi, roishp01@gmail.com, +6281327446342 */}
+        {/* Floating Profile Card: DP, Dimas Pratama */}
         <div className="relative -mt-14 mx-4 z-10 bg-white rounded-3xl shadow-md border border-slate-100/90 overflow-hidden">
           <div className="p-4 sm:p-5 flex items-start justify-between gap-3">
             <div className="flex items-center gap-3.5 min-w-0">
-              {/* Circle avatar: Green with white initials RH */}
+              {/* Circle avatar: Green with white initials */}
               <div className="w-14 h-14 rounded-full bg-[#00880D] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-xs ring-4 ring-white">
                 {getInitials(userName)}
               </div>

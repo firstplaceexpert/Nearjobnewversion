@@ -2,8 +2,8 @@ import { describe, it, expect } from "vitest";
 import { marketplaceStore } from "@/lib/marketplace-store";
 
 describe("WhatsApp / Phone OTP Registration Flow with Mitra KTP Verification", () => {
-  const testPhone = "+6281327446342";
-  const testName = "Rois hadi";
+  const testPhone = "+6281298765432";
+  const testName = "Dimas Pratama";
   const testOtp = "7294";
   const testKtp = "data:image/jpeg;base64,/9j/4AAQSkZJRg==";
 

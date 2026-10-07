@@ -92,9 +92,9 @@ function initStore() {
   // ── Seed Users ───────────────────────────────────────────────
   const poster1: UserSummary = {
     id: "usr-poster-budi",
-    name: "Rois hadi",
-    email: "roishp01@gmail.com",
-    phone: "+6281327446342",
+    name: "Dimas Pratama",
+    email: "dimas@nearjob.id",
+    phone: "+6281298765432",
     role: "POSTER",
   };
   const poster2: UserSummary = {
@@ -105,9 +105,9 @@ function initStore() {
   };
   const worker1: UserSummary = {
     id: "usr-worker-siti",
-    name: "Rois hadi",
-    email: "roishp01@gmail.com",
-    phone: "+6281327446342",
+    name: "Dimas Pratama",
+    email: "dimas@nearjob.id",
+    phone: "+6281298765432",
     role: "WORKER",
   };
   const worker2: UserSummary = {

@@ -27,15 +27,15 @@ export function ProfileMenu() {
   });
 
   const currentUser = data?.currentUser;
-  const userName = currentUser?.name || "Rois hadi";
+  const userName = currentUser?.name || "Dimas Pratama";
 
-  // Get Initials (e.g. Rois hadi -> RH)
+  // Get Initials (e.g. Dimas Pratama -> DP)
   const getInitials = (nameStr: string) => {
     const parts = nameStr.trim().split(" ");
     if (parts.length >= 2) {
       return (parts[0][0] + parts[1][0]).toUpperCase();
     }
-    return nameStr.slice(0, 2).toUpperCase() || "RH";
+    return nameStr.slice(0, 2).toUpperCase() || "DP";
   };
 
   return (

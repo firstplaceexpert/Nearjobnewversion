@@ -31,8 +31,8 @@ export default function RegisterPage() {
 
   // Unified Registration Form State
   const [role, setRole] = useState<RoleType>("POSTER");
-  const [name, setName] = useState("Rois hadi");
-  const [phone, setPhone] = useState("081327446342");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [step, setStep] = useState<StepType>("INPUT_PHONE");
 
   // Mitra KTP Selfie Verification State
@@ -105,7 +105,7 @@ export default function RegisterPage() {
     setKtpImage(
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80",
     );
-    setKtpFileName("selfie_ktp_rois_terverifikasi.jpg");
+    setKtpFileName("selfie_ktp_demo_terverifikasi.jpg");
     setErrorMessage(null);
   };
 
@@ -425,7 +425,7 @@ export default function RegisterPage() {
                 <input
                   type="text"
                   required
-                  placeholder="Contoh: Rois hadi"
+                  placeholder="Contoh: Dimas Pratama"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:border-[#00880D] focus:ring-2 focus:ring-[#00880D]/20 transition-all placeholder:text-slate-400"

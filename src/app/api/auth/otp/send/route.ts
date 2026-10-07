@@ -30,7 +30,7 @@ export async function POST(req: Request) {
         {
           success: false,
           error:
-            "Nomor WhatsApp / HP tidak valid. Masukkan nomor yang benar (contoh: 081327446342).",
+            "Nomor WhatsApp / HP tidak valid. Masukkan nomor yang benar (contoh: 081234567890).",
         },
         { status: 400 },
       );

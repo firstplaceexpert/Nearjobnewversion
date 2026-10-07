@@ -111,7 +111,7 @@ export function InstantOrderModal({
         {step === "FORM" && (
           <form onSubmit={handleSubmitOrder} className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-md shadow-amber-500/30">
+              <div className="w-11 h-11 rounded-2xl bg-warning text-dark flex items-center justify-center shadow-md shadow-warning/30">
                 <Zap className="w-6 h-6" />
               </div>
               <div>
@@ -216,7 +216,7 @@ export function InstantOrderModal({
                   </div>
 
                   {appliedVoucher && (
-                    <div className="flex items-center justify-between text-emerald-600 font-semibold">
+                    <div className="flex items-center justify-between text-secondary-hover font-semibold">
                       <span>Diskon Promo ({appliedVoucher.code}):</span>
                       <span>
                         - Rp {appliedVoucher.discountAmount.toLocaleString("id-ID")}
@@ -265,7 +265,7 @@ export function InstantOrderModal({
           </form>
         )}
 
-        {/* STEP 2: RADAR SEARCHING ANIMATION (GOJEK / GRAB RADAR VIBE) */}
+        {/* STEP 2: RADAR SEARCHING ANIMATION (NEARJOB RADAR VIBE) */}
         {step === "SEARCHING" && (
           <div className="py-12 flex flex-col items-center justify-center text-center space-y-6">
             <div className="relative flex items-center justify-center">
@@ -307,7 +307,7 @@ export function InstantOrderModal({
               </div>
             </div>
 
-            {/* Worker Profile Card (Gojek / Grab Driver card) */}
+            {/* Worker Profile Card (NearJob Driver card) */}
             <div className="bg-light rounded-2xl p-4 border border-gray-border/60 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-xl overflow-hidden">
@@ -316,8 +316,8 @@ export function InstantOrderModal({
                 <div>
                   <h4 className="text-sm font-bold text-dark">Bagus Setiawan</h4>
                   <div className="flex items-center gap-2 text-xs text-gray mt-0.5">
-                    <span className="text-amber-500 font-bold flex items-center gap-1">
-                      <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                    <span className="text-warning font-bold flex items-center gap-1">
+                      <Star className="w-3.5 h-3.5 fill-warning text-warning" />
                       4.96
                     </span>
                     <span>•</span>

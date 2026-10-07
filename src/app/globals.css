@@ -22,21 +22,25 @@
   --color-secondary: #23c8fe;
   --color-secondary-hover: #0bb1e7;
   --color-secondary-light: #e6f9ff;
+  --color-secondary-deep: #0779a3;
 
   /* Swatch 2: Warm Coral Red */
   --color-error: #f57373;
   --color-error-hover: #e35555;
   --color-error-light: #fdeeee;
+  --color-error-deep: #c43c3c;
 
   /* Swatch 5: Sweet Pastel Pink */
   --color-accent: #ff9de0;
   --color-accent-hover: #f382d0;
   --color-accent-light: #fff0fa;
+  --color-accent-deep: #c8469c;
 
   /* Swatch 6: Warm Buttercup Yellow */
   --color-warning: #fee49a;
   --color-warning-dark: #2f2b4f;
   --color-warning-light: #fffbe9;
+  --color-warning-deep: #9a6b00;
 
   /* Neutrals */
   --color-gray: #64607c;

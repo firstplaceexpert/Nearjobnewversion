@@ -128,7 +128,7 @@ export function WorkerDashboard() {
               onClick={() => setFilterStatus("PENDING")}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                 filterStatus === "PENDING"
-                  ? "bg-warning text-white"
+                  ? "bg-warning text-dark"
                   : "bg-light text-gray hover:text-dark"
               }`}
             >

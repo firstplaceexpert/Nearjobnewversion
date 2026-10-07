@@ -340,7 +340,7 @@ export default function RegisterPage() {
                   }}
                   className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2 ${
                     role === "POSTER"
-                      ? "border-[#00880D] bg-[#00880D]/5 ring-2 ring-[#00880D]/20 shadow-xs"
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20 shadow-xs"
                       : "border-slate-200 bg-slate-50/60 hover:bg-slate-100/60 text-slate-600"
                   }`}
                 >
@@ -348,14 +348,14 @@ export default function RegisterPage() {
                     <div
                       className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold ${
                         role === "POSTER"
-                          ? "bg-[#00880D] text-white shadow-xs"
+                          ? "bg-primary text-white shadow-xs"
                           : "bg-slate-200 text-slate-600"
                       }`}
                     >
                       <User className="w-4 h-4" />
                     </div>
                     {role === "POSTER" && (
-                      <span className="w-2 h-2 rounded-full bg-[#00880D]"></span>
+                      <span className="w-2 h-2 rounded-full bg-primary"></span>
                     )}
                   </div>
                   <div>
@@ -377,7 +377,7 @@ export default function RegisterPage() {
                   }}
                   className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2 relative ${
                     role === "WORKER"
-                      ? "border-[#1867F8] bg-[#1867F8]/5 ring-2 ring-[#1867F8]/20 shadow-xs"
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20 shadow-xs"
                       : "border-slate-200 bg-slate-50/60 hover:bg-slate-100/60 text-slate-600"
                   }`}
                 >
@@ -385,13 +385,13 @@ export default function RegisterPage() {
                     <div
                       className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold ${
                         role === "WORKER"
-                          ? "bg-[#1867F8] text-white shadow-xs"
+                          ? "bg-primary text-white shadow-xs"
                           : "bg-slate-200 text-slate-600"
                       }`}
                     >
                       <Bike className="w-4 h-4" />
                     </div>
-                    <span className="text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-600 px-1.5 py-0.5 rounded-md border border-amber-500/20">
+                    <span className="text-[9px] font-black uppercase tracking-wider bg-warning/10 text-warning-deep px-1.5 py-0.5 rounded-md border border-warning/20">
                       Wajib KTP
                     </span>
                   </div>
@@ -409,7 +409,7 @@ export default function RegisterPage() {
 
             {/* Error Message */}
             {errorMessage && (
-              <div className="p-3 bg-rose-50 border border-rose-200 text-rose-600 text-xs rounded-xl font-bold flex items-start gap-2">
+              <div className="p-3 bg-error-light border border-error/30 text-error-hover text-xs rounded-xl font-bold flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span className="leading-snug">{errorMessage}</span>
               </div>
@@ -428,7 +428,7 @@ export default function RegisterPage() {
                   placeholder="Contoh: Dimas Pratama"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:border-[#00880D] focus:ring-2 focus:ring-[#00880D]/20 transition-all placeholder:text-slate-400"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400"
                 />
               </div>
 
@@ -437,7 +437,7 @@ export default function RegisterPage() {
                 <label className="text-xs font-bold text-slate-700 block mb-1">
                   Nomor WhatsApp / HP
                 </label>
-                <div className="flex items-center rounded-xl border border-slate-200 overflow-hidden focus-within:border-[#00880D] focus-within:ring-2 focus-within:ring-[#00880D]/20 transition-all">
+                <div className="flex items-center rounded-xl border border-slate-200 overflow-hidden focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all">
                   <div className="bg-slate-100 px-3 py-2.5 border-r border-slate-200 flex items-center gap-1.5 select-none shrink-0">
                     <span className="text-sm">🇮🇩</span>
                     <span className="text-xs font-bold text-slate-700">+62</span>
@@ -458,10 +458,10 @@ export default function RegisterPage() {
                 <div className="pt-2 border-t border-slate-100 space-y-2.5 animate-in fade-in slide-in-from-top-2">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-black text-slate-900 flex items-center gap-1.5">
-                      <Camera className="w-3.5 h-3.5 text-[#1867F8]" />
+                      <Camera className="w-3.5 h-3.5 text-primary" />
                       <span>Upload Foto Diri Bersama KTP</span>
                     </label>
-                    <span className="text-[10px] font-bold text-rose-500 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+                    <span className="text-[10px] font-bold text-error bg-error-light px-2 py-0.5 rounded-full border border-error/30">
                       Wajib untuk Mitra
                     </span>
                   </div>
@@ -486,9 +486,9 @@ export default function RegisterPage() {
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="w-full p-4 rounded-2xl border-2 border-dashed border-slate-200 hover:border-[#1867F8] bg-slate-50/50 hover:bg-slate-100/50 transition-all flex flex-col items-center justify-center text-center gap-2 cursor-pointer group"
+                        className="w-full p-4 rounded-2xl border-2 border-dashed border-slate-200 hover:border-primary bg-slate-50/50 hover:bg-slate-100/50 transition-all flex flex-col items-center justify-center text-center gap-2 cursor-pointer group"
                       >
-                        <div className="w-10 h-10 rounded-2xl bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <div className="w-10 h-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-105 transition-transform">
                           <UploadCloud className="w-5 h-5" />
                         </div>
                         <div>
@@ -507,13 +507,13 @@ export default function RegisterPage() {
                         onClick={handleUseDemoKtp}
                         className="w-full py-1.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                       >
-                        <Sparkles className="w-3 h-3 text-amber-500" />
+                        <Sparkles className="w-3 h-3 text-warning" />
                         <span>Gunakan Foto Contoh Demo KTP (1-Klik)</span>
                       </button>
                     </div>
                   ) : (
                     /* Uploaded Preview State */
-                    <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-2">
+                    <div className="p-3 bg-secondary-light/70 border border-secondary/30 rounded-2xl space-y-2">
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3 min-w-0">
                           {/* Image thumbnail */}
@@ -521,14 +521,14 @@ export default function RegisterPage() {
                           <img
                             src={ktpImage}
                             alt="Selfie KTP"
-                            className="w-12 h-12 rounded-xl object-cover border border-emerald-300 shadow-xs shrink-0 cursor-pointer"
+                            className="w-12 h-12 rounded-xl object-cover border border-secondary/30 shadow-xs shrink-0 cursor-pointer"
                             onClick={() => setShowPreviewModal(true)}
                           />
                           <div className="min-w-0">
-                            <span className="text-xs font-extrabold text-emerald-900 block truncate">
+                            <span className="text-xs font-extrabold text-secondary-deep block truncate">
                               Foto KTP Siap Diverifikasi
                             </span>
-                            <span className="text-[10px] text-emerald-700 truncate block">
+                            <span className="text-[10px] text-secondary-deep truncate block">
                               {ktpFileName || "selfie_ktp_terlampir.jpg"}
                             </span>
                           </div>
@@ -538,7 +538,7 @@ export default function RegisterPage() {
                           <button
                             type="button"
                             onClick={() => setShowPreviewModal(true)}
-                            className="w-7 h-7 rounded-lg hover:bg-emerald-100 text-emerald-800 flex items-center justify-center cursor-pointer"
+                            className="w-7 h-7 rounded-lg hover:bg-secondary-light text-secondary-deep flex items-center justify-center cursor-pointer"
                             title="Lihat Foto Penuh"
                           >
                             <Eye className="w-3.5 h-3.5" />
@@ -546,7 +546,7 @@ export default function RegisterPage() {
                           <button
                             type="button"
                             onClick={handleRemoveKtp}
-                            className="w-7 h-7 rounded-lg hover:bg-rose-100 text-rose-600 flex items-center justify-center cursor-pointer"
+                            className="w-7 h-7 rounded-lg hover:bg-error-light text-error-hover flex items-center justify-center cursor-pointer"
                             title="Hapus / Ganti Foto"
                           >
                             <X className="w-3.5 h-3.5" />
@@ -554,8 +554,8 @@ export default function RegisterPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1.5 text-[10px] font-bold text-emerald-800 pt-0.5">
-                        <FileCheck className="w-3.5 h-3.5 text-emerald-600" />
+                      <div className="flex items-center gap-1.5 text-[10px] font-bold text-secondary-deep pt-0.5">
+                        <FileCheck className="w-3.5 h-3.5 text-secondary-hover" />
                         <span>Identitas KTP lengkap dan siap diverifikasi.</span>
                       </div>
                     </div>
@@ -567,7 +567,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3 px-4 rounded-xl font-black text-xs text-white bg-[#00880D] hover:bg-[#00700B] active:scale-98 transition-all shadow-md shadow-[#00880D]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
+                className="w-full py-3 px-4 rounded-xl font-black text-xs text-white bg-primary hover:bg-primary-hover active:scale-98 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
               >
                 {isLoading ? (
                   <>
@@ -601,14 +601,14 @@ export default function RegisterPage() {
                 <ArrowLeft className="w-4 h-4" />
                 <span>Ubah Nomor HP / Data</span>
               </button>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#00880D] bg-[#00880D]/10 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                 Langkah 2 / 2
               </span>
             </div>
 
             {/* Instruction Header */}
             <div className="text-center space-y-1">
-              <div className="w-12 h-12 rounded-2xl bg-[#00880D]/10 text-[#00880D] flex items-center justify-center mx-auto mb-2">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-2">
                 <Smartphone className="w-6 h-6" />
               </div>
               <h2 className="text-xl font-black text-slate-900 tracking-tight">
@@ -624,7 +624,7 @@ export default function RegisterPage() {
 
             {/* Error Message */}
             {errorMessage && (
-              <div className="p-3 bg-rose-50 border border-rose-200 text-rose-600 text-xs rounded-xl font-bold text-center">
+              <div className="p-3 bg-error-light border border-error/30 text-error-hover text-xs rounded-xl font-bold text-center">
                 {errorMessage}
               </div>
             )}
@@ -644,8 +644,8 @@ export default function RegisterPage() {
                   onPaste={idx === 0 ? handlePaste : undefined}
                   className={`w-14 h-16 text-center text-2xl font-black rounded-2xl border-2 text-slate-900 focus:outline-none transition-all shadow-xs ${
                     otpDigits[idx]
-                      ? "border-[#00880D] bg-white ring-2 ring-[#00880D]/20"
-                      : "border-slate-200 bg-slate-50 focus:border-[#00880D]"
+                      ? "border-primary bg-white ring-2 ring-primary/20"
+                      : "border-slate-200 bg-slate-50 focus:border-primary"
                   }`}
                 />
               ))}
@@ -658,7 +658,7 @@ export default function RegisterPage() {
                   type="button"
                   onClick={() => handleSendOtp()}
                   disabled={isLoading}
-                  className="font-bold text-[#00880D] hover:underline cursor-pointer inline-flex items-center gap-1.5"
+                  className="font-bold text-primary hover:underline cursor-pointer inline-flex items-center gap-1.5"
                 >
                   <RefreshCw className="w-3.5 h-3.5" />
                   <span>Kirim Ulang Kode OTP via WhatsApp</span>
@@ -678,7 +678,7 @@ export default function RegisterPage() {
               type="button"
               disabled={isLoading || otpDigits.some((d) => d === "")}
               onClick={() => verifyCode(otpDigits.join(""))}
-              className="w-full py-3 px-4 rounded-xl font-black text-xs text-white bg-[#00880D] hover:bg-[#00700B] active:scale-98 transition-all shadow-md shadow-[#00880D]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
+              className="w-full py-3 px-4 rounded-xl font-black text-xs text-white bg-primary hover:bg-primary-hover active:scale-98 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
             >
               {isLoading ? (
                 <>
@@ -698,7 +698,7 @@ export default function RegisterPage() {
         {/* STEP 3: SUCCESS ANIMATION */}
         {step === "SUCCESS" && (
           <div className="py-8 text-center space-y-3 animate-in zoom-in-95 duration-300">
-            <div className="w-16 h-16 rounded-full bg-[#00880D] text-white flex items-center justify-center mx-auto shadow-lg shadow-[#00880D]/30">
+            <div className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mx-auto shadow-lg shadow-primary/30">
               <CheckCircle2 className="w-9 h-9 stroke-[2.5]" />
             </div>
             <h2 className="text-xl font-black text-slate-900 tracking-tight">
@@ -708,12 +708,12 @@ export default function RegisterPage() {
               Selamat datang, <strong>{name}</strong>!
             </p>
             {role === "WORKER" && (
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-full">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary-light text-secondary-deep text-[11px] font-bold rounded-full">
+                <ShieldCheck className="w-3.5 h-3.5 text-secondary-hover" />
                 <span>Foto KTP Terverifikasi Resmi</span>
               </div>
             )}
-            <div className="flex items-center justify-center gap-2 text-xs font-bold text-[#00880D] pt-2">
+            <div className="flex items-center justify-center gap-2 text-xs font-bold text-primary pt-2">
               <Sparkles className="w-4 h-4" />
               <span>
                 Mengalihkan ke {role === "WORKER" ? "Radar Mitra" : "Halaman Utama"}...
@@ -727,7 +727,7 @@ export default function RegisterPage() {
       {step !== "SUCCESS" && (
         <p className="text-center text-xs text-slate-500 font-medium">
           Sudah memiliki akun?{" "}
-          <Link href="/login" className="font-bold text-[#00880D] hover:underline">
+          <Link href="/login" className="font-bold text-primary hover:underline">
             Masuk di sini
           </Link>
         </p>

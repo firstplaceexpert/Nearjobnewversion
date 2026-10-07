@@ -98,7 +98,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Rawat Hewan",
       brandCode: "NearPet",
       svgIcon: SUBMENU_SVGS.paw,
-      bg: "bg-amber-100 text-amber-800",
+      bg: "bg-warning-light text-warning-deep",
     };
   }
   if (
@@ -111,7 +111,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Angkut Barang",
       brandCode: "NearAngkut",
       svgIcon: SUBMENU_SVGS.package,
-      bg: "bg-blue-100 text-blue-800",
+      bg: "bg-primary-light text-primary-hover",
     };
   }
   if (
@@ -125,7 +125,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Beres-Beres",
       brandCode: "NearClean",
       svgIcon: SUBMENU_SVGS.sparkles,
-      bg: "bg-emerald-100 text-emerald-800",
+      bg: "bg-secondary-light text-secondary-deep",
     };
   }
   if (
@@ -140,7 +140,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Desain Grafis",
       brandCode: "NearDesign",
       svgIcon: SUBMENU_SVGS.palette,
-      bg: "bg-purple-100 text-purple-800",
+      bg: "bg-dark/10 text-dark",
     };
   }
   if (
@@ -154,7 +154,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Staf Kasir",
       brandCode: "NearKasir",
       svgIcon: SUBMENU_SVGS.coffee,
-      bg: "bg-orange-100 text-orange-800",
+      bg: "bg-warning-light text-warning-deep",
     };
   }
   if (
@@ -169,7 +169,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Jaga Booth",
       brandCode: "NearEvent",
       svgIcon: SUBMENU_SVGS.store,
-      bg: "bg-rose-100 text-rose-800",
+      bg: "bg-error-light text-error-deep",
     };
   }
   if (
@@ -184,7 +184,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Servis Listrik",
       brandCode: "NearFix",
       svgIcon: SUBMENU_SVGS.zap,
-      bg: "bg-yellow-100 text-yellow-800",
+      bg: "bg-warning-light text-warning-deep",
     };
   }
   if (
@@ -197,7 +197,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Fotografer",
       brandCode: "NearFoto",
       svgIcon: SUBMENU_SVGS.camera,
-      bg: "bg-teal-100 text-teal-800",
+      bg: "bg-secondary-light text-secondary-deep",
     };
   }
   if (
@@ -210,7 +210,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Kurir Instan",
       brandCode: "NearExpress",
       svgIcon: SUBMENU_SVGS.zap,
-      bg: "bg-amber-100 text-amber-800",
+      bg: "bg-warning-light text-warning-deep",
     };
   }
   if (text.includes("antre") || text.includes("belanja") || text.includes("titip")) {
@@ -218,7 +218,7 @@ function getSubMenuInfo(category: string, title: string) {
       subMenu: "Titip & Antre",
       brandCode: "NearHelper",
       svgIcon: SUBMENU_SVGS.cart,
-      bg: "bg-pink-100 text-pink-800",
+      bg: "bg-accent-light text-accent-deep",
     };
   }
 
@@ -314,13 +314,13 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
       radiusCircleRef.current = circle;
     }
 
-    // 3. User / Mitra Position Marker (Gojek / Grab Blue Radar Pulse)
+    // 3. User / Mitra Position Marker (NearJob Blue Radar Pulse)
     const userIcon = L.divIcon({
       className: "custom-user-marker",
       html: `
         <div class="relative flex items-center justify-center">
-          <div class="absolute w-12 h-12 rounded-full bg-[#1867F8]/25 animate-ping"></div>
-          <div class="w-10 h-10 rounded-full bg-[#1867F8] border-3 border-white shadow-xl flex items-center justify-center text-white font-black text-xs">
+          <div class="absolute w-12 h-12 rounded-full bg-primary/25 animate-ping"></div>
+          <div class="w-10 h-10 rounded-full bg-primary border-3 border-white shadow-xl flex items-center justify-center text-white font-black text-xs">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
             </svg>
@@ -360,8 +360,8 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
           <div style="transform: translate(-50%, -100%); width: max-content;" class="group cursor-pointer select-none">
             <div class="flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-200 ${
               isSelected
-                ? "bg-[#1867F8] text-white shadow-[0_10px_26px_rgba(24,103,248,0.48)] ring-4 ring-[#1867F8]/25 scale-110 -translate-y-1.5"
-                : "bg-white/95 text-[#2F2B4F] shadow-[0_4px_16px_rgba(0,0,0,0.18)] border border-slate-200/90 hover:border-[#1867F8] hover:shadow-[0_8px_24px_rgba(24,103,248,0.25)] hover:scale-105"
+                ? "bg-primary text-white shadow-[0_10px_26px_rgba(24,103,248,0.48)] ring-4 ring-primary/25 scale-110 -translate-y-1.5"
+                : "bg-white/95 text-dark shadow-[0_4px_16px_rgba(0,0,0,0.18)] border border-slate-200/90 hover:border-primary hover:shadow-[0_8px_24px_rgba(24,103,248,0.25)] hover:scale-105"
             }">
               <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0 shadow-xs ${
                 isSelected ? "bg-white/20 text-white" : info.bg
@@ -370,12 +370,12 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
               </div>
               <div class="flex flex-col text-left pr-1 leading-none">
                 <span class="text-[12px] font-black tracking-tight whitespace-nowrap mb-0.5 ${
-                  isSelected ? "text-white" : "text-[#2F2B4F]"
+                  isSelected ? "text-white" : "text-dark"
                 }">
                   ${info.subMenu}
                 </span>
                 <span class="text-[11px] font-black ${
-                  isSelected ? "text-[#FEE49A]" : "text-[#1867F8]"
+                  isSelected ? "text-warning" : "text-primary"
                 }">
                   Rp ${budgetInK}
                 </span>
@@ -383,7 +383,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
             </div>
             <div class="w-2.5 h-2.5 mx-auto rotate-45 -mt-1 shadow-xs ${
               isSelected
-                ? "bg-[#1867F8]"
+                ? "bg-primary"
                 : "bg-white/95 border-r border-b border-slate-200/90"
             }"></div>
           </div>
@@ -555,14 +555,14 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
         <div className="flex flex-wrap sm:flex-row gap-2 justify-between items-start sm:items-center">
           {/* Posisi Mitra & Tombol GPS */}
           <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3 py-1.5 shadow-md border border-slate-200 pointer-events-auto flex items-center gap-2 max-w-fit">
-            <span className="w-2 h-2 rounded-full bg-[#23C8FE] animate-pulse shrink-0"></span>
+            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse shrink-0"></span>
             <span className="text-[11px] sm:text-xs font-black text-dark truncate max-w-[140px] sm:max-w-none">
               {userLocation.name}
             </span>
             <button
               onClick={handleGetCurrentLocation}
               disabled={isLocating}
-              className="px-2 py-0.5 rounded-lg bg-[#23C8FE]/15 hover:bg-[#23C8FE]/25 text-[#0aaedc] font-bold transition-colors text-[10px] sm:text-[11px] flex items-center gap-1 shrink-0"
+              className="px-2 py-0.5 rounded-lg bg-secondary/15 hover:bg-secondary/25 text-secondary-hover font-bold transition-colors text-[10px] sm:text-[11px] flex items-center gap-1 shrink-0"
               title="Deteksi Lokasi GPS Asli"
             >
               <Navigation className={`w-3 h-3 ${isLocating ? "animate-spin" : ""}`} />
@@ -648,7 +648,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                 onClick={() => setSelectedRadius(item.val)}
                 className={`px-2 py-0.5 rounded-xl text-[10px] sm:text-[11px] font-bold transition-all shrink-0 ${
                   selectedRadius === item.val
-                    ? "bg-[#1867F8] text-white shadow-xs"
+                    ? "bg-primary text-white shadow-xs"
                     : "text-slate-600 hover:bg-slate-100"
                 }`}
               >
@@ -685,8 +685,8 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                       {getSubMenuInfo(activeTask.category, activeTask.title).subMenu}
                     </span>
                   </Badge>
-                  <span className="text-[11px] font-black text-[#1867F8] bg-[#1867F8]/10 px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                    <Navigation className="w-3 h-3 text-[#1867F8]" />
+                  <span className="text-[11px] font-black text-primary bg-primary/10 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    <Navigation className="w-3 h-3 text-primary" />
                     <span>{activeTask.distance} km dari Anda</span>
                   </span>
                 </div>
@@ -731,7 +731,7 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
                 <p className="text-[10px] text-slate-400 uppercase font-black">
                   Upah Bersih Mitra
                 </p>
-                <p className="text-lg font-black text-[#1867F8]">
+                <p className="text-lg font-black text-primary">
                   Rp {Math.round(activeTask.budget * 0.9).toLocaleString("id-ID")}
                 </p>
               </div>
@@ -763,16 +763,16 @@ export function TaskMap({ tasks, onApplyClick }: TaskMapProps) {
         <div className="absolute bottom-4 left-4 z-[390] pointer-events-none">
           <div className="bg-white/95 backdrop-blur-md rounded-2xl px-3.5 py-2 shadow-lg border border-slate-200 pointer-events-auto flex items-center gap-3 text-xs font-bold text-slate-700">
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-[#1867F8] border border-white shadow-xs"></span>
+              <span className="w-3 h-3 rounded-full bg-primary border border-white shadow-xs"></span>
               <span>Posisi Mitra</span>
             </span>
             <span className="text-slate-300">|</span>
             <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-[#23C8FE] border border-white shadow-xs"></span>
+              <span className="w-3 h-3 rounded-full bg-secondary border border-white shadow-xs"></span>
               <span>Titik Order ({mappedTasks.length})</span>
             </span>
             <span className="text-slate-300">|</span>
-            <span className="text-[#1867F8] font-black">
+            <span className="text-primary font-black">
               Radar Aktif {selectedRadius ? `${selectedRadius} km` : "Semua"}
             </span>
           </div>

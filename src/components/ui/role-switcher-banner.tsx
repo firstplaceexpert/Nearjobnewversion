@@ -56,8 +56,8 @@ export function RoleSwitcherBanner({
     <div
       className={`p-4 sm:p-5 rounded-3xl border transition-all ${
         isMitra
-          ? "bg-gradient-to-r from-[#2F2B4F] to-[#3f3a69] text-white border-[#3f3a69] shadow-md shadow-[#2F2B4F]/20"
-          : "bg-gradient-to-r from-[#1867F8]/10 via-[#23C8FE]/10 to-white text-dark border-[#1867F8]/20 shadow-xs"
+          ? "bg-gradient-to-r from-dark to-dark-soft text-white border-dark-soft shadow-md shadow-dark/20"
+          : "bg-gradient-to-r from-primary/10 via-secondary/10 to-white text-dark border-primary/20 shadow-xs"
       } ${className}`}
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -66,8 +66,8 @@ export function RoleSwitcherBanner({
           <div
             className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${
               isMitra
-                ? "bg-gradient-to-r from-[#1867F8] to-[#23C8FE] text-white font-extrabold"
-                : "bg-[#1867F8] text-white font-extrabold"
+                ? "bg-gradient-to-r from-primary to-secondary text-white font-extrabold"
+                : "bg-primary text-white font-extrabold"
             }`}
           >
             {isMitra ? <Bike className="w-6 h-6" /> : <User className="w-6 h-6" />}
@@ -78,14 +78,14 @@ export function RoleSwitcherBanner({
               <span
                 className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${
                   isMitra
-                    ? "bg-[#23C8FE]/20 text-[#23C8FE] border border-[#23C8FE]/40"
-                    : "bg-[#1867F8]/10 text-[#1867F8] border border-[#1867F8]/20"
+                    ? "bg-secondary/20 text-secondary border border-secondary/40"
+                    : "bg-primary/10 text-primary border border-primary/20"
                 }`}
               >
                 {isMitra ? "Mode Aktif: MITRA KERJA" : "Mode Aktif: KONSUMEN"}
               </span>
-              <span className="flex items-center gap-1 text-[11px] font-semibold text-[#1867F8]">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#1867F8]" />
+              <span className="flex items-center gap-1 text-[11px] font-semibold text-primary">
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
                 <span>Terhubung</span>
               </span>
             </div>
@@ -119,12 +119,12 @@ export function RoleSwitcherBanner({
           disabled={switchMutation.isPending}
           className={`flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-xs transition-all shrink-0 cursor-pointer shadow-sm hover:scale-102 ${
             isMitra
-              ? "bg-white hover:bg-slate-100 text-[#1867F8] shadow-md shadow-black/10"
-              : "bg-gradient-to-r from-[#1867F8] to-[#23C8FE] hover:opacity-95 text-white shadow-md shadow-[#1867F8]/25"
+              ? "bg-white hover:bg-slate-100 text-primary shadow-md shadow-black/10"
+              : "bg-gradient-to-r from-primary to-secondary hover:opacity-95 text-white shadow-md shadow-primary/25"
           }`}
         >
           <ArrowLeftRight
-            className={`w-4 h-4 ${isMitra ? "text-[#1867F8]" : "text-white"}`}
+            className={`w-4 h-4 ${isMitra ? "text-primary" : "text-white"}`}
           />
           <span>
             {switchMutation.isPending

@@ -44,7 +44,7 @@ export function ProfileMenu() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#00880D] hover:bg-[#00700B] text-white flex items-center justify-center font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all cursor-pointer ring-2 ring-white border border-emerald-600/30 shrink-0"
+        className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-primary hover:bg-primary-hover text-white flex items-center justify-center font-black text-xs sm:text-sm shadow-xs hover:scale-105 transition-all cursor-pointer ring-2 ring-white border border-secondary-hover/30 shrink-0"
         aria-label="Buka Profil Akun"
         title="Profil Akun"
       >
@@ -53,7 +53,7 @@ export function ProfileMenu() {
         </span>
       </button>
 
-      {/* Slide-over Profile Sheet matching Gojek Profile design */}
+      {/* Slide-over NearJob Profile Sheet */}
       <ProfileSheet isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );

@@ -22,7 +22,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     description: "Bantuan instan hadir < 30 menit",
     icon: Zap,
     badge: "INSTAN",
-    colorClass: "bg-[#FEE49A] text-[#2F2B4F] shadow-[#FEE49A]/30",
+    colorClass: "bg-warning text-dark shadow-warning/30",
     isInstant: true,
   },
   {
@@ -31,7 +31,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     category: "Angkut Barang",
     description: "Pindahan kos, perabot & barang",
     icon: Truck,
-    colorClass: "bg-[#1867F8] text-white shadow-[#1867F8]/25",
+    colorClass: "bg-primary text-white shadow-primary/25",
   },
   {
     id: "near-clean",
@@ -40,7 +40,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     description: "Beres-beres kos, rumah & ruko",
     icon: Sparkles,
     badge: "POPULER",
-    colorClass: "bg-[#23C8FE] text-white shadow-[#23C8FE]/25",
+    colorClass: "bg-secondary text-white shadow-secondary/25",
   },
   {
     id: "near-event",
@@ -48,7 +48,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     category: "Jaga Booth",
     description: "Jaga booth, usher & bazaar",
     icon: Store,
-    colorClass: "bg-[#2F2B4F] text-white shadow-[#2F2B4F]/25",
+    colorClass: "bg-dark text-white shadow-dark/25",
   },
   {
     id: "near-helper",
@@ -56,7 +56,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     category: "Operasional",
     description: "Antre tiket, belanja & bantuan",
     icon: Users,
-    colorClass: "bg-[#FF9DE0] text-[#2F2B4F] shadow-[#FF9DE0]/30",
+    colorClass: "bg-accent text-dark shadow-accent/30",
   },
   {
     id: "near-tech",
@@ -64,7 +64,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     category: "IT & Desain",
     description: "Rakit PC, wifi & teknisi komputer",
     icon: Laptop,
-    colorClass: "bg-[#1867F8] text-white shadow-[#1867F8]/25",
+    colorClass: "bg-primary text-white shadow-primary/25",
   },
   {
     id: "near-design",
@@ -72,7 +72,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     category: "IT & Desain",
     description: "Desain flyer, logo, banner & medsos",
     icon: Palette,
-    colorClass: "bg-[#F57373] text-white shadow-[#F57373]/25",
+    colorClass: "bg-error text-white shadow-error/25",
   },
   {
     id: "near-driver",
@@ -80,7 +80,7 @@ export const SUPERAPP_SERVICES: SuperAppService[] = [
     category: "Transportasi",
     description: "Sopir cadangan & antar jemput",
     icon: Car,
-    colorClass: "bg-[#2F2B4F] text-white shadow-[#2F2B4F]/25",
+    colorClass: "bg-dark text-white shadow-dark/25",
   },
 ];
 
@@ -113,7 +113,7 @@ export function SuperAppServices({ onSelectInstant }: SuperAppServicesProps) {
         </Link>
       </div>
 
-      {/* Grid of 8 Services like Gojek SuperApp */}
+      {/* Grid of 8 Services NearJob SuperApp */}
       <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4">
         {SUPERAPP_SERVICES.map((srv) => {
           const Icon = srv.icon;

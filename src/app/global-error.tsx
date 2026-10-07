@@ -23,8 +23,8 @@ export default function GlobalError({
     <html lang="id">
       <body className="min-h-screen bg-slate-50 flex items-center justify-center p-4 font-sans">
         <div className="max-w-md w-full bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-5 shadow-sm">
-          <div className="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center mx-auto">
-            <AlertTriangle className="w-6 h-6 text-red-600" />
+          <div className="w-12 h-12 rounded-xl bg-error-light text-error-hover flex items-center justify-center mx-auto">
+            <AlertTriangle className="w-6 h-6 text-error-hover" />
           </div>
           <h1 className="text-xl font-bold text-slate-900">
             Terjadi Kesalahan Sistem Kritis
@@ -36,7 +36,7 @@ export default function GlobalError({
           <div className="pt-2">
             <button
               onClick={() => reset()}
-              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition-colors"
+              className="px-5 py-2.5 bg-primary hover:bg-primary-hover text-white text-xs font-semibold rounded-xl transition-colors"
             >
               Muat Ulang Halaman
             </button>

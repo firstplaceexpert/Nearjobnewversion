@@ -32,7 +32,7 @@ export default function DesignSystemPage() {
       <header className="bg-white border-b border-gray-border/50 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Logo size="md" />
-          <span className="text-xs font-medium text-gray bg-warning-light text-amber-700 px-3 py-1 rounded-[var(--radius-pill)]">
+          <span className="text-xs font-medium text-gray bg-warning-light text-warning-deep px-3 py-1 rounded-[var(--radius-pill)]">
             DEV ONLY
           </span>
         </div>

@@ -172,7 +172,7 @@ export function TaskDetailClient({ task, currentUser }: TaskDetailClientProps) {
                 </div>
 
                 {task.voucherCode && (
-                  <div className="flex items-center justify-between text-emerald-600 font-medium">
+                  <div className="flex items-center justify-between text-secondary-hover font-medium">
                     <span>Diskon Voucher ({task.voucherCode}):</span>
                     <span>- {formatRupiah(task.discountAmount || 0)}</span>
                   </div>

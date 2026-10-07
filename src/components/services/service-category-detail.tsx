@@ -207,11 +207,11 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-semibold text-white/90">
             <span className="flex items-center gap-1.5 bg-black/15 px-3 py-1 rounded-full">
-              <ShieldCheck className="w-4 h-4 text-[#23C8FE]" />
+              <ShieldCheck className="w-4 h-4 text-secondary" />
               <span>Mitra Terverifikasi & Rekber Aman</span>
             </span>
             <span className="flex items-center gap-1.5 bg-black/15 px-3 py-1 rounded-full">
-              <Sparkles className="w-4 h-4 text-[#FEE49A]" />
+              <Sparkles className="w-4 h-4 text-warning" />
               <span>Upah Bebas Ditentukan Konsumen</span>
             </span>
           </div>
@@ -220,14 +220,14 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
 
       {/* 3. Notifikasi Berhasil Jika Tugas Dibuat */}
       {createdTaskId && (
-        <div className="p-6 rounded-3xl bg-[#1867F8]/10 border-2 border-[#1867F8]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+        <div className="p-6 rounded-3xl bg-primary/10 border-2 border-primary/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
           <div className="flex items-start gap-3">
-            <CheckCircle2 className="w-7 h-7 text-[#1867F8] shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-7 h-7 text-primary shrink-0 mt-0.5" />
             <div>
               <h3 className="text-base font-extrabold text-dark">
                 Pesanan Berhasil Diposting!
               </h3>
-              <p className="text-xs text-[#1867F8] mt-1 max-w-xl">
+              <p className="text-xs text-primary mt-1 max-w-xl">
                 Tugas Anda telah aktif di sistem radar NearJob. Mitra yang sesuai akan
                 segera merespons permintaan Anda.
               </p>
@@ -283,7 +283,7 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-extrabold text-[#1867F8] bg-[#1867F8]/10 px-2 py-0.5 rounded-md border border-[#1867F8]/20">
+                    <span className="text-[11px] font-extrabold text-primary bg-primary/10 px-2 py-0.5 rounded-md border border-primary/20">
                       {v.badge}
                     </span>
                     {isSelected && (
@@ -537,7 +537,7 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
               <button
                 type="button"
                 onClick={() => setBudgetNum(0)}
-                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-rose-50 border border-gray-border text-slate-500 hover:text-rose-600 transition-all"
+                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-error-light border border-gray-border text-slate-500 hover:text-error-hover transition-all"
               >
                 Reset
               </button>
@@ -564,7 +564,7 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
             </div>
 
             {appliedVoucher && (
-              <div className="flex items-center justify-between text-xs text-emerald-600 font-semibold">
+              <div className="flex items-center justify-between text-xs text-secondary-hover font-semibold">
                 <span>Diskon Promo ({appliedVoucher.code}):</span>
                 <span>- Rp {appliedVoucher.discountAmount.toLocaleString("id-ID")}</span>
               </div>

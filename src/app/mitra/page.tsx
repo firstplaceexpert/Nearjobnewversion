@@ -15,7 +15,6 @@ import {
   AlertCircle,
   Eye,
   CheckCircle2,
-  Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -134,14 +133,14 @@ export default function MitraDashboardPage() {
     <div className="space-y-6">
       {/* BANNER NOTIFIKASI SUKSES MENGAMBIL ORDERAN */}
       {orderSuccessMessage && (
-        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center justify-between gap-3 shadow-xs animate-slide-up">
+        <div className="p-4 rounded-2xl bg-secondary-light border border-secondary/30 text-secondary-deep text-xs font-semibold flex items-center justify-between gap-3 shadow-xs animate-slide-up">
           <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-secondary-hover shrink-0" />
             <span>{orderSuccessMessage}</span>
           </div>
           <button
             onClick={() => setOrderSuccessMessage(null)}
-            className="text-xs font-bold text-emerald-700 underline shrink-0 hover:text-emerald-900"
+            className="text-xs font-bold text-secondary-deep underline shrink-0 hover:text-secondary-deep"
           >
             Tutup
           </button>
@@ -263,7 +262,7 @@ export default function MitraDashboardPage() {
               Rating Kepuasan
             </span>
             <div className="flex items-center gap-1.5">
-              <Star className="w-5 h-5 fill-[#FEE49A] text-amber-400" />
+              <Star className="w-5 h-5 fill-warning text-warning" />
               <span className="text-xl sm:text-2xl font-black text-dark">
                 {profile?.rating || 4.98}
               </span>
@@ -360,9 +359,9 @@ export default function MitraDashboardPage() {
 
         {/* Banner Penjelasan jika sedang ada tugas aktif yang berjalan */}
         {activeOrder && (
-          <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs flex items-center justify-between gap-3 shadow-xs">
+          <div className="p-3.5 rounded-2xl bg-warning-light border border-warning/80 text-warning-deep text-xs flex items-center justify-between gap-3 shadow-xs">
             <div className="flex items-center gap-2.5">
-              <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+              <AlertCircle className="w-4 h-4 text-warning-deep shrink-0" />
               <span>
                 Anda sedang menjalankan 1 tugas aktif:{" "}
                 <strong>{activeOrder.title}</strong>. Lowongan lain di bawah tetap

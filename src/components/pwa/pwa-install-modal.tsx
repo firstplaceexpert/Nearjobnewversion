@@ -89,7 +89,7 @@ export function PwaInstallModal() {
         {/* Header */}
         <div className="p-5 border-b border-gray-border/60 flex items-center justify-between bg-light/50">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl overflow-hidden shadow-xs border border-primary/20 shrink-0 bg-[#1968F9]">
+            <div className="w-11 h-11 rounded-xl overflow-hidden shadow-xs border border-primary/20 shrink-0 bg-primary">
               <Image
                 src="/logo.png?v=2"
                 alt="NearJob Logo"
@@ -102,7 +102,7 @@ export function PwaInstallModal() {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-base text-dark">Unduh & Pasang NearJob</h3>
-                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#1867F8]/10 text-[#1867F8]">
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-primary/10 text-primary">
                   100% Gratis
                 </span>
               </div>
@@ -232,7 +232,7 @@ export function PwaInstallModal() {
                 {/* Android Guide */}
                 <div className="p-3.5 rounded-2xl bg-white border border-gray-border space-y-2">
                   <div className="flex items-center gap-2 font-bold text-xs text-dark">
-                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center">
+                    <span className="w-6 h-6 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                       <Smartphone className="w-3.5 h-3.5" />
                     </span>
                     <span>Untuk Android (Chrome)</span>
@@ -260,7 +260,7 @@ export function PwaInstallModal() {
                 {/* iPhone Guide */}
                 <div className="p-3.5 rounded-2xl bg-white border border-gray-border space-y-2">
                   <div className="flex items-center gap-2 font-bold text-xs text-dark">
-                    <span className="w-6 h-6 rounded-lg bg-[#1867F8]/10 text-[#1867F8] flex items-center justify-center">
+                    <span className="w-6 h-6 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                       <Apple className="w-3.5 h-3.5" />
                     </span>
                     <span>Untuk iPhone (Safari)</span>
@@ -364,9 +364,9 @@ export function PwaInstallModal() {
           {/* TAB 3: FILE APK ANDROID */}
           {activeTab === "apk" && (
             <div className="space-y-4 animate-fade-in">
-              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2">
-                <div className="flex items-center gap-2 font-bold text-sm text-amber-900">
-                  <Info className="w-4 h-4 text-amber-700 shrink-0" />
+              <div className="p-4 rounded-2xl bg-warning-light border border-warning text-xs text-warning-deep space-y-2">
+                <div className="flex items-center gap-2 font-bold text-sm text-warning-deep">
+                  <Info className="w-4 h-4 text-warning-deep shrink-0" />
                   <span>Informasi Penting Tentang File APK</span>
                 </div>
                 <p className="leading-relaxed">

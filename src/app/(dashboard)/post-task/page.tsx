@@ -216,7 +216,7 @@ export default function PostTaskPage() {
                       )}
                     </span>
                     {appliedVoucher && (
-                      <span className="text-[10px] text-emerald-600 block font-bold">
+                      <span className="text-[10px] text-secondary-hover block font-bold">
                         Voucher {appliedVoucher.code} (-
                         {formatRupiah(appliedVoucher.discountAmount)})
                       </span>
@@ -425,7 +425,7 @@ export default function PostTaskPage() {
                 </div>
 
                 {appliedVoucher && (
-                  <div className="flex items-center justify-between text-emerald-600 font-semibold">
+                  <div className="flex items-center justify-between text-secondary-hover font-semibold">
                     <span>Potongan Diskon ({appliedVoucher.code}):</span>
                     <span>- {formatRupiah(appliedVoucher.discountAmount)}</span>
                   </div>

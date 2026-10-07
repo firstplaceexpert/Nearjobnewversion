@@ -182,7 +182,7 @@ export default function MitraWalletPage() {
                 <option value="BCA">BCA (Bank Central Asia)</option>
                 <option value="Mandiri">Bank Mandiri</option>
                 <option value="BRI">Bank BRI</option>
-                <option value="GoPay">GoPay (Instan)</option>
+                <option value="E-Wallet">E-Wallet / QRIS (Instan)</option>
                 <option value="OVO">OVO Cash</option>
               </select>
             </div>

@@ -146,32 +146,32 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
         aria-hidden="true"
       />
 
-      {/* Drawer Panel: matching Gojek Profile design */}
-      <div className="relative w-full sm:max-w-md bg-[#F6F7F9] h-[100dvh] overflow-y-auto shadow-2xl z-10 animate-slide-in-right pb-16 select-none">
-        {/* Top Section with Illustrated Green Superapp Banner */}
-        <div className="relative bg-gradient-to-b from-[#87DC71] via-[#74D15C] to-[#5FC445] overflow-hidden pt-5 pb-20 px-4 min-h-[175px]">
+      {/* Drawer Panel: NearJob profile design */}
+      <div className="relative w-full sm:max-w-md bg-light h-[100dvh] overflow-y-auto shadow-2xl z-10 animate-slide-in-right pb-16 select-none">
+        {/* Top Section with Illustrated NearJob Brand Banner */}
+        <div className="relative bg-gradient-to-b from-primary via-primary to-secondary overflow-hidden pt-5 pb-20 px-4 min-h-[175px]">
           {/* Top Bar: Back Arrow + "Profil" */}
           <div className="flex items-center gap-3 relative z-10 mb-2">
             <button
               type="button"
               onClick={onClose}
-              className="w-10 h-10 rounded-full bg-white/50 hover:bg-white text-slate-900 flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+              className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/35 text-white flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
               aria-label="Kembali"
             >
-              <ArrowLeft className="w-5 h-5 text-slate-900 stroke-[2.5]" />
+              <ArrowLeft className="w-5 h-5 text-white stroke-[2.5]" />
             </button>
-            <h1 className="text-xl font-black text-slate-900 tracking-tight">Profil</h1>
+            <h1 className="text-xl font-black text-white tracking-tight">Profil</h1>
           </div>
 
           {/* Cute SVG Illustration Background: Hills, Phone, Lock, Gear, Asterisks, Sparkles */}
           <div className="absolute right-1 -top-1 w-48 h-40 pointer-events-none select-none opacity-95">
             <svg viewBox="0 0 200 160" className="w-full h-full">
-              {/* Green Hill Contour */}
-              <path d="M30 160 Q80 85 200 115 L200 160 Z" fill="#4EAB36" opacity="0.35" />
+              {/* Soft wave contour */}
+              <path d="M30 160 Q80 85 200 115 L200 160 Z" fill="#2F2B4F" opacity="0.18" />
               <path
                 d="M60 160 Q120 95 200 130 L200 160 Z"
-                fill="#4EAB36"
-                opacity="0.45"
+                fill="#2F2B4F"
+                opacity="0.25"
               />
 
               {/* Angled Smartphone Vector */}
@@ -182,43 +182,43 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
                   width="72"
                   height="125"
                   rx="16"
-                  fill="#1E40AF"
+                  fill="#2F2B4F"
                   opacity="0.95"
                 />
-                <rect x="95" y="20" width="62" height="109" rx="12" fill="#60A5FA" />
+                <rect x="95" y="20" width="62" height="109" rx="12" fill="#23C8FE" />
 
                 {/* Profile Silhouette inside phone */}
-                <circle cx="126" cy="52" r="14" fill="#BFDBFE" />
-                <path d="M106 88 C106 72, 146 72, 146 88 Z" fill="#BFDBFE" />
+                <circle cx="126" cy="52" r="14" fill="#E6F9FF" />
+                <path d="M106 88 C106 72, 146 72, 146 88 Z" fill="#E6F9FF" />
 
                 {/* Top speaker slit */}
-                <rect x="116" y="15" width="20" height="3" rx="1.5" fill="#93C5FD" />
+                <rect x="116" y="15" width="20" height="3" rx="1.5" fill="#3F3A69" />
               </g>
 
-              {/* Blue lock badge */}
-              <circle cx="166" cy="62" r="16" fill="#38BDF8" />
-              <rect x="158" y="59" width="16" height="12" rx="3" fill="#0284C7" />
+              {/* Pink lock badge */}
+              <circle cx="166" cy="62" r="16" fill="#FF9DE0" />
+              <rect x="158" y="59" width="16" height="12" rx="3" fill="#C8469C" />
               <path
                 d="M162 59 V53 A4 4 0 0 1 170 53 V59"
                 fill="none"
-                stroke="#0284C7"
+                stroke="#C8469C"
                 strokeWidth="2.5"
               />
 
               {/* Gear icon */}
-              <circle cx="76" cy="62" r="11" fill="#0D9488" opacity="0.85" />
-              <circle cx="76" cy="62" r="4.5" fill="#5FC445" />
+              <circle cx="76" cy="62" r="11" fill="#2F2B4F" opacity="0.6" />
+              <circle cx="76" cy="62" r="4.5" fill="#FEE49A" />
 
               {/* Password bubble */}
-              <rect x="60" y="22" width="54" height="19" rx="9.5" fill="#A7F3D0" />
-              <circle cx="72" cy="31.5" r="2.5" fill="#047857" />
-              <circle cx="87" cy="31.5" r="2.5" fill="#047857" />
-              <circle cx="102" cy="31.5" r="2.5" fill="#047857" />
+              <rect x="60" y="22" width="54" height="19" rx="9.5" fill="#E8F0FE" />
+              <circle cx="72" cy="31.5" r="2.5" fill="#1867F8" />
+              <circle cx="87" cy="31.5" r="2.5" fill="#1867F8" />
+              <circle cx="102" cy="31.5" r="2.5" fill="#1867F8" />
 
               {/* Sparkle Stars */}
               <polygon
                 points="48,92 50,97 55,99 50,101 48,106 46,101 41,99 46,97"
-                fill="#FEF08A"
+                fill="#FEE49A"
               />
               <polygon
                 points="182,102 183,105 186,106 183,107 182,110 181,107 178,106 181,105"
@@ -233,7 +233,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
           <div className="p-4 sm:p-5 flex items-start justify-between gap-3">
             <div className="flex items-center gap-3.5 min-w-0">
               {/* Circle avatar: Green with white initials */}
-              <div className="w-14 h-14 rounded-full bg-[#00880D] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-xs ring-4 ring-white">
+              <div className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center font-black text-xl shrink-0 shadow-xs ring-4 ring-white">
                 {getInitials(effectiveName)}
               </div>
 
@@ -262,24 +262,24 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             </button>
           </div>
 
-          {/* Golden "Join GoStar" Ribbon Banner */}
+          {/* Golden "NearPoin" Rewards Ribbon */}
           <button
             type="button"
-            onClick={() => setActiveModal("GOSTAR")}
-            className="w-full bg-[#FEE49A] px-4 py-2.5 flex items-center justify-between text-left hover:bg-[#FDD874] transition-colors cursor-pointer border-t border-[#FCD34D]"
+            onClick={() => setActiveModal("NEARPOIN")}
+            className="w-full bg-warning px-4 py-2.5 flex items-center justify-between text-left hover:bg-warning/80 transition-colors cursor-pointer border-t border-warning-deep/20"
           >
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-900">
-                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-600" />
+              <div className="w-5 h-5 rounded-full bg-warning/20 flex items-center justify-center text-warning-deep">
+                <Star className="w-3.5 h-3.5 fill-warning text-warning-deep" />
               </div>
-              <span className="font-extrabold text-xs text-slate-900">Join GoStar</span>
+              <span className="font-extrabold text-xs text-dark">Gabung NearPoin</span>
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-bold text-amber-950">
+              <span className="text-[11px] font-bold text-warning-deep">
                 Ada reward eksklusif
               </span>
-              <div className="w-5 h-5 rounded-full bg-[#7C2D12] text-white flex items-center justify-center text-[10px] font-bold">
+              <div className="w-5 h-5 rounded-full bg-dark text-white flex items-center justify-center text-[10px] font-bold">
                 &rarr;
               </div>
             </div>
@@ -316,7 +316,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
                 <Repeat className="w-5 h-5 text-slate-700" />
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold text-slate-800">Langganan</span>
-                  <span className="bg-[#00880D] text-white font-bold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="bg-primary text-white font-bold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
                     Promo terbatas 🔥
                   </span>
                 </div>
@@ -349,7 +349,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
                 <Users className="w-5 h-5 text-slate-700" />
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold text-slate-800">Akun Keluarga</span>
-                  <span className="bg-[#00880D] text-white font-bold text-[10px] px-2 py-0.5 rounded-full">
+                  <span className="bg-primary text-white font-bold text-[10px] px-2 py-0.5 rounded-full">
                     Baru
                   </span>
                 </div>
@@ -476,11 +476,11 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
                 onClose();
                 router.push("/login");
               }}
-              className="w-full p-3.5 flex items-center justify-between hover:bg-rose-50 transition-colors text-left cursor-pointer"
+              className="w-full p-3.5 flex items-center justify-between hover:bg-error-light transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
-                <LogOut className="w-5 h-5 text-rose-600" />
-                <span className="text-xs font-bold text-rose-600">Keluar Akun</span>
+                <LogOut className="w-5 h-5 text-error-hover" />
+                <span className="text-xs font-bold text-error-hover">Keluar Akun</span>
               </div>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
@@ -490,7 +490,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
         {/* Interactive Toast Notification */}
         {activeInfoToast && (
           <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-secondary" />
             <span>{activeInfoToast}</span>
           </div>
         )}

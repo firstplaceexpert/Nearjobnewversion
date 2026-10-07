@@ -33,7 +33,7 @@ export function Logo({ size = "md", showText = true, className }: LogoProps) {
       {/* Official NearJob Mascot Brand Mark */}
       <div
         className={cn(
-          "relative overflow-hidden shrink-0 shadow-xs border border-primary/20 bg-[#1867F8]",
+          "relative overflow-hidden shrink-0 shadow-xs border border-primary/20 bg-primary",
           radius,
         )}
         style={{ width: icon, height: icon }}

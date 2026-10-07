@@ -217,7 +217,7 @@ export default function DashboardPage() {
           onClick={() => setFilterStatus("WORKING")}
           className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
             filterStatus === "WORKING"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-warning-deep text-white shadow-xs"
               : "bg-slate-100 text-slate-600 hover:bg-slate-200"
           }`}
         >
@@ -230,7 +230,7 @@ export default function DashboardPage() {
           onClick={() => setFilterStatus("COMPLETED")}
           className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
             filterStatus === "COMPLETED"
-              ? "bg-emerald-700 text-white shadow-xs"
+              ? "bg-secondary-deep text-white shadow-xs"
               : "bg-slate-100 text-slate-600 hover:bg-slate-200"
           }`}
         >
@@ -272,22 +272,22 @@ export default function DashboardPage() {
 
                     {/* Badge Status Ringkas */}
                     {currentStage === 1 && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#1867F8]/10 text-primary text-[10px] font-black border border-primary/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-black border border-primary/20">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
                         <span>Mencari Mitra</span>
                       </span>
                     )}
 
                     {currentStage === 2 && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 text-[10px] font-black border border-amber-200">
-                        <Clock className="w-3 h-3 text-amber-600 animate-spin" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-warning-light text-warning-deep text-[10px] font-black border border-warning">
+                        <Clock className="w-3 h-3 text-warning-deep animate-spin" />
                         <span>Sedang Dikerjakan</span>
                       </span>
                     )}
 
                     {currentStage === 3 && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-black border border-emerald-200">
-                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-light text-secondary-deep text-[10px] font-black border border-secondary/30">
+                        <CheckCircle2 className="w-3 h-3 text-secondary-hover" />
                         <span>Selesai & Lunas</span>
                       </span>
                     )}
@@ -369,7 +369,7 @@ export default function DashboardPage() {
                           stage >= 1
                             ? stage === 1
                               ? "bg-primary text-white ring-4 ring-primary/20 shadow-xs"
-                              : "bg-emerald-600 text-white"
+                              : "bg-secondary-hover text-white"
                             : "bg-slate-200 text-slate-400"
                         }`}
                       >
@@ -393,8 +393,8 @@ export default function DashboardPage() {
                         className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${
                           stage >= 2
                             ? stage === 2
-                              ? "bg-amber-500 text-white ring-4 ring-amber-200 shadow-xs"
-                              : "bg-emerald-600 text-white"
+                              ? "bg-warning text-dark ring-4 ring-warning shadow-xs"
+                              : "bg-secondary-hover text-white"
                             : "bg-slate-200 text-slate-400"
                         }`}
                       >
@@ -419,7 +419,7 @@ export default function DashboardPage() {
                       <div
                         className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${
                           stage === 3
-                            ? "bg-emerald-600 text-white ring-4 ring-emerald-200 shadow-xs"
+                            ? "bg-secondary-hover text-white ring-4 ring-secondary/30 shadow-xs"
                             : "bg-slate-200 text-slate-400"
                         }`}
                       >
@@ -444,7 +444,7 @@ export default function DashboardPage() {
               // TAHAP 1: SEDANG MENCARI MITRA
               if (stage === 1) {
                 return (
-                  <div className="p-4 rounded-2xl bg-[#1867F8]/5 border border-[#1867F8]/20 space-y-3">
+                  <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 space-y-3">
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shrink-0">
                         <Search className="w-4 h-4 animate-pulse" />
@@ -460,7 +460,7 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Pelamar Section jika ada */}
-                    <div className="pt-2 border-t border-[#1867F8]/15">
+                    <div className="pt-2 border-t border-primary/15">
                       <span className="text-[11px] font-extrabold text-slate-700 block mb-2">
                         Mitra yang Mengajukan Lamaran ({applicants.length}):
                       </span>
@@ -470,7 +470,7 @@ export default function DashboardPage() {
                           Memuat pelamar...
                         </p>
                       ) : applicants.length === 0 ? (
-                        <p className="text-xs text-slate-500 bg-white p-3 rounded-xl border border-[#1867F8]/15">
+                        <p className="text-xs text-slate-500 bg-white p-3 rounded-xl border border-primary/15">
                           Belum ada pelamar yang mengajukan. Mitra biasanya merespons
                           dalam 1-5 menit.
                         </p>
@@ -479,7 +479,7 @@ export default function DashboardPage() {
                           {applicants.map((app) => (
                             <div
                               key={app.id}
-                              className="p-3 bg-white rounded-xl border border-[#1867F8]/20 flex items-center justify-between gap-3 shadow-2xs"
+                              className="p-3 bg-white rounded-xl border border-primary/20 flex items-center justify-between gap-3 shadow-2xs"
                             >
                               <div className="min-w-0">
                                 <span className="font-extrabold text-xs text-dark block truncate">
@@ -515,10 +515,10 @@ export default function DashboardPage() {
               // TAHAP 2: SEDANG DIKERJAKAN
               if (stage === 2) {
                 return (
-                  <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-4">
+                  <div className="p-4 rounded-2xl bg-warning-light/70 border border-warning space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-warning text-dark flex items-center justify-center shrink-0">
                           <UserCheck className="w-4 h-4" />
                         </div>
                         <div>
@@ -575,22 +575,22 @@ export default function DashboardPage() {
 
               // TAHAP 3: SUDAH SELESAI
               return (
-                <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 flex items-center justify-between gap-3">
+                <div className="p-4 rounded-2xl bg-secondary-light/70 border border-secondary/30 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-secondary-hover text-white flex items-center justify-center shrink-0">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-emerald-900">
+                      <h4 className="text-xs font-black text-secondary-deep">
                         Pekerjaan Telah Tuntas & Selesai
                       </h4>
-                      <p className="text-[11px] text-emerald-700">
+                      <p className="text-[11px] text-secondary-deep">
                         Pembayaran telah diteruskan kepada mitra via rekening bersama
                         aman.
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-extrabold text-emerald-800 bg-white px-2.5 py-1 rounded-xl border border-emerald-200 shrink-0">
+                  <span className="text-xs font-extrabold text-secondary-deep bg-white px-2.5 py-1 rounded-xl border border-secondary/30 shrink-0">
                     Lunas
                   </span>
                 </div>

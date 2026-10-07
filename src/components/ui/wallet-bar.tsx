@@ -72,14 +72,14 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
   return (
     <>
       {variant === "gopay-card" ? (
-        /* Gojek-style Horizontal Floating Wallet Card */
+        /* NearJob-style Horizontal Floating Wallet Card */
         <div className="bg-white rounded-3xl border border-gray-border/80 p-3.5 sm:p-5 shadow-xs flex items-center justify-between gap-2.5 sm:gap-4">
           <button
             type="button"
             onClick={() => setIsOpen(true)}
             className="flex items-center gap-2.5 sm:gap-3 text-left group min-w-0 flex-1 cursor-pointer"
           >
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#1867F8] to-[#23C8FE] text-white flex items-center justify-center shrink-0 shadow-xs">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center shrink-0 shadow-xs">
               <Wallet className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div className="min-w-0">
@@ -98,7 +98,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
               onClick={() => setIsOpen(true)}
               className="flex flex-col items-center gap-1 group w-11 sm:w-14 cursor-pointer shrink-0"
             >
-              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-all shadow-xs group-hover:scale-105">
+              <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-primary-hover transition-all shadow-xs group-hover:scale-105">
                 <ArrowUpRight className="w-4 h-4" />
               </div>
               <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 whitespace-nowrap text-center block leading-tight">
@@ -110,7 +110,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
               onClick={() => setIsOpen(true)}
               className="flex flex-col items-center gap-1 group w-11 sm:w-14 cursor-pointer shrink-0"
             >
-              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-all shadow-xs group-hover:scale-105">
+              <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-primary-hover transition-all shadow-xs group-hover:scale-105">
                 <Plus className="w-4 h-4" />
               </div>
               <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 whitespace-nowrap text-center block leading-tight">
@@ -122,7 +122,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
               onClick={() => setIsOpen(true)}
               className="flex flex-col items-center gap-1 group w-11 sm:w-14 cursor-pointer shrink-0"
             >
-              <div className="w-8 h-8 rounded-full bg-[#1867F8] text-white flex items-center justify-center group-hover:bg-[#0e52cf] transition-all shadow-xs group-hover:scale-105">
+              <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:bg-primary-hover transition-all shadow-xs group-hover:scale-105">
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 whitespace-nowrap text-center block leading-tight">
@@ -196,7 +196,7 @@ export function WalletBar({ variant = "pill" }: WalletBarProps) {
                   Rp {balance.toLocaleString("id-ID")}
                 </h2>
                 <div className="pt-2 flex items-center gap-1.5 text-[11px] text-white/90">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#FEE49A]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-warning" />
                   <span>Garansi dana tersimpan aman hingga tugas tuntas</span>
                 </div>
               </div>

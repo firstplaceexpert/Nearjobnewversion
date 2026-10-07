@@ -113,8 +113,8 @@ export default function ChatListPage() {
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 font-semibold bg-emerald-50 border border-emerald-200/60 px-3 py-1.5 rounded-full w-fit">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+        <div className="inline-flex items-center gap-1.5 text-[11px] text-secondary-deep font-semibold bg-secondary-light border border-secondary/60 px-3 py-1.5 rounded-full w-fit">
+          <ShieldCheck className="w-3.5 h-3.5 text-secondary-hover shrink-0" />
           <span>Komunikasi Terproteksi Rekening Bersama</span>
         </div>
       </div>
@@ -140,7 +140,7 @@ export default function ChatListPage() {
         </div>
       ) : isError ? (
         <div className="bg-white rounded-2xl p-8 text-center border border-gray-border space-y-3">
-          <p className="text-xs font-semibold text-rose-500">
+          <p className="text-xs font-semibold text-error">
             Gagal memuat daftar percakapan
           </p>
           <button
@@ -200,7 +200,7 @@ export default function ChatListPage() {
                     className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-sm font-black ${
                       isMitra
                         ? "bg-primary/10 text-primary border border-primary/20"
-                        : "bg-amber-50 text-amber-700 border border-amber-200"
+                        : "bg-warning-light text-warning-deep border border-warning"
                     }`}
                   >
                     {conv.partner.name.charAt(0) || <User className="w-5 h-5" />}
@@ -208,7 +208,7 @@ export default function ChatListPage() {
                   {conv.partner.isOnline && (
                     <span
                       title="Online"
-                      className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-xs"
+                      className="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-white shadow-xs"
                     />
                   )}
                 </div>

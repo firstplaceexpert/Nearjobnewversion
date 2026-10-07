@@ -95,7 +95,7 @@ export default function MitraProfilePage() {
 
           <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center border-t sm:border-t-0 pt-3 sm:pt-0 border-light">
             <div className="flex items-center gap-1.5">
-              <Star className="w-5 h-5 fill-[#FEE49A] text-amber-400" />
+              <Star className="w-5 h-5 fill-warning text-warning" />
               <span className="text-2xl font-black text-dark">{profile.rating}</span>
             </div>
             <span className="text-xs text-gray">{profile.totalTrips} Tugas Selesai</span>

@@ -93,7 +93,7 @@ export function ActiveJobTracker({
         </div>
       </div>
 
-      {/* Step Progress Bar (Ala Gojek Driver) */}
+      {/* Step Progress Bar (NearJob Mitra Flow) */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs font-bold">
           <span className={stepConfig.progressIndex >= 1 ? "text-primary" : "text-gray"}>

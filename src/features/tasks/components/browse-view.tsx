@@ -124,7 +124,7 @@ export function BrowseView({
         <div className="flex items-center gap-2 self-start sm:self-auto">
           <button
             onClick={() => setIsInstantOrderOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-all shadow-sm shadow-amber-500/20"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-warning hover:bg-warning-deep hover:text-white text-dark text-xs font-bold transition-all shadow-sm shadow-warning/20"
           >
             <Zap className="w-3.5 h-3.5" />
             <span>Pesan Instan</span>

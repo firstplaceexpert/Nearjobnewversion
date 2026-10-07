@@ -70,22 +70,22 @@ export function VoucherSelector({
     const res = applyVoucher(appliedCode, budget);
     return (
       <div
-        className={`p-3 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-between gap-3 text-xs ${className}`}
+        className={`p-3 rounded-2xl bg-secondary-light border border-secondary/30 flex items-center justify-between gap-3 text-xs ${className}`}
       >
         <div className="flex items-center gap-2 min-w-0">
-          <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-secondary-hover text-white flex items-center justify-center shrink-0">
             <Check className="w-4 h-4" />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="font-extrabold text-emerald-900 truncate">
+              <span className="font-extrabold text-secondary-deep truncate">
                 {activeVoucher.title}
               </span>
-              <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300">
+              <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-secondary-light text-secondary-deep border border-secondary/30">
                 {activeVoucher.code}
               </span>
             </div>
-            <p className="text-[11px] text-emerald-700 font-semibold mt-0.5">
+            <p className="text-[11px] text-secondary-deep font-semibold mt-0.5">
               Hemat Rp {res.discountAmount.toLocaleString("id-ID")} berhasil dipotong dari
               total bayar!
             </p>
@@ -95,7 +95,7 @@ export function VoucherSelector({
         <button
           type="button"
           onClick={handleRemove}
-          className="text-[11px] font-bold text-slate-500 hover:text-rose-600 bg-white hover:bg-rose-50 px-2.5 py-1 rounded-lg border border-slate-200 transition-all shrink-0"
+          className="text-[11px] font-bold text-slate-500 hover:text-error-hover bg-white hover:bg-error-light px-2.5 py-1 rounded-lg border border-slate-200 transition-all shrink-0"
         >
           Hapus
         </button>
@@ -161,14 +161,12 @@ export function VoucherSelector({
             </button>
           </div>
 
-          {errorMsg && (
-            <p className="text-[11px] font-semibold text-rose-500">{errorMsg}</p>
-          )}
+          {errorMsg && <p className="text-[11px] font-semibold text-error">{errorMsg}</p>}
 
           {/* Quick Select Voucher Chips */}
           <div className="space-y-1.5">
             <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-amber-500" />
+              <Sparkles className="w-3 h-3 text-warning" />
               Voucher Tersedia untuk Kamu:
             </span>
 

@@ -9,12 +9,12 @@ export function PwaInstallCard() {
 
   if (isInstalled) {
     return (
-      <div className="p-4 rounded-2xl bg-[#1867F8]/10 border border-[#1867F8]/20 flex items-center justify-between gap-3 text-dark">
+      <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-between gap-3 text-dark">
         <div className="flex items-center gap-2.5">
-          <CheckCircle2 className="w-5 h-5 text-[#1867F8] shrink-0" />
+          <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
           <div>
             <h4 className="text-xs font-bold">Aplikasi NearJob Aktif</h4>
-            <p className="text-[11px] text-[#1867F8]">
+            <p className="text-[11px] text-primary">
               Anda sedang menggunakan NearJob dalam mode aplikasi standalone.
             </p>
           </div>

@@ -76,7 +76,7 @@ export function MitraNavbar({
                 </span>
               </div>
               <div className="flex items-center gap-1 text-[11px] text-gray">
-                <Star className="w-3 h-3 fill-[#FEE49A] text-amber-400" />
+                <Star className="w-3 h-3 fill-warning text-warning" />
                 <span className="font-bold text-dark">{profile.rating}</span>
                 <span>• Terverifikasi</span>
               </div>

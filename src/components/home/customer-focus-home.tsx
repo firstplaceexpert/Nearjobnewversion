@@ -130,8 +130,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       title: "Tugas Kuliah",
       ribbon: "Remote",
       icon: GraduationCap,
-      bgClass: "bg-[#1867F8]/10 border-[#1867F8]/25 hover:border-[#1867F8]/60",
-      iconColor: "text-[#1867F8]",
+      bgClass: "bg-primary/10 border-primary/25 hover:border-primary/60",
+      iconColor: "text-primary",
     },
     {
       id: "rumah",
@@ -140,8 +140,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       title: "Bantu Rumah",
       ribbon: "Lokasi",
       icon: Home,
-      bgClass: "bg-[#23C8FE]/15 border-[#23C8FE]/30 hover:border-[#23C8FE]/60",
-      iconColor: "text-[#0aaedc]",
+      bgClass: "bg-secondary/15 border-secondary/30 hover:border-secondary/60",
+      iconColor: "text-secondary-hover",
     },
     {
       id: "event",
@@ -150,8 +150,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       title: "Jaga Stand",
       ribbon: "Shift",
       icon: Store,
-      bgClass: "bg-[#FEE49A]/30 border-[#FEE49A] hover:border-[#e6c968]",
-      iconColor: "text-[#2F2B4F]",
+      bgClass: "bg-warning/30 border-warning hover:border-warning-deep",
+      iconColor: "text-dark",
     },
     {
       id: "titip",
@@ -160,8 +160,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       title: "Titip Antre",
       ribbon: "Antre",
       icon: Clock,
-      bgClass: "bg-[#FF9DE0]/20 border-[#FF9DE0]/40 hover:border-[#FF9DE0]/70",
-      iconColor: "text-[#c8469c]",
+      bgClass: "bg-accent/20 border-accent/40 hover:border-accent/70",
+      iconColor: "text-accent-deep",
     },
   ];
 
@@ -178,7 +178,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Kunjungan kasih makan kucing, ganti air minum bersih & bersihkan pasir litterbox.",
       badge: "Perawatan Anabul",
       desc: "Kasih Makan & Pasir",
-      bgClass: "bg-[#FEE49A]/30 text-[#2F2B4F] border-[#FEE49A]",
+      bgClass: "bg-warning/30 text-dark border-warning",
     },
     {
       id: "canva",
@@ -191,7 +191,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Bantu buat desain feed Instagram / banner promosi / poster menggunakan template Canva.",
       badge: "Desain Grafis",
       desc: "Desain Feed & Poster",
-      bgClass: "bg-[#FF9DE0]/25 text-[#c8469c] border-[#FF9DE0]/50",
+      bgClass: "bg-accent/25 text-accent-deep border-accent/50",
     },
     {
       id: "clean",
@@ -206,7 +206,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Sapu, pel lantai, bersihkan kamar mandi & buang sampah kosan.",
       badge: "Kebersihan Kosan",
       desc: "Sapu, Pel & Kamar Mandi",
-      bgClass: "bg-[#23C8FE]/15 text-[#0aaedc] border-[#23C8FE]/35",
+      bgClass: "bg-secondary/15 text-secondary-hover border-secondary/35",
     },
     {
       id: "masak",
@@ -219,7 +219,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       note: "Bantu potong sayur, bumbu & masak 2-3 lauk rumahan untuk anak kos / keluarga.",
       badge: "Masak Rumahan",
       desc: "Masak Rumahan 2-3 Menu",
-      bgClass: "bg-[#F57373]/15 text-[#e35555] border-[#F57373]/30",
+      bgClass: "bg-error/15 text-error-hover border-error/30",
     },
   ];
 
@@ -312,7 +312,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-5 animate-fade-in">
-      {/* 1. Header Atas: Search Bar + Tombol Voucher (Ala Gojek) */}
+      {/* 1. Header Atas: Search Bar + Tombol Voucher (NearJob SuperApp) */}
       <div className="flex items-center gap-2.5">
         <div className="flex-1 relative">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -327,18 +327,18 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
 
         <Link
           href="/promo"
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#FEE49A] hover:bg-[#FEE49A]/90 text-[#2F2B4F] border border-[#FEE49A] text-xs font-black transition-all shrink-0 shadow-2xs"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-warning hover:bg-warning/90 text-dark border border-warning text-xs font-black transition-all shrink-0 shadow-2xs"
         >
-          <Star className="w-3.5 h-3.5 fill-[#2F2B4F] text-[#2F2B4F]" />
+          <Star className="w-3.5 h-3.5 fill-dark text-dark" />
           <span>Voucher</span>
         </Link>
       </div>
 
       {/* 2. Banner Promo Utama (Hero Visual Harmonis Warna Brand) */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#2F2B4F] via-[#1867F8] to-[#23C8FE] p-5 sm:p-6 text-white shadow-md">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-dark via-primary to-secondary p-5 sm:p-6 text-white shadow-md">
         <div className="relative z-10 max-w-sm space-y-2">
           <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-black tracking-wider uppercase">
-            <Gift className="w-3 h-3 text-[#FEE49A]" />
+            <Gift className="w-3 h-3 text-warning" />
             <span>Promo Hemat NearJob</span>
           </div>
 
@@ -346,7 +346,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
             Menu Bantuan 20 Ribuan & Bebas Repot
           </h2>
 
-          <p className="text-xs text-blue-100 leading-relaxed">
+          <p className="text-xs text-primary-light leading-relaxed">
             Pakai kupon{" "}
             <span className="font-mono font-bold bg-white/20 px-1.5 py-0.5 rounded text-white">
               NEARBARU
@@ -358,17 +358,17 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
         <div className="absolute -right-4 -bottom-6 w-36 h-36 bg-white/10 rounded-full blur-2xl pointer-events-none" />
       </div>
 
-      {/* 3. Kartu NearPay Horizontal (1:1 Mirip GoPay Card di Gojek) */}
+      {/* 3. Kartu NearPay Horizontal (NearPay Horizontal Card) */}
       <WalletBar variant="gopay-card" />
 
       {/* Banner Sukses Pemesanan Jika Ada */}
       {successTask && (
-        <div className="p-4 rounded-2xl bg-[#1867F8]/10 border border-[#1867F8]/20 flex items-center justify-between gap-3 animate-in fade-in">
+        <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-between gap-3 animate-in fade-in">
           <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-5 h-5 text-[#1867F8] shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
             <div>
               <p className="text-xs font-black text-dark">Pesanan Berhasil Diposting!</p>
-              <p className="text-[11px] text-[#1867F8]">
+              <p className="text-[11px] text-primary">
                 &ldquo;{successTask.title}&rdquo; aktif di radar pekerja.
               </p>
             </div>
@@ -400,7 +400,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                   className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl border ${srv.bgClass} flex items-center justify-center relative transition-all duration-200 group-hover:scale-105 group-hover:shadow-md`}
                 >
                   {/* Pita / Ribbon Kecil di Sudut Atas */}
-                  <span className="absolute -top-1.5 -left-1.5 bg-[#2F2B4F] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-xs">
+                  <span className="absolute -top-1.5 -left-1.5 bg-dark text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-xs">
                     {srv.ribbon}
                   </span>
 
@@ -420,15 +420,15 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
       {/* 5. Banner Promo Harmonis Palet Resmi */}
       <Link
         href="/promo"
-        className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#2F2B4F] to-[#1867F8] hover:opacity-95 text-white flex items-center justify-between gap-3 shadow-xs transition-all group"
+        className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-dark to-primary hover:opacity-95 text-white flex items-center justify-between gap-3 shadow-xs transition-all group"
       >
         <div className="flex items-center gap-2 text-xs font-bold truncate">
-          <Tag className="w-3.5 h-3.5 text-[#23C8FE] shrink-0" />
+          <Tag className="w-3.5 h-3.5 text-secondary shrink-0" />
           <span className="truncate">Mau tarif tugas & bantuan lebih hemat?</span>
         </div>
-        <span className="text-xs font-black bg-[#FEE49A] hover:bg-[#FEE49A]/90 text-[#2F2B4F] px-2.5 py-1 rounded-xl shrink-0 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform shadow-2xs">
+        <span className="text-xs font-black bg-warning hover:bg-warning/90 text-dark px-2.5 py-1 rounded-xl shrink-0 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform shadow-2xs">
           <span>Klaim Voucher</span>
-          <ChevronRight className="w-3 h-3 text-[#2F2B4F]" />
+          <ChevronRight className="w-3 h-3 text-dark" />
         </span>
       </Link>
 
@@ -457,8 +457,8 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
               >
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className="w-2 h-2 rounded-full bg-[#1867F8] animate-pulse" />
-                    <span className="text-[10px] font-black text-[#1867F8] uppercase">
+                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                    <span className="text-[10px] font-black text-primary uppercase">
                       Sedang Aktif
                     </span>
                   </div>
@@ -497,7 +497,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                     <h4 className="text-xs font-black text-dark truncate group-hover:text-primary transition-colors">
                       {preset.name}
                     </h4>
-                    <p className="text-[10px] text-[#1867F8] font-extrabold truncate">
+                    <p className="text-[10px] text-primary font-extrabold truncate">
                       {preset.badge}
                     </p>
                   </div>
@@ -770,7 +770,7 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                   </div>
 
                   {appliedVoucher && appliedVoucher.discountAmount > 0 && (
-                    <div className="flex items-center justify-between text-xs text-emerald-700 font-bold">
+                    <div className="flex items-center justify-between text-xs text-secondary-deep font-bold">
                       <span className="flex items-center gap-1">
                         <Tag className="w-3.5 h-3.5" />
                         Diskon Voucher ({appliedVoucher.code}):

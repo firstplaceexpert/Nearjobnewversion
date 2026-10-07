@@ -20,9 +20,9 @@ import {
   LogOut,
   Repeat,
   CheckCircle2,
-  X,
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { ProfileModals, type ProfileModalType } from "./profile-modals";
 
 interface ProfileSheetProps {
   isOpen: boolean;
@@ -52,8 +52,10 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
     () => true,
     () => false,
   );
-  const [isEditing, setIsEditing] = useState(false);
+  const [activeModal, setActiveModal] = useState<ProfileModalType>(null);
   const [activeInfoToast, setActiveInfoToast] = useState<string | null>(null);
+  const [customName, setCustomName] = useState<string | null>(null);
+  const [customPhone, setCustomPhone] = useState<string | null>(null);
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -81,8 +83,8 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
   const userEmail = currentUser?.email || "dimas@nearjob.id";
   const userPhone = currentUser?.phone || "+6281298765432";
 
-  const [editName, setEditName] = useState(userName);
-  const [editPhone, setEditPhone] = useState(userPhone);
+  const effectiveName = customName || userName;
+  const effectivePhone = customPhone || userPhone;
 
   // Get Initials (e.g. Dimas Pratama -> DP)
   const getInitials = (nameStr: string) => {
@@ -232,19 +234,19 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             <div className="flex items-center gap-3.5 min-w-0">
               {/* Circle avatar: Green with white initials */}
               <div className="w-14 h-14 rounded-full bg-[#00880D] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-xs ring-4 ring-white">
-                {getInitials(userName)}
+                {getInitials(effectiveName)}
               </div>
 
               {/* User details */}
               <div className="min-w-0 space-y-0.5">
                 <h2 className="text-base sm:text-lg font-black text-slate-900 leading-tight truncate">
-                  {userName}
+                  {effectiveName}
                 </h2>
                 <p className="text-xs text-slate-500 font-medium truncate leading-tight">
                   {userEmail}
                 </p>
                 <p className="text-xs text-slate-500 font-medium leading-tight">
-                  {userPhone}
+                  {effectivePhone}
                 </p>
               </div>
             </div>
@@ -252,11 +254,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Edit button */}
             <button
               type="button"
-              onClick={() => {
-                setEditName(userName);
-                setEditPhone(userPhone);
-                setIsEditing(true);
-              }}
+              onClick={() => setActiveModal("EDIT_PROFILE")}
               className="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500 transition-colors shrink-0 cursor-pointer"
               title="Edit Profil"
             >
@@ -267,11 +265,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
           {/* Golden "Join GoStar" Ribbon Banner */}
           <button
             type="button"
-            onClick={() =>
-              triggerToast(
-                "Selamat! Anda sudah tergabung di Program Mitra & Konsumen Bintang.",
-              )
-            }
+            onClick={() => setActiveModal("GOSTAR")}
             className="w-full bg-[#FEE49A] px-4 py-2.5 flex items-center justify-between text-left hover:bg-[#FDD874] transition-colors cursor-pointer border-t border-[#FCD34D]"
           >
             <div className="flex items-center gap-2">
@@ -302,7 +296,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Keamanan akun */}
             <button
               type="button"
-              onClick={() => triggerToast("Keamanan Akun: 2FA & Password Terlindungi.")}
+              onClick={() => setActiveModal("SECURITY")}
               className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -315,9 +309,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Langganan */}
             <button
               type="button"
-              onClick={() =>
-                triggerToast("Langganan NearJob Plus aktif dengan diskon komisi.")
-              }
+              onClick={() => setActiveModal("SUBSCRIPTION")}
               className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -335,9 +327,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Metode pembayaran */}
             <button
               type="button"
-              onClick={() => {
-                triggerToast("Membuka Saldo & Rekber NearPay.");
-              }}
+              onClick={() => setActiveModal("PAYMENT")}
               className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -352,9 +342,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Akun Keluarga */}
             <button
               type="button"
-              onClick={() =>
-                triggerToast("Fitur Akun Keluarga: Hubungkan pembayaran bersama.")
-              }
+              onClick={() => setActiveModal("FAMILY")}
               className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -372,9 +360,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Alamat tersimpan */}
             <button
               type="button"
-              onClick={() =>
-                triggerToast("Alamat utama Anda tersimpan: Kota Yogyakarta.")
-              }
+              onClick={() => setActiveModal("ADDRESSES")}
               className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -387,9 +373,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Pusat Akun Terverifikasi */}
             <button
               type="button"
-              onClick={() =>
-                triggerToast("Status Identitas: KTP & Email Terverifikasi Resmi.")
-              }
+              onClick={() => setActiveModal("VERIFICATION")}
               className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -454,9 +438,7 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             {/* Ikon aplikasi */}
             <button
               type="button"
-              onClick={() =>
-                triggerToast("Tema Ikon Aplikasi: Mode Standar Hijau Superapp.")
-              }
+              onClick={() => setActiveModal("APP_ICON")}
               className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -513,71 +495,21 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
           </div>
         )}
 
-        {/* Edit Profile Modal Dialog */}
-        {isEditing && (
-          <div className="fixed inset-0 z-[100005] flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-            <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="font-extrabold text-base text-slate-900">
-                  Edit Data Profil
-                </h3>
-                <button
-                  type="button"
-                  onClick={() => setIsEditing(false)}
-                  className="w-7 h-7 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-400 cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              <div className="space-y-3 text-xs">
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">
-                    Nama Lengkap
-                  </label>
-                  <input
-                    type="text"
-                    value={editName}
-                    onChange={(e) => setEditName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:border-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">
-                    Nomor WhatsApp / HP
-                  </label>
-                  <input
-                    type="tel"
-                    value={editPhone}
-                    onChange={(e) => setEditPhone(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:border-primary"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-2 flex items-center justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsEditing(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
-                >
-                  Batal
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsEditing(false);
-                    triggerToast("Data profil berhasil diperbarui!");
-                  }}
-                  className="px-4 py-2 rounded-xl text-xs font-bold bg-[#00880D] hover:bg-[#00700B] text-white shadow-xs cursor-pointer"
-                >
-                  Simpan Perubahan
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* All Preference & Profile Sub-Modals */}
+        <ProfileModals
+          activeModal={activeModal}
+          onClose={() => setActiveModal(null)}
+          onSuccess={(msg) => triggerToast(msg)}
+          userData={{
+            name: effectiveName,
+            email: userEmail,
+            phone: effectivePhone,
+          }}
+          onUpdateUser={({ name, phone }) => {
+            setCustomName(name);
+            setCustomPhone(phone);
+          }}
+        />
       </div>
     </div>,
     document.body,

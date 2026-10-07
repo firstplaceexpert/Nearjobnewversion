@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -23,6 +23,8 @@ import {
   Coins,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { VoucherSelector } from "@/components/ui/voucher-selector";
+import { applyVoucher } from "@/lib/vouchers";
 import type { ServiceCategoryConfig, ServiceVariant } from "@/lib/service-categories";
 
 interface ServiceCategoryDetailProps {
@@ -55,6 +57,24 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
     config.variants[0].suggestedDuration || 2,
   );
   const [budgetNum, setBudgetNum] = useState<number>(config.variants[0].defaultBudget);
+  const [voucherCode, setVoucherCode] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("voucher")?.toUpperCase() || "";
+    }
+    return "";
+  });
+
+  const appliedVoucher = useMemo(() => {
+    if (!voucherCode || budgetNum <= 0) return null;
+    const res = applyVoucher(voucherCode, budgetNum);
+    if (!res.isValid || !res.voucher) return null;
+    return {
+      code: res.voucher.code,
+      discountAmount: res.discountAmount,
+      finalPaidAmount: res.finalPaidAmount,
+    };
+  }, [voucherCode, budgetNum]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [createdTaskId, setCreatedTaskId] = useState<string | null>(null);
@@ -127,6 +147,9 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
         description: fullDesc,
         location: location.trim(),
         budget: budgetNum,
+        voucherCode: appliedVoucher?.code || undefined,
+        discountAmount: appliedVoucher?.discountAmount || 0,
+        finalPaidAmount: appliedVoucher ? appliedVoucher.finalPaidAmount : budgetNum,
       };
 
       const res = await fetch("/api/tasks", {
@@ -521,20 +544,51 @@ export function ServiceCategoryDetail({ config }: ServiceCategoryDetailProps) {
             </div>
           </div>
 
+          {/* Voucher Promo Diskon */}
+          <VoucherSelector
+            budget={budgetNum}
+            appliedCode={voucherCode}
+            onApply={(res) => setVoucherCode(res.code)}
+            onRemove={() => setVoucherCode("")}
+          />
+
           {/* Total Tarif Layanan Bersih Sesuai Keinginan Konsumen */}
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <span className="text-xs text-slate-700 font-bold block">
-                Total Biaya Layanan yang Anda Tawarkan:
-              </span>
-              <span className="text-[11px] text-slate-400">
-                Sesuai nominal yang Anda inginkan. Dana aman di rekening bersama sampai
-                tugas selesai.
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+              <span className="text-slate-600 font-medium">Upah yang Ditawarkan:</span>
+              <span
+                className={`font-bold ${appliedVoucher ? "line-through text-slate-400" : "text-slate-800"}`}
+              >
+                Rp {budgetNum.toLocaleString("id-ID")}
               </span>
             </div>
-            <span className="font-black text-primary text-xl sm:text-2xl">
-              Rp {budgetNum.toLocaleString("id-ID")}
-            </span>
+
+            {appliedVoucher && (
+              <div className="flex items-center justify-between text-xs text-emerald-600 font-semibold">
+                <span>Diskon Promo ({appliedVoucher.code}):</span>
+                <span>- Rp {appliedVoucher.discountAmount.toLocaleString("id-ID")}</span>
+              </div>
+            )}
+
+            <div className="pt-2 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span className="text-xs text-slate-700 font-bold block">
+                  Total Pembayaran Bersih Konsumen:
+                </span>
+                <span className="text-[11px] text-slate-400">
+                  {appliedVoucher
+                    ? `Hemat Rp ${appliedVoucher.discountAmount.toLocaleString("id-ID")} dengan voucher ${appliedVoucher.code}. Dana aman di rekening bersama.`
+                    : "Sesuai nominal yang Anda inginkan. Dana aman di rekening bersama sampai tugas selesai."}
+                </span>
+              </div>
+              <span className="font-black text-primary text-xl sm:text-2xl">
+                Rp{" "}
+                {(appliedVoucher
+                  ? appliedVoucher.finalPaidAmount
+                  : budgetNum
+                ).toLocaleString("id-ID")}
+              </span>
+            </div>
           </div>
 
           {/* Action Button */}

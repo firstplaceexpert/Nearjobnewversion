@@ -171,6 +171,13 @@ export function TaskDetailClient({ task, currentUser }: TaskDetailClientProps) {
                   </Badge>
                 </div>
 
+                {task.voucherCode && (
+                  <div className="flex items-center justify-between text-emerald-600 font-medium">
+                    <span>Diskon Voucher ({task.voucherCode}):</span>
+                    <span>- {formatRupiah(task.discountAmount || 0)}</span>
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between text-error font-medium">
                   <span>Biaya Layanan:</span>
                   <span>- {formatRupiah(commission.commissionAmount)}</span>

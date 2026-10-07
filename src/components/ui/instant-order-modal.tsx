@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Zap,
   MapPin,
@@ -15,6 +15,8 @@ import {
   Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { VoucherSelector } from "@/components/ui/voucher-selector";
+import { applyVoucher } from "@/lib/vouchers";
 
 interface InstantOrderModalProps {
   isOpen: boolean;
@@ -33,10 +35,23 @@ export function InstantOrderModal({
     "Lobby Utama Plaza Ambarrukmo, Sleman, Yogyakarta",
   );
   const [budget, setBudget] = useState("50000");
+  const [voucherCode, setVoucherCode] = useState<string>("");
   const [notes, setNotes] = useState(
     "Tolong ambil titipan paket dokumen dan antarkan segera ya.",
   );
   const [createdTaskId, setCreatedTaskId] = useState<string | null>(null);
+
+  const appliedVoucher = useMemo(() => {
+    const budgetNum = Number(budget) || 0;
+    if (!voucherCode || budgetNum <= 0) return null;
+    const res = applyVoucher(voucherCode, budgetNum);
+    if (!res.isValid || !res.voucher) return null;
+    return {
+      code: res.voucher.code,
+      discountAmount: res.discountAmount,
+      finalPaidAmount: res.finalPaidAmount,
+    };
+  }, [voucherCode, budget]);
 
   if (!isOpen) return null;
 
@@ -45,14 +60,18 @@ export function InstantOrderModal({
     setStep("SEARCHING");
 
     try {
+      const budgetNum = Number(budget) || 0;
       const res = await fetch("/api/trackings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           serviceName,
           location,
-          budget: Number(budget),
+          budget: budgetNum,
           description: notes,
+          voucherCode: appliedVoucher?.code,
+          discountAmount: appliedVoucher?.discountAmount || 0,
+          finalPaidAmount: appliedVoucher ? appliedVoucher.finalPaidAmount : budgetNum,
         }),
       });
 
@@ -176,15 +195,47 @@ export function InstantOrderModal({
                 Biaya minimum Rp 2.000. Bebas nominal (tidak harus kelipatan).
               </p>
 
+              {/* Voucher Selector */}
+              <VoucherSelector
+                budget={Number(budget) || 0}
+                appliedCode={voucherCode}
+                onApply={(res) => setVoucherCode(res.code)}
+                onRemove={() => setVoucherCode("")}
+              />
+
               {/* Total Tarif Layanan */}
               {Number(budget) > 0 && (
-                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
-                  <span className="text-slate-600 font-semibold">
-                    Total Biaya Layanan:
-                  </span>
-                  <span className="font-extrabold text-slate-800 text-sm">
-                    Rp {Number(budget).toLocaleString("id-ID")}
-                  </span>
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
+                  <div className="flex items-center justify-between text-slate-600">
+                    <span>Upah Layanan:</span>
+                    <span
+                      className={`font-semibold ${appliedVoucher ? "line-through text-slate-400" : "text-slate-800"}`}
+                    >
+                      Rp {Number(budget).toLocaleString("id-ID")}
+                    </span>
+                  </div>
+
+                  {appliedVoucher && (
+                    <div className="flex items-center justify-between text-emerald-600 font-semibold">
+                      <span>Diskon Promo ({appliedVoucher.code}):</span>
+                      <span>
+                        - Rp {appliedVoucher.discountAmount.toLocaleString("id-ID")}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="pt-1.5 border-t border-slate-200 flex items-center justify-between">
+                    <span className="font-bold text-slate-800">
+                      Total Tagihan Pembayaran:
+                    </span>
+                    <span className="font-extrabold text-primary text-base">
+                      Rp{" "}
+                      {(appliedVoucher
+                        ? appliedVoucher.finalPaidAmount
+                        : Number(budget)
+                      ).toLocaleString("id-ID")}
+                    </span>
+                  </div>
                 </div>
               )}
             </div>

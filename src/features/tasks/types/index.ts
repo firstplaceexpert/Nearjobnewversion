@@ -35,6 +35,9 @@ export interface TaskItem {
   updatedAt: string;
   applicationsCount?: number;
   hasApplied?: boolean;
+  voucherCode?: string | null;
+  discountAmount?: number | null;
+  finalPaidAmount?: number | null;
 }
 
 export interface ApplicationItem {

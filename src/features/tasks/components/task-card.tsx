@@ -32,6 +32,11 @@ export function TaskCard({ task }: TaskCardProps) {
               <Badge variant={typeConfig.variant} size="sm">
                 {typeConfig.label}
               </Badge>
+              {task.voucherCode && (
+                <Badge variant="success" size="sm">
+                  Diskon Promo
+                </Badge>
+              )}
             </div>
             {task.status !== "OPEN" ? (
               <Badge variant={statusConfig.variant} size="sm">

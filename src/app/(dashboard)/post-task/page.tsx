@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { VoucherSelector } from "@/components/ui/voucher-selector";
+import { applyVoucher } from "@/lib/vouchers";
 import { TASK_CATEGORIES, JOB_TYPE_BADGE } from "@/lib/constants";
 import { formatRupiah } from "@/lib/utils";
 import { calculateCommission } from "@/features/payments/services/calculateCommission";
@@ -27,6 +29,13 @@ export default function PostTaskPage() {
   const [scheduleDate, setScheduleDate] = useState("");
   const [scheduleTime, setScheduleTime] = useState("");
   const [budgetStr, setBudgetStr] = useState("100000");
+  const [voucherCode, setVoucherCode] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("voucher")?.toUpperCase() || "";
+    }
+    return "";
+  });
 
   const [activeTab, setActiveTab] = useState<"form" | "preview">("form");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -41,6 +50,17 @@ export default function PostTaskPage() {
     // ignore
   }
 
+  const appliedVoucher = useMemo(() => {
+    if (!voucherCode || budgetNum <= 0) return null;
+    const res = applyVoucher(voucherCode, budgetNum);
+    if (!res.isValid || !res.voucher) return null;
+    return {
+      code: res.voucher.code,
+      discountAmount: res.discountAmount,
+      finalPaidAmount: res.finalPaidAmount,
+    };
+  }, [voucherCode, budgetNum]);
+
   const postTaskMutation = useMutation({
     mutationFn: async () => {
       const payload = {
@@ -52,6 +72,9 @@ export default function PostTaskPage() {
         budget: budgetNum,
         scheduleDate,
         scheduleTime,
+        voucherCode: appliedVoucher?.code || undefined,
+        discountAmount: appliedVoucher?.discountAmount || 0,
+        finalPaidAmount: appliedVoucher ? appliedVoucher.finalPaidAmount : budgetNum,
       };
 
       // Client-side validation check
@@ -188,8 +211,16 @@ export default function PostTaskPage() {
                   <div>
                     <span className="text-[11px] text-gray block">Budget Anda</span>
                     <span className="font-extrabold text-lg text-dark">
-                      {formatRupiah(budgetNum)}
+                      {formatRupiah(
+                        appliedVoucher ? appliedVoucher.finalPaidAmount : budgetNum,
+                      )}
                     </span>
+                    {appliedVoucher && (
+                      <span className="text-[10px] text-emerald-600 block font-bold">
+                        Voucher {appliedVoucher.code} (-
+                        {formatRupiah(appliedVoucher.discountAmount)})
+                      </span>
+                    )}
                     {commissionData && (
                       <span className="text-[11px] text-success block font-medium">
                         Diterima Worker: {formatRupiah(commissionData.netAmount)}
@@ -372,6 +403,42 @@ export default function PostTaskPage() {
                 {errors.budget && (
                   <p className="text-[11px] text-error mt-1">{errors.budget}</p>
                 )}
+              </div>
+
+              {/* Voucher Promo Diskon */}
+              <VoucherSelector
+                budget={budgetNum}
+                appliedCode={voucherCode}
+                onApply={(res) => setVoucherCode(res.code)}
+                onRemove={() => setVoucherCode("")}
+              />
+
+              {/* Rincian Pembayaran Konsumen */}
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+                <div className="flex items-center justify-between text-slate-600">
+                  <span>Nominal Upah Tugas:</span>
+                  <span
+                    className={`font-semibold ${appliedVoucher ? "line-through text-slate-400" : "text-slate-800"}`}
+                  >
+                    {formatRupiah(budgetNum)}
+                  </span>
+                </div>
+
+                {appliedVoucher && (
+                  <div className="flex items-center justify-between text-emerald-600 font-semibold">
+                    <span>Potongan Diskon ({appliedVoucher.code}):</span>
+                    <span>- {formatRupiah(appliedVoucher.discountAmount)}</span>
+                  </div>
+                )}
+
+                <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
+                  <span className="font-bold text-slate-800">Total yang Anda Bayar:</span>
+                  <span className="font-extrabold text-base text-primary">
+                    {formatRupiah(
+                      appliedVoucher ? appliedVoucher.finalPaidAmount : budgetNum,
+                    )}
+                  </span>
+                </div>
               </div>
 
               {/* Real-time Commission Box */}

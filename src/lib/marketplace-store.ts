@@ -569,6 +569,8 @@ export const marketplaceStore = {
       budget: number;
       scheduleDate: string;
       scheduleTime: string;
+      voucherCode?: string | null;
+      discountAmount?: number | null;
     },
   ): TaskItem {
     const store = initStore();
@@ -582,6 +584,9 @@ export const marketplaceStore = {
         "Hanya akun Pemberi Tugas (Poster) yang dapat memposting pekerjaan",
       );
     }
+
+    const discountAmount = data.discountAmount || 0;
+    const finalPaidAmount = Math.max(2000, data.budget - discountAmount);
 
     const taskId = generateId("tsk");
     const newTask: TaskItem = {
@@ -605,6 +610,9 @@ export const marketplaceStore = {
       updatedAt: new Date().toISOString(),
       applicationsCount: 0,
       hasApplied: false,
+      voucherCode: data.voucherCode || null,
+      discountAmount: data.discountAmount || null,
+      finalPaidAmount,
     };
 
     store.tasks.set(taskId, newTask);
@@ -1037,11 +1045,18 @@ export const marketplaceStore = {
       description: string;
       latitude?: number;
       longitude?: number;
+      voucherCode?: string;
+      discountAmount?: number;
+      finalPaidAmount?: number;
     },
   ): { task: TaskItem; tracking: LiveOrderTracking } {
     const store = initStore();
     const poster = store.users.get(posterId);
     if (!poster) throw new Error("Pengguna tidak ditemukan");
+
+    const discountAmount = data.discountAmount || 0;
+    const finalPaidAmount =
+      data.finalPaidAmount ?? Math.max(2000, data.budget - discountAmount);
 
     const taskId = `tsk-inst-${Date.now()}`;
     const newTask: TaskItem = {
@@ -1063,6 +1078,9 @@ export const marketplaceStore = {
       updatedAt: new Date().toISOString(),
       applicationsCount: 1,
       hasApplied: false,
+      voucherCode: data.voucherCode || null,
+      discountAmount: discountAmount || null,
+      finalPaidAmount,
     };
 
     store.tasks.set(taskId, newTask);
@@ -1082,7 +1100,7 @@ export const marketplaceStore = {
       etaMinutes: 7,
       distanceKm: 1.1,
       destinationLocation: data.location,
-      budget: data.budget,
+      budget: finalPaidAmount,
       updatedAt: new Date().toISOString(),
     };
 

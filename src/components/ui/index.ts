@@ -27,3 +27,4 @@ export { MobileBottomNav } from "./mobile-bottom-nav";
 export { InstantOrderModal } from "./instant-order-modal";
 export { ProfileMenu } from "./profile-menu";
 export { RoleSwitcherBanner } from "./role-switcher-banner";
+export { VoucherSelector } from "./voucher-selector";

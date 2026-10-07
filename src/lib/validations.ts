@@ -60,6 +60,9 @@ export const postTaskSchema = z.object({
     .max(100000000, "Budget maksimal Rp100.000.000"),
   scheduleDate: z.string().min(1, "Tanggal pelaksanaan wajib diisi"),
   scheduleTime: z.string().min(1, "Jam pelaksanaan wajib diisi"),
+  voucherCode: z.string().optional().nullable(),
+  discountAmount: z.number().optional().nullable(),
+  finalPaidAmount: z.number().optional().nullable(),
 });
 
 export const filterTaskSchema = z.object({

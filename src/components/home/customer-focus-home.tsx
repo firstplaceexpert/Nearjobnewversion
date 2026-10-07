@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { VoucherSelector } from "@/components/ui/voucher-selector";
+import { applyVoucher } from "@/lib/vouchers";
 import {
   Search,
   Star,
@@ -25,11 +27,9 @@ import {
   Pin,
   ChevronRight,
   Gift,
-  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WalletBar } from "@/components/ui/wallet-bar";
-import { PwaInstallCard } from "@/components/pwa";
 import type { TaskItem } from "@/features/tasks/types";
 
 export type PricingMode = "PER_TASK" | "HOURLY" | "PER_KM" | "DAILY";
@@ -74,7 +74,13 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
   const [searchQuery, setSearchQuery] = useState("");
 
   // Modal State for Quick/Custom Task
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return !!params.get("voucher");
+    }
+    return false;
+  });
   const [selectedService, setSelectedService] = useState<ServicePreset | null>(null);
 
   // Form State
@@ -91,6 +97,29 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [successTask, setSuccessTask] = useState<TaskItem | null>(null);
+
+  // Voucher Code State (auto-read from URL query param ?voucher=NEARBARU)
+  const [voucherCode, setVoucherCode] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("voucher")?.toUpperCase() || "";
+    }
+    return "";
+  });
+
+  const budgetNum = parseInt(budgetStr.replace(/\D/g, ""), 10) || 0;
+
+  // Real-time derived voucher discount calculation (no setState in effect needed)
+  const appliedVoucher = useMemo(() => {
+    if (!voucherCode || budgetNum <= 0) return null;
+    const res = applyVoucher(voucherCode, budgetNum);
+    if (!res.isValid || !res.voucher) return null;
+    return {
+      code: res.voucher.code,
+      discountAmount: res.discountAmount,
+      finalPaidAmount: res.finalPaidAmount,
+    };
+  }, [voucherCode, budgetNum]);
 
   // TEPAT 4 LAYANAN UTAMA (SATU BARIS SAJA - PERSIS ALA GOJEK)
   const mainServices: MainServiceItem[] = [
@@ -233,8 +262,6 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
     setBudgetStr((next * hourlyRate).toString());
   };
 
-  const budgetNum = parseInt(budgetStr.replace(/\D/g, ""), 10) || 0;
-
   const postMutation = useMutation({
     mutationFn: async () => {
       if (!title.trim()) {
@@ -248,15 +275,19 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
 
       setErrors({});
 
+      const finalBudget = appliedVoucher ? appliedVoucher.finalPaidAmount : budgetNum;
+
       const payload = {
         title,
         category,
         type: "DAILY",
         description:
           description.trim() ||
-          `Permintaan layanan ${title} terjadwal pada ${scheduleDate} jam ${scheduleTime} WIB.`,
+          `Permintaan layanan ${title} terjadwal pada ${scheduleDate} jam ${scheduleTime} WIB.${appliedVoucher ? ` [Voucher: ${appliedVoucher.code} Hemat Rp${appliedVoucher.discountAmount.toLocaleString("id-ID")}]` : ""}`,
         location,
-        budget: budgetNum,
+        budget: finalBudget,
+        voucherCode: appliedVoucher?.code || null,
+        discountAmount: appliedVoucher?.discountAmount || null,
       };
 
       const res = await fetch("/api/tasks", {
@@ -714,20 +745,61 @@ export function CustomerFocusHome({ initialTasks = [] }: CustomerFocusHomeProps)
                 />
               </div>
 
-              {/* Total Tarif Layanan Bersih Tanpa Bocoran Komisi */}
+              {/* Voucher Diskon Selector */}
               {budgetNum > 0 && (
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
-                  <div>
-                    <span className="text-xs text-slate-700 font-bold block">
-                      Total Biaya Layanan:
+                <VoucherSelector
+                  budget={budgetNum}
+                  appliedCode={voucherCode}
+                  onApply={(res) => setVoucherCode(res.code)}
+                  onRemove={() => setVoucherCode("")}
+                />
+              )}
+
+              {/* Total Tarif Layanan & Rincian Pembayaran */}
+              {budgetNum > 0 && (
+                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-600 font-semibold">
+                      Upah Tawaran Layanan:
                     </span>
-                    <span className="text-[11px] text-slate-400">
-                      Tarif all-in resmi NearJob
+                    <span
+                      className={`font-bold ${appliedVoucher ? "line-through text-slate-400" : "text-dark"}`}
+                    >
+                      Rp {budgetNum.toLocaleString("id-ID")}
                     </span>
                   </div>
-                  <span className="font-black text-dark text-base sm:text-lg">
-                    Rp {budgetNum.toLocaleString("id-ID")}
-                  </span>
+
+                  {appliedVoucher && appliedVoucher.discountAmount > 0 && (
+                    <div className="flex items-center justify-between text-xs text-emerald-700 font-bold">
+                      <span className="flex items-center gap-1">
+                        <Tag className="w-3.5 h-3.5" />
+                        Diskon Voucher ({appliedVoucher.code}):
+                      </span>
+                      <span>
+                        - Rp {appliedVoucher.discountAmount.toLocaleString("id-ID")}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
+                    <div>
+                      <span className="text-xs text-slate-800 font-black block">
+                        Total yang Harus Dibayar:
+                      </span>
+                      <span className="text-[10px] text-slate-400">
+                        {appliedVoucher
+                          ? "Sudah dipotong diskon voucher promo"
+                          : "Sesuai nominal tawaran upah Anda"}
+                      </span>
+                    </div>
+                    <span className="font-black text-primary text-base sm:text-lg">
+                      Rp{" "}
+                      {(appliedVoucher
+                        ? appliedVoucher.finalPaidAmount
+                        : budgetNum
+                      ).toLocaleString("id-ID")}
+                    </span>
+                  </div>
                 </div>
               )}
 

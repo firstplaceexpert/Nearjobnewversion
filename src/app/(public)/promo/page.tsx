@@ -101,11 +101,11 @@ export default function PromoPage() {
               <div className="px-3 py-1.5 rounded-xl bg-slate-100 border border-dashed border-slate-300 font-mono text-xs font-bold text-dark tracking-wider flex items-center gap-1.5">
                 <span>{promo.code}</span>
               </div>
-              <Link href="/">
+              <Link href={`/?voucher=${promo.code}`}>
                 <Button
                   size="sm"
                   variant="primary"
-                  className="text-xs font-bold px-3 py-1.5 h-auto"
+                  className="text-xs font-bold px-3 py-1.5 h-auto shadow-xs"
                 >
                   Pakai Sekarang
                 </Button>

@@ -27,6 +27,9 @@ export async function POST(request: Request) {
       description: body.description || "Pesanan instan bantuan cepat di dekat lokasi.",
       latitude: body.latitude,
       longitude: body.longitude,
+      voucherCode: body.voucherCode,
+      discountAmount: Number(body.discountAmount) || 0,
+      finalPaidAmount: Number(body.finalPaidAmount) || undefined,
     });
 
     return NextResponse.json({ success: true, ...result });

@@ -486,31 +486,31 @@ export function ProfileSheet({ isOpen, onClose }: ProfileSheetProps) {
             </button>
           </div>
         </div>
-
-        {/* Interactive Toast Notification */}
-        {activeInfoToast && (
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-xl flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2">
-            <CheckCircle2 className="w-4 h-4 text-secondary" />
-            <span>{activeInfoToast}</span>
-          </div>
-        )}
-
-        {/* All Preference & Profile Sub-Modals */}
-        <ProfileModals
-          activeModal={activeModal}
-          onClose={() => setActiveModal(null)}
-          onSuccess={(msg) => triggerToast(msg)}
-          userData={{
-            name: effectiveName,
-            email: userEmail,
-            phone: effectivePhone,
-          }}
-          onUpdateUser={({ name, phone }) => {
-            setCustomName(name);
-            setCustomPhone(phone);
-          }}
-        />
       </div>
+
+      {/* Interactive Toast Notification */}
+      {activeInfoToast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100060] bg-slate-900 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-xl flex items-center gap-2 animate-fade-in pointer-events-none">
+          <CheckCircle2 className="w-4 h-4 text-secondary" />
+          <span>{activeInfoToast}</span>
+        </div>
+      )}
+
+      {/* All Preference & Profile Sub-Modals */}
+      <ProfileModals
+        activeModal={activeModal}
+        onClose={() => setActiveModal(null)}
+        onSuccess={(msg) => triggerToast(msg)}
+        userData={{
+          name: effectiveName,
+          email: userEmail,
+          phone: effectivePhone,
+        }}
+        onUpdateUser={({ name, phone }) => {
+          setCustomName(name);
+          setCustomPhone(phone);
+        }}
+      />
     </div>,
     document.body,
   );

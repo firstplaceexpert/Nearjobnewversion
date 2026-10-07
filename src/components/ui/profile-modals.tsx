@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import {
   X,
   Shield,
@@ -131,15 +132,22 @@ export function ProfileModals({
     onSuccess(`${message} (-${cost} NearPoin)`);
   };
 
-  // ── State for Edit Profile Modal ──────────────────────────
-  const [editName, setEditName] = useState(userData.name);
-  const [editPhone, setEditPhone] = useState(userData.phone);
-
   if (!activeModal) return null;
+  if (typeof document === "undefined") return null;
 
-  return (
-    <div className="fixed inset-0 z-[100005] flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xs animate-in fade-in select-none">
-      <div className="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 p-5 sm:p-6 space-y-4">
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[100050] flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xs animate-fade-in select-none"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div
+        className="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 p-5 sm:p-6 space-y-4 relative z-10 animate-scale-in"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* ── 1. KEAMANAN AKUN MODAL ───────────────────────── */}
         {activeModal === "SECURITY" && (
           <div className="space-y-4">
@@ -1143,71 +1151,98 @@ export function ProfileModals({
 
         {/* ── 9. EDIT PROFIL MODAL ─────────────────────────── */}
         {activeModal === "EDIT_PROFILE" && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-              <div className="flex items-center gap-2">
-                <Pencil className="w-4 h-4 text-slate-600" />
-                <h3 className="font-extrabold text-base text-slate-900">
-                  Edit Data Profil
-                </h3>
-              </div>
-              <button
-                type="button"
-                onClick={onClose}
-                className="w-7 h-7 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-400 cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="space-y-3 text-xs">
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">
-                  Nama Lengkap
-                </label>
-                <input
-                  type="text"
-                  value={editName}
-                  onChange={(e) => setEditName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">
-                  Nomor WhatsApp / HP
-                </label>
-                <input
-                  type="tel"
-                  value={editPhone}
-                  onChange={(e) => setEditPhone(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:border-primary"
-                />
-              </div>
-            </div>
-
-            <div className="pt-2 flex items-center justify-end gap-2">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
-              >
-                Batal
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  onUpdateUser({ name: editName, phone: editPhone });
-                  onClose();
-                  onSuccess("Data profil berhasil diperbarui!");
-                }}
-                className="px-4 py-2 rounded-xl text-xs font-bold bg-primary hover:bg-primary-hover text-white shadow-xs cursor-pointer"
-              >
-                Simpan Perubahan
-              </button>
-            </div>
-          </div>
+          <EditProfileModalContent
+            userData={userData}
+            onClose={onClose}
+            onSuccess={onSuccess}
+            onUpdateUser={onUpdateUser}
+          />
         )}
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+interface EditProfileModalContentProps {
+  userData: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+  onClose: () => void;
+  onSuccess: (message: string) => void;
+  onUpdateUser: (updated: { name: string; phone: string }) => void;
+}
+
+function EditProfileModalContent({
+  userData,
+  onClose,
+  onSuccess,
+  onUpdateUser,
+}: EditProfileModalContentProps) {
+  const [editName, setEditName] = useState(userData.name);
+  const [editPhone, setEditPhone] = useState(userData.phone);
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="flex items-center gap-2">
+          <Pencil className="w-4 h-4 text-slate-600" />
+          <h3 className="font-extrabold text-base text-slate-900">Edit Data Profil</h3>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="w-7 h-7 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-400 cursor-pointer"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+
+      <div className="space-y-3 text-xs">
+        <div>
+          <label className="font-bold text-slate-700 block mb-1">Nama Lengkap</label>
+          <input
+            type="text"
+            value={editName}
+            onChange={(e) => setEditName(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:border-primary"
+          />
+        </div>
+
+        <div>
+          <label className="font-bold text-slate-700 block mb-1">
+            Nomor WhatsApp / HP
+          </label>
+          <input
+            type="tel"
+            value={editPhone}
+            onChange={(e) => setEditPhone(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-900 focus:outline-none focus:border-primary"
+          />
+        </div>
+      </div>
+
+      <div className="pt-2 flex items-center justify-end gap-2">
+        <button
+          type="button"
+          onClick={onClose}
+          className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
+        >
+          Batal
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            onUpdateUser({ name: editName, phone: editPhone });
+            onClose();
+            onSuccess("Data profil berhasil diperbarui!");
+          }}
+          className="px-4 py-2 rounded-xl text-xs font-bold bg-primary hover:bg-primary-hover text-white shadow-xs cursor-pointer"
+        >
+          Simpan Perubahan
+        </button>
       </div>
     </div>
   );
